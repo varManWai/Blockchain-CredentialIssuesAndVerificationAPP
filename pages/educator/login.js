@@ -58,8 +58,8 @@ export default function Login() {
     }
 
     return (
-        <Layout criteria="educator">
+       
             <Content />
-        </Layout>
+       
     )
 }

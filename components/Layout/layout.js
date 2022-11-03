@@ -1,7 +1,7 @@
 import Visitor, { Student, Educator} from './navbar';
-import Footer from './footer';
+import BFooter from './footer';
 
-export default function Layout({ children , criteria }) {
+export default function Layout({ children , criteria , footer}) {
     const NavBar = () =>{
         if (criteria == "student"){
             return <Student />
@@ -12,9 +12,16 @@ export default function Layout({ children , criteria }) {
         }
     }
 
+    const Footer = () => {
+        if(footer){
+            <BFooter />
+        }
+    }
+
     return (
         <>
             <NavBar />
+            <h1>testing 1</h1>
             <main>
                 {children}
             </main>
