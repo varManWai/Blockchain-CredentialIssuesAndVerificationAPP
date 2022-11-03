@@ -5,36 +5,32 @@ import { useRouter } from 'next/router';
 
 function MyApp({ Component, pageProps }) {
 
-   const GetContent = () => {
+  const GetContent = () => {
     const path = useRouter();
 
-    const layout = [
-      { path: '/student', criteria: "student", footer: false },
-      { path: '/educator', criteria: "educator", footer: false },
-      { path: '/acc_student', criteria: "none", footer: false },
-      { path: '/acc_educator', criteria: "none", footer: false }
-    ]
+    let criteria = "visitor";
+    let footer = true;
 
-    layout.map(val => {
-      if (path.pathname.includes(val.path)) {
-        return (
-          <Layout criteria={val.criteria} footer={val.footer}>
-            <Component {...pageProps} />
-          </Layout>
-        )
-      }
-    })
+    if (path.pathname.includes('/student')) {
+      criteria = "student";
+      footer = false;
+    }
+    else if (path.pathname.includes('/educator')) {
+      criteria = "educator";
+      footer = false;
+    }
+    else if (path.pathname.includes('/acc_educator') || path.pathname.includes('/acc_student')) {
+      criteria = "none";
+      footer = false;
+    } else {
+      criteria = "visitor";
+      footer = true;
+    }
 
-    //  else if (path.pathname.includes('/educator')) {
-    // return (
-    //   <Layout criteria="educator" footer={false}>
-    //     <Component {...pageProps} />
-    //   </Layout>
-    // )
-    // }
+    console.log(criteria);
 
     return (
-      <Layout criteria="Visitor" footer={true}>
+      <Layout criteria={criteria} footer={footer}>
         <Component {...pageProps} />
       </Layout>
     )

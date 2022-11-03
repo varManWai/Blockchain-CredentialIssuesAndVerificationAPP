@@ -14,14 +14,13 @@ export default function Layout({ children , criteria , footer}) {
 
     const Footer = () => {
         if(footer){
-            <BFooter />
+            return <BFooter />
         }
     }
 
     return (
         <>
             <NavBar />
-            <h1>testing 1</h1>
             <main>
                 {children}
             </main>
