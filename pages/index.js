@@ -1,7 +1,7 @@
 import Head from 'next/head'
-
 import styles from '../styles/Home.module.css'
 
+import CertificateItem from '../components/Certificates/Certificate-item';
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      
+      <CertificateItem />
 
     </div>
   )
