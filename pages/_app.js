@@ -5,10 +5,11 @@ import { useRouter } from 'next/router';
 
 function MyApp({ Component, pageProps }) {
 
+
   const GetContent = () => {
     const path = useRouter();
 
-    let criteria = "visitor";
+    let criteria;
     let footer = true;
 
     if (path.pathname.includes('/student')) {

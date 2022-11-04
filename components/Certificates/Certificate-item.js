@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import { Button } from "@mui/material/";
+
 export default function CertificateItem() {
     const style = {
         backgroundImage: "/hello world"
@@ -15,8 +17,16 @@ export default function CertificateItem() {
                 width={500}
             />
             <div className="down-side">
-                <button>View</button>
-                <button>Delete</button>
+                <Button variant="contained">View</Button>
+                <Button variant="contained"  >
+                    <Image
+                        src="/icons/close-circle-outline.svg"
+                        alt="a delete icon"
+                        height={20}
+                        width={20}
+                        priority
+                    />
+                </Button>
             </div>
         </div>
     )
