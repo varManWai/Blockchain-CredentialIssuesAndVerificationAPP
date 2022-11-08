@@ -1,91 +1,102 @@
 import Image from "next/image";
 import Layout from "../../components/Layout/layout";
 
-const { LockOutlined, UserOutlined } = icons;
-const { Button, Checkbox, Form, Input } = antd;
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { Button, Checkbox, Form, Input, Row, Col, Space } from 'antd';
+
+import styles from '../../styles/Login.module.css';
 
 export default function Login() {
+    const onFinish = (values) => {
+        console.log('Received values of form: ', values);
+    };
+
     return (
-        <>
-            <main>
-                <section className="leftSide">
+        <div className={styles.login_layout}>
+            <Row justify="center" className={styles.login}>
+                <Col span={12}>
                     <Image
                         src="/images/login.jpg"
                         alt="Picture of Login Page"
-                        width="100%"
-                        height="100%"
+                        layout='fill'
                         objectFit="cover"
                         objectPosition="bottom"
                         priority //the image that must be show first
                     ></Image>
-                </section>
+                </Col>
 
-                <section className="rightSide">
-                    <h2>Login</h2>
-                    <p>Welcome Back</p>
+                <Col span={12} className={styles.loginForm}>
 
-                    <form>
-                        <button>Google</button>
+                    <h2 className={styles.header}>Login</h2>
+                    <p className={styles.sub_header}>Welcome Back</p>
 
-                        <hr />
 
-                        <Form
-                            name="normal_login"
-                            className="login-form"
-                            initialValues={{
-                                remember: true,
-                            }}
-                            onFinish={onFinish}
+                    <button>Google</button>
+
+                    <hr />
+
+                    <Form
+                        name="normal_login"
+                        className="login-form"
+                        initialValues={{
+                            remember: true,
+                        }}
+                        onFinish={onFinish}
+                    >
+                        <Form.Item
+                            name="email"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your Email!',
+                                },
+                            ]}
                         >
-                            <Form.Item
-                                name="username"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input your Username!',
-                                    },
-                                ]}
-                            >
-                                <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
-                            </Form.Item>
-                            <Form.Item
-                                name="password"
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'Please input your Password!',
-                                    },
-                                ]}
-                            >
-                                <Input
-                                    prefix={<LockOutlined className="site-form-item-icon" />}
-                                    type="password"
-                                    placeholder="Password"
-                                />
-                            </Form.Item>
-                            <Form.Item>
-                                <Form.Item name="remember" valuePropName="checked" noStyle>
-                                    <Checkbox>Remember me</Checkbox>
-                                </Form.Item>
+                            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                        </Form.Item>
+                        <Form.Item
+                            name="password"
+                            rules={[
+                                {
+                                    required: true,
+                                    message: 'Please input your Password!',
+                                },
+                            ]}
+                        >
+                            <Input
+                                prefix={<LockOutlined className="site-form-item-icon" />}
+                                type="password"
+                                placeholder="Password"
+                            />
+                        </Form.Item>
+                        <Form.Item >
+                            <Row justify="space-between">
+                                <Col >
+                                    <Form.Item name="remember" valuePropName="checked" noStyle>
+                                        <Checkbox>Remember me</Checkbox>
+                                    </Form.Item>
+                                </Col>
 
-                                <a className="login-form-forgot" href="">
-                                    Forgot password
-                                </a>
-                            </Form.Item>
+                                <Col >
+                                    <a className="login-form-forgot" href="" >
+                                        Forgot password
+                                    </a>
+                                </Col>
+                            </Row>
+                        </Form.Item>
 
-                            <Form.Item>
-                                <Button type="primary" htmlType="submit" className="login-form-button">
-                                    Log in
-                                </Button>
-                                Or <a href="">register now!</a>
-                            </Form.Item>
-                        </Form>
-                        <p>
+                        <Form.Item>
+                            <Button type="primary" htmlType="submit" className={`login-form-button ${styles.login_button}`}>
+                                Log in
+                            </Button>
+                        </Form.Item>
+
+                        <Form.Item>
                             Don't have an account? <a href="" >Sign Up</a>
-                        </p>
-                    </form>
-                </section>
-            </main>
-        </>
+                        </Form.Item>
+                    </Form>
+                </Col>
+            </Row>
+        </div>
     );
 }

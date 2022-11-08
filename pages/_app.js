@@ -3,6 +3,8 @@ import Layout from '../components/Layout/layout';
 import { useRouter } from 'next/router';
 
 
+import 'antd/dist/antd.css';
+
 function MyApp({ Component, pageProps }) {
 
 
