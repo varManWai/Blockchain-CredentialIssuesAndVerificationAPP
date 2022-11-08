@@ -1,40 +1,13 @@
 import Image from "next/image";
 import Layout from "../../components/Layout/layout";
 
-import { useState } from "react";
-
-import { FormControl, InputLabel, Input, InputAdornment, IconButton, TextField, Button, FormControlLabel, Checkbox } from "@mui/material";
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+const { LockOutlined, UserOutlined } = icons;
+const { Button, Checkbox, Form, Input } = antd;
 
 export default function Login() {
-    const [values, setValues] = useState({
-        password: '',
-    })
-
-    const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-    };
-
-    const handleClickShowPassword = () => {
-        setValues({
-            ...values,
-            showPassword: !values.showPassword,
-        });
-    };
-
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
-    };
-
-    // const Content = () => {
-    //     return (
-           
-    //     );
-    // };
-
     return (
         <>
-             <main>
+            <main>
                 <section className="leftSide">
                     <Image
                         src="/images/login.jpg"
@@ -56,51 +29,57 @@ export default function Login() {
 
                         <hr />
 
-                        <div>
-                            <TextField id="email" label="Email" variant="standard" error helperText="*incorrect entry" />
-                        </div>
-                        <div>
-                            <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
-                                <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                        <Form
+                            name="normal_login"
+                            className="login-form"
+                            initialValues={{
+                                remember: true,
+                            }}
+                            onFinish={onFinish}
+                        >
+                            <Form.Item
+                                name="username"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input your Username!',
+                                    },
+                                ]}
+                            >
+                                <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                            </Form.Item>
+                            <Form.Item
+                                name="password"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: 'Please input your Password!',
+                                    },
+                                ]}
+                            >
                                 <Input
-                                    id="standard-adornment-password"
-                                    type={values.showPassword ? 'text' : 'password'}
-                                    value={values.password}
-                                    onChange={handleChange('password')}
-                                    endAdornment={
-                                        <InputAdornment position="end">
-                                            <IconButton
-                                                aria-label="toggle password visibility"
-                                                onClick={handleClickShowPassword}
-                                                onMouseDown={handleMouseDownPassword}
-                                            >
-                                                {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                                            </IconButton>
-                                        </InputAdornment>
-                                    }
+                                    prefix={<LockOutlined className="site-form-item-icon" />}
+                                    type="password"
+                                    placeholder="Password"
                                 />
-                            </FormControl>
-                        </div>
+                            </Form.Item>
+                            <Form.Item>
+                                <Form.Item name="remember" valuePropName="checked" noStyle>
+                                    <Checkbox>Remember me</Checkbox>
+                                </Form.Item>
 
-                        <div className="smallSection">
-                            <FormControlLabel
-                                value="Remember Me"
-                                control={
-                                    <Checkbox
-                                        sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
-                                        color="success"
-                                    />
-                                }
-                                label="Remember Me"
-                                labelPlacement="end"
-                            />
-                            <div className="forgetPwd">
-                                <a href="#">Forget Password</a>
-                            </div>
-                        </div>
+                                <a className="login-form-forgot" href="">
+                                    Forgot password
+                                </a>
+                            </Form.Item>
 
-                        <Button variant="contained" type="submit" className="login-btn">Login</Button>
-
+                            <Form.Item>
+                                <Button type="primary" htmlType="submit" className="login-form-button">
+                                    Log in
+                                </Button>
+                                Or <a href="">register now!</a>
+                            </Form.Item>
+                        </Form>
                         <p>
                             Don't have an account? <a href="" >Sign Up</a>
                         </p>
