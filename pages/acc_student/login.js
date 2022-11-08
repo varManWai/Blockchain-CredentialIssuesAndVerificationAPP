@@ -1,10 +1,40 @@
-import Image from 'next/image'
-import Layout from '../../components/Layout/layout'
+import Image from "next/image";
+import Layout from "../../components/Layout/layout";
+
+import { useState } from "react";
+
+import { FormControl, InputLabel, Input, InputAdornment, IconButton, TextField, Button, FormControlLabel, Checkbox } from "@mui/material";
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 export default function Login() {
-    const Content = () => {
-        return (
-            <main>
+    const [values, setValues] = useState({
+        password: '',
+    })
+
+    const handleChange = (prop) => (event) => {
+        setValues({ ...values, [prop]: event.target.value });
+    };
+
+    const handleClickShowPassword = () => {
+        setValues({
+            ...values,
+            showPassword: !values.showPassword,
+        });
+    };
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+
+    // const Content = () => {
+    //     return (
+           
+    //     );
+    // };
+
+    return (
+        <>
+             <main>
                 <section className="leftSide">
                     <Image
                         src="/images/login.jpg"
@@ -14,8 +44,7 @@ export default function Login() {
                         objectFit="cover"
                         objectPosition="bottom"
                         priority //the image that must be show first
-                    >
-                    </Image>
+                    ></Image>
                 </section>
 
                 <section className="rightSide">
@@ -27,39 +56,57 @@ export default function Login() {
 
                         <hr />
 
-                        <label htmlFor="email">Email</label>
-                        <input type="email" name="email" id="email" />
-                        <p className="error-text">*Error Text</p>
-
-
-                        <label htmlFor="pwd">Password</label>
-                        <input type="password" name="pwd" id="pwd" />
-                        <p className="error-text">*Error Text</p>
+                        <div>
+                            <TextField id="email" label="Email" variant="standard" error helperText="*incorrect entry" />
+                        </div>
+                        <div>
+                            <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
+                                <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+                                <Input
+                                    id="standard-adornment-password"
+                                    type={values.showPassword ? 'text' : 'password'}
+                                    value={values.password}
+                                    onChange={handleChange('password')}
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                            >
+                                                {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                />
+                            </FormControl>
+                        </div>
 
                         <div className="smallSection">
-                            <div className="rememberMe">
-                                <input type="checkbox" name="rmbMe" id="rmbMe" />
-                                <p>Remember Me</p>
-                            </div>
-
+                            <FormControlLabel
+                                value="Remember Me"
+                                control={
+                                    <Checkbox
+                                        sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
+                                        color="success"
+                                    />
+                                }
+                                label="Remember Me"
+                                labelPlacement="end"
+                            />
                             <div className="forgetPwd">
                                 <a href="#">Forget Password</a>
                             </div>
                         </div>
 
-                        <button type="submit">Login</button>
+                        <Button variant="contained" type="submit" className="login-btn">Login</Button>
 
-
-                        <p>Don't have an account? <a href="">Sign Up</a></p>
+                        <p>
+                            Don't have an account? <a href="" >Sign Up</a>
+                        </p>
                     </form>
                 </section>
             </main>
-        )
-    }
-
-    return (
-        
-            <Content />
-       
-    )
+        </>
+    );
 }
