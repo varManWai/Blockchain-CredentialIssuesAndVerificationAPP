@@ -1,3 +1,4 @@
+/* login and sign up  */
 .login_layout {
   width: 100vw;
   height: 100vh;
@@ -62,6 +63,34 @@
 /* signup form page */
 .xs_font {
   font-size: 1.1rem !important;
+}
+
+/* forgot password page */
+.forgotPwd_header {
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: left;
+  margin: 0px;
+  padding: 0px;
+}
+
+.forgotPwd_sub_header {
+  font-size: 1.8rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  text-align: left;
+  color: rgb(73, 73, 73);
+}
+
+.margin_bottom_input{
+  margin-bottom: 5rem;
+}
+
+.forgotPwd_redirect{
+  display: block;
+  text-align: center;
+  width: 100%;
 }
 
 @media (max-width: 480px) {

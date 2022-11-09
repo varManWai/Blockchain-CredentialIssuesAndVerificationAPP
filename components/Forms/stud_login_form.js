@@ -12,6 +12,11 @@ export default function Stud_Login_Form() {
         event.preventDefault();
         router.push('/acc_student/signup');
     }
+    
+    const redirectToForgotPwd = (event) => {
+        event.preventDefault();
+        router.push('/acc_student/forgotPwd');
+    }
 
     return (
         <div className={styles.sub_loginForm}>
@@ -67,7 +72,7 @@ export default function Stud_Login_Form() {
                         </Col>
 
                         <Col>
-                            <a className="login-form-forgot" href="">
+                            <a className="login-form-forgot" href="" onClick={redirectToForgotPwd}>
                                 Forgot password
                             </a>
                         </Col>
