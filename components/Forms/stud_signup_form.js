@@ -33,6 +33,10 @@ export default function Stud_SignUp_Form() {
                     name="email"
                     rules={[
                         {
+                            type: 'email',
+                            message: 'The input is not valid E-mail!',
+                        },
+                        {
                             required: true,
                             message: "Please input your Email!",
                         },
@@ -45,6 +49,7 @@ export default function Stud_SignUp_Form() {
                 </Form.Item>
                 <Form.Item
                     name="password"
+                    hasFeedback
                     rules={[
                         {
                             required: true,
@@ -52,7 +57,7 @@ export default function Stud_SignUp_Form() {
                         },
                     ]}
                 >
-                    <Input
+                    <Input.Password
                         prefix={<LockOutlined className="site-form-item-icon" />}
                         type="password"
                         placeholder="Password"
@@ -72,9 +77,9 @@ export default function Stud_SignUp_Form() {
                 <Form.Item>
                     <Row>
                         <Col span={1}>
-                            <CheckSquareOutlined style={{ fontSize: '110%'}}/>
+                            <CheckSquareOutlined style={{ fontSize: '110%' }} />
                         </Col>
-                        <Col span={23} style={{paddingLeft: '10px'}}>
+                        <Col span={23} style={{ paddingLeft: '10px' }}>
                             <span className={styles.xs_font}>
                                 By signing up, you are agree to our <a href="">Terms & Conditions and Privacy Policy</a>, including Cookie Use.
                             </span>

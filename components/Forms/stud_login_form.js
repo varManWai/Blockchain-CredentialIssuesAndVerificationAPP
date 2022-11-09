@@ -7,12 +7,12 @@ import styles from "../../styles/Login.module.css";
 
 export default function Stud_Login_Form() {
     const router = useRouter();
-    
-    const redirectToSignUp = (event) =>{
+
+    const redirectToSignUp = (event) => {
         event.preventDefault();
         router.push('/acc_student/signup');
     }
-    
+
     const redirectToForgotPwd = (event) => {
         event.preventDefault();
         router.push('/acc_student/forgotPwd');
@@ -25,7 +25,7 @@ export default function Stud_Login_Form() {
 
             <button>Google</button>
 
-            <hr className={styles.hr_line}/>
+            <hr className={styles.hr_line} />
 
             <Form
                 name="normal_login"
@@ -37,6 +37,10 @@ export default function Stud_Login_Form() {
                 <Form.Item
                     name="email"
                     rules={[
+                        {
+                            type: 'email',
+                            message: 'The input is not valid E-mail!',
+                        },
                         {
                             required: true,
                             message: "Please input your Email!",
@@ -50,6 +54,7 @@ export default function Stud_Login_Form() {
                 </Form.Item>
                 <Form.Item
                     name="password"
+                    hasFeedback
                     rules={[
                         {
                             required: true,
@@ -57,7 +62,7 @@ export default function Stud_Login_Form() {
                         },
                     ]}
                 >
-                    <Input
+                    <Input.Password
                         prefix={<LockOutlined className="site-form-item-icon" />}
                         type="password"
                         placeholder="Password"
