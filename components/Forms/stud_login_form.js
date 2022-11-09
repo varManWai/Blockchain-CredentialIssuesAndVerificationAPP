@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import styles from "../../styles/Login.module.css";
 
 
-export default function Stud_Login_Form(ImgSrc) {
+export default function Stud_Login_Form() {
     const router = useRouter();
     
     const redirectToSignUp = (event) =>{
