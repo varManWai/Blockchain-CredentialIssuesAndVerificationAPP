@@ -21,7 +21,7 @@ export default function Stud_Login_Form() {
     return (
         <div className={styles.sub_loginForm}>
             <h2 className={styles.header}>Login</h2>
-            <p className={styles.sub_header}>Student, Welcome Back</p>
+            <p className={styles.sub_header}><span className={styles.emphasize_word}>Student</span>, Welcome Back</p>
 
             <button>Google</button>
 

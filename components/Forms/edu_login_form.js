@@ -1,22 +1,27 @@
-import { LockOutlined, UserOutlined, CheckSquareOutlined } from "@ant-design/icons";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Row, Col } from "antd";
 import { useRouter } from "next/router";
 
 import styles from "../../styles/Login.module.css";
 
-export default function Stud_SignUp_Form() {
 
+export default function Edu_Login_Form() {
     const router = useRouter();
 
-    const redirectToLogin = (event) => {
+    const redirectToSignUp = (event) => {
         event.preventDefault();
-        router.push('/acc_student/login');
+        router.push('/acc_educator/signup');
+    }
+
+    const redirectToForgotPwd = (event) => {
+        event.preventDefault();
+        router.push('/acc_educator/forgotPwd');
     }
 
     return (
         <div className={styles.sub_loginForm}>
-            <h2 className={styles.header}>Sign Up</h2>
-            <p className={styles.sub_header}><span className={styles.emphasize_word}>Student</span>, Welcome Back</p>
+            <h2 className={styles.header}>Login</h2>
+            <p className={styles.sub_header}><span className={styles.emphasize_word}>Educator</span>, Welcome Back</p>
 
             <button>Google</button>
 
@@ -63,6 +68,21 @@ export default function Stud_SignUp_Form() {
                         placeholder="Password"
                     />
                 </Form.Item>
+                <Form.Item>
+                    <Row justify="space-between">
+                        <Col>
+                            <Form.Item name="remember" valuePropName="checked" noStyle>
+                                <Checkbox>Remember me</Checkbox>
+                            </Form.Item>
+                        </Col>
+
+                        <Col>
+                            <a className="login-form-forgot" href="" onClick={redirectToForgotPwd}>
+                                Forgot password
+                            </a>
+                        </Col>
+                    </Row>
+                </Form.Item>
 
                 <Form.Item>
                     <Button
@@ -74,21 +94,8 @@ export default function Stud_SignUp_Form() {
                     </Button>
                 </Form.Item>
 
-                <Form.Item>
-                    <Row>
-                        <Col span={1}>
-                            <CheckSquareOutlined style={{ fontSize: '110%' }} />
-                        </Col>
-                        <Col span={23} style={{ paddingLeft: '10px' }}>
-                            <span className={styles.xs_font}>
-                                By signing up, you are agree to our <a href="">Terms & Conditions and Privacy Policy</a>, including Cookie Use.
-                            </span>
-                        </Col>
-                    </Row>
-                </Form.Item>
-
                 <Form.Item className={styles.text_align}>
-                    Already have an account? <a href="" onClick={redirectToLogin}>Login</a>
+                    Don't have an account? <a href="" onClick={redirectToSignUp}>Sign Up</a>
                 </Form.Item>
             </Form>
         </div>
