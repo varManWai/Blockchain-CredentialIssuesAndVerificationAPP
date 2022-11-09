@@ -25,7 +25,7 @@ export default function Login() {
                     <form>
                         <button>Google</button>
 
-                        <hr />
+                        <hr className={styles.hr_line}/>
 
                         <label htmlFor="email">Email</label>
                         <input type="email" name="email" id="email" />
