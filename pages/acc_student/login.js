@@ -15,13 +15,16 @@ export default function Login() {
         <div className={styles.login_layout}>
             <Row justify="center" className={styles.login}>
                 <Col span={12}
-                xs={{
-                    span: 24,
-                  }}
-                  lg={{
-                    span: 12,
-                  }}
-                  >
+                    xs={{
+                        span: 24,
+                    }}
+                    sm={{
+                        span: 12,
+                    }}
+                    lg={{
+                        span: 12,
+                    }}
+                >
                     <Image
                         src="/images/login.jpg"
                         alt="Picture of Login Page"
@@ -32,15 +35,18 @@ export default function Login() {
                     ></Image>
                 </Col>
 
-                <Col 
-                span={12} 
-                className={styles.loginForm}
-                xs={{
-                    span: 24,
-                  }}
-                  lg={{
-                    span: 12,
-                  }}
+                <Col
+                    span={12}
+                    className={styles.loginForm}
+                    xs={{
+                        span: 24,
+                    }}
+                    sm={{
+                        span: 12,
+                    }}
+                    lg={{
+                        span: 12,
+                    }}
                 >
                     <div className={styles.sub_loginForm}>
                         <h2 className={styles.header}>Login</h2>
