@@ -5,12 +5,12 @@ import { useRouter } from "next/router";
 import styles from "../../styles/Login.module.css";
 
 
-export default function Edu_Login_Form() {
+export default function Edu_SignUp_Form() {
     const router = useRouter();
 
-    const redirectToSignUp = (event) => {
+    const redirectToLogin = (event) => {
         event.preventDefault();
-        router.push('/acc_educator/signup');
+        router.push('/acc_educator/login');
     }
 
     const redirectToForgotPwd = (event) => {
@@ -28,7 +28,7 @@ export default function Edu_Login_Form() {
             <hr className={styles.hr_line} />
 
             <Form
-                name="educator_login"
+                name="educator_signup"
                 className="login-form"
                 initialValues={{
                     remember: true,
@@ -95,7 +95,7 @@ export default function Edu_Login_Form() {
                 </Form.Item>
 
                 <Form.Item className={styles.text_align}>
-                    Don't have an account? <a href="" onClick={redirectToSignUp}>Sign Up</a>
+                    Don't have an account? <a href="" onClick={redirectToLogin}>Sign Up</a>
                 </Form.Item>
             </Form>
         </div>
