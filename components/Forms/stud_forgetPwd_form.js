@@ -3,7 +3,7 @@ import { useRouter } from "next/router"
 
 import styles from "../../styles/Login.module.css";
 
-import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
+// import { useGoogleReCaptcha } from "react-google-recaptcha-v3";
 
 export default function Stud_ForgotPwd_Form() {
 
@@ -16,48 +16,48 @@ export default function Stud_ForgotPwd_Form() {
 
     const [form] = Form.useForm();
 
-    
-    const { executeRecaptcha } = useGoogleReCaptcha();
 
-    const handleSumitForm = useCallback(
-        (e) => {
-            e.preventDefault();
-            if (!executeRecaptcha) {
-                console.log("Execute recaptcha not yet available");
-                return;
-            }
-            executeRecaptcha("enquiryFormSubmit").then((gReCaptchaToken) => {
-                console.log(gReCaptchaToken, "response Google reCaptcha server");
-                submitEnquiryForm(gReCaptchaToken);
-            });
-        },
-        [executeRecaptcha]
-    );
+    // const { executeRecaptcha } = useGoogleReCaptcha();
 
-    const submitEnquiryForm = (gReCaptchaToken) => {
-        fetch("/api/enquiry", {
-            method: "POST",
-            headers: {
-                Accept: "application/json, text/plain, */*",
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                name: name,
-                email: email,
-                message: message,
-                gRecaptchaToken: gReCaptchaToken,
-            }),
-        })
-            .then((res) => res.json())
-            .then((res) => {
-                console.log(res, "response from backend");
-                if (res?.status === "success") {
-                    setNotification(res?.message);
-                } else {
-                    setNotification(res?.message);
-                }
-            });
-    };
+    // const handleSumitForm = useCallback(
+    //     (e) => {
+    //         e.preventDefault();
+    //         if (!executeRecaptcha) {
+    //             console.log("Execute recaptcha not yet available");
+    //             return;
+    //         }
+    //         executeRecaptcha("enquiryFormSubmit").then((gReCaptchaToken) => {
+    //             console.log(gReCaptchaToken, "response Google reCaptcha server");
+    //             submitEnquiryForm(gReCaptchaToken);
+    //         });
+    //     },
+    //     [executeRecaptcha]
+    // );
+
+    // const submitEnquiryForm = (gReCaptchaToken) => {
+    //     fetch("/api/enquiry", {
+    //         method: "POST",
+    //         headers: {
+    //             Accept: "application/json, text/plain, */*",
+    //             "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify({
+    //             name: name,
+    //             email: email,
+    //             message: message,
+    //             gRecaptchaToken: gReCaptchaToken,
+    //         }),
+    //     })
+    //         .then((res) => res.json())
+    //         .then((res) => {
+    //             console.log(res, "response from backend");
+    //             if (res?.status === "success") {
+    //                 setNotification(res?.message);
+    //             } else {
+    //                 setNotification(res?.message);
+    //             }
+    //         });
+    // };
 
     return (
         <div className={styles.sub_loginForm}>
