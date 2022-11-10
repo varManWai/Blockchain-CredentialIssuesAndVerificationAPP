@@ -15,19 +15,6 @@ export default function Edu_SignUp_Form() {
         router.push('/acc_educator/login');
     }
 
-    const prefixSelector = (
-        <Form.Item name="prefix" noStyle>
-            <Select
-                style={{
-                    width: 70,
-                }}
-            >
-                <Option value="86">+86</Option>
-                <Option value="87">+87</Option>
-            </Select>
-        </Form.Item>
-    );
-
     const [autoCompleteResult, setAutoCompleteResult] = useState([]);
 
     const onWebsiteChange = (value) => {
@@ -86,6 +73,32 @@ export default function Edu_SignUp_Form() {
                 }}
             >
                 <Form.Item
+                    name="firstName"
+                    label="First Name"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your first name!',
+                            whitespace: true,
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
+                    name="lastName"
+                    label="Last Name"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your last name!',
+                            whitespace: true,
+                        },
+                    ]}
+                >
+                    <Input />
+                </Form.Item>
+                <Form.Item
                     name="email"
                     label="E-mail"
                     rules={[
@@ -140,9 +153,9 @@ export default function Edu_SignUp_Form() {
                 </Form.Item>
 
                 <Form.Item
-                    name="nickname"
-                    label="Nickname"
-                    tooltip="What do you want others to call you?"
+                    name="jobTitle"
+                    label="Job Title"
+                    tooltip="What is your job position?"
                     rules={[
                         {
                             required: true,
@@ -164,22 +177,16 @@ export default function Edu_SignUp_Form() {
                         },
                     ]}
                 >
-                    <Input
-                        addonBefore={prefixSelector}
-                        style={{
-                            width: '100%',
-                        }}
-                    />
+                    <Input />
                 </Form.Item>
 
                 <Form.Item
-                    name="nickname"
-                    label="Nickname"
-                    tooltip="What do you want others to call you?"
+                    name="orgName"
+                    label="Organization Name"
                     rules={[
                         {
                             required: true,
-                            message: 'Please input your nickname!',
+                            message: 'Please input your organization name!',
                             whitespace: true,
                         },
                     ]}
@@ -188,14 +195,15 @@ export default function Edu_SignUp_Form() {
                 </Form.Item>
 
                 <Form.Item
-                    name="website"
-                    label="Website"
+                    name="organizationURL"
+                    label="Organization URL"
                     rules={[
                         {
                             required: true,
-                            message: 'Please input website!',
+                            message: 'Please input organization url!',
                         },
                     ]}
+                    className={styles.margin_bottom_input}
                 >
                     <AutoComplete options={websiteOptions} onChange={onWebsiteChange} placeholder="website">
                         <Input />

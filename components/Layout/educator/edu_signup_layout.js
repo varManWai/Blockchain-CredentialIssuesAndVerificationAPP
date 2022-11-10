@@ -14,7 +14,7 @@ export default function Edu_SignUp_Layout({ children }) {
             span: 24,
           }}
           sm={{
-            span: 8,
+            span: 7,
           }}
           lg={{
             span: 10,
@@ -38,7 +38,7 @@ export default function Edu_SignUp_Layout({ children }) {
             span: 24,
           }}
           sm={{
-            span: 12,
+            span: 13,
           }}
           lg={{
             span: 10,
