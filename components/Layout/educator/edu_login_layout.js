@@ -4,7 +4,7 @@ import {  Row, Col } from "antd";
 
 import styles from "../../../styles/Login.module.css";
 
-export default function Edu_Layout({imgSrc, children}) {
+export default function Edu_Login_Layout({imgSrc, children}) {
 
   return (
     <div className={styles.edu_login_layout}>
