@@ -1,6 +1,5 @@
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { LockOutlined } from "@ant-design/icons";
 import { Form, Input, Button } from "antd";
-import { useRouter } from "next/router"
 
 import styles from "../../styles/Login.module.css";
 
