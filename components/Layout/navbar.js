@@ -1,16 +1,33 @@
 import Link from 'next/link';
 
 import { FileOutlined, TeamOutlined, UserOutlined, DesktopOutlined, PieChartOutlined } from '@ant-design/icons';
-import { Button, Menu ,Layout } from 'antd';
+import { Button, Menu, Layout } from 'antd';
 import { useState } from 'react';
-const {Sider} = Layout 
+const { Header, Sider } = Layout
 
 import styles from '../../styles/Login.module.css'
 
 export default function Visitor() {
     return (
         <div>
-            <h1>This is visitor nav bar</h1>
+            <Header>
+                <div className="logo" />
+                <Menu
+                    theme="light"
+                    mode="horizontal"
+                    defaultSelectedKeys={['2']}
+                    items={new Array(15).fill(null).map((_, index) => {
+                        const key = index + 1;
+                        return {
+                            key,
+                            label: `nav ${key}`,
+                        };
+                    })}
+                />
+                <Dropdown.Button menu={menuProps} placement="bottom" icon={<UserOutlined />}>
+                    Dropdown
+                </Dropdown.Button>
+            </Header>
         </div>
     )
 }
