@@ -157,6 +157,14 @@
   height: 100%;
 }
 
+/* educator nav bar */
+.edu_sider{
+  background-color: white !important;
+  min-height: 100vh !important;
+  width: 2560px !important;
+}
+
+
 @media (max-width: 480px) {
   .loginForm {
     align-items: flex-start;

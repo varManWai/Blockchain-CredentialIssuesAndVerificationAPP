@@ -1,8 +1,9 @@
 import "../styles/globals.css";
-import Layout from "../components/Layout/layout";
+import Final_Layout from "../components/Layout/final_layout";
 import { useRouter } from "next/router";
 
 // import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
+
 import "antd/dist/antd.css";
 
 function MyApp({ Component, pageProps }) {
@@ -39,9 +40,9 @@ function MyApp({ Component, pageProps }) {
       //     nonce: undefined,
       //   }}
       // >
-      <Layout criteria={criteria} footer={footer}>
+      <Final_Layout criteria={criteria} footer={footer}>
         <Component {...pageProps} />
-      </Layout>
+      </Final_Layout>
       // </GoogleReCaptchaProvider>
     );
   };

@@ -1,5 +1,12 @@
 import Link from 'next/link';
 
+import { FileOutlined, TeamOutlined, UserOutlined, DesktopOutlined, PieChartOutlined } from '@ant-design/icons';
+import { Button, Menu ,Layout } from 'antd';
+import { useState } from 'react';
+const {Sider} = Layout 
+
+import styles from '../../styles/Login.module.css'
+
 export default function Visitor() {
     return (
         <div>
@@ -16,84 +23,35 @@ export function Student() {
     )
 }
 
-import { AppstoreOutlined, ContainerOutlined, DesktopOutlined, MailOutlined, MenuFoldOutlined, MenuUnfoldOutlined, PieChartOutlined } from '@ant-design/icons';
-import { Button, Menu } from 'antd';
-import { useState } from 'react';
-
 export function Educator() {
 
-    const getItem = (label, key, icon, children, type) => {
+    const [collapsed, setCollapsed] = useState(false);
+
+    const getItem = (label, key, icon, children) => {
         return {
             key,
             icon,
             children,
             label,
-            type,
         };
     }
 
     const items = [
         getItem('Option 1', '1', <PieChartOutlined />),
         getItem('Option 2', '2', <DesktopOutlined />),
-        getItem('Option 3', '3', <ContainerOutlined />),
-        getItem('Navigation One', 'sub1', <MailOutlined />, [
-            getItem('Option 5', '5'),
-            getItem('Option 6', '6'),
-            getItem('Option 7', '7'),
-            getItem('Option 8', '8'),
+        getItem('User', 'sub1', <UserOutlined />, [
+            getItem('Tom', '3'),
+            getItem('Bill', '4'),
+            getItem('Alex', '5'),
         ]),
-        getItem('Navigation Two', 'sub2', <AppstoreOutlined />, [
-            getItem('Option 9', '9'),
-            getItem('Option 10', '10'),
-            getItem('Submenu', 'sub3', null, [getItem('Option 11', '11'), getItem('Option 12', '12')]),
-        ]),
+        getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
+        getItem('Files', '9', <FileOutlined />),
     ];
 
-    const [collapsed, setCollapsed] = useState(false);
-    const toggleCollapsed = () => {
-        setCollapsed(!collapsed);
-    };
-
     return (
-        <div>
-            <div
-                style={{
-                    width: 250,
-                }}
-            >
-                <Button
-                    type="primary"
-                    onClick={toggleCollapsed}
-                    style={{
-                        marginBottom: 16,
-                    }}
-                >
-                    {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-                </Button>
-                <Menu
-                    defaultSelectedKeys={['1']}
-                    defaultOpenKeys={['sub1']}
-                    mode="inline"
-                    theme="light"
-                    inlineCollapsed={collapsed}
-                    items={items}
-                />
-            </div>
-            <h1>this is educator navigation bar</h1>
-            <ul>
-                <li>
-                    <Link href="/">Home</Link>
-                </li>
-                <li>
-                    <Link href="/groups">Groups</Link>
-                </li>
-                <li>
-                    <Link href="/certificates">Certificates</Link>
-                </li>
-                <li>
-                    <Link href="/badge">Badges</Link>
-                </li>
-            </ul>
-        </div>
+        <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} className={styles.edu_sider}>
+            <div className="logo" />
+            <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" items={items} />
+        </Sider>
     )
 }
