@@ -29,6 +29,7 @@ export default function Final_Layout({ children, criteria, footer }) {
           className="site-layout-background"
           style={{
             padding: 0,
+            background: 'white'
           }}
         />
         <Content
@@ -49,9 +50,10 @@ export default function Final_Layout({ children, criteria, footer }) {
             style={{
               padding: 24,
               minHeight: 360,
+              background: 'white'
             }}
           >
-            Bill is a cat.
+            {children}
           </div>
         </Content>
         <Footer
