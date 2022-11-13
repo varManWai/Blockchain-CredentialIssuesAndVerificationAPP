@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
-import { FileOutlined, TeamOutlined, UserOutlined, DesktopOutlined, PieChartOutlined } from '@ant-design/icons';
-import { Button, Menu, Layout } from 'antd';
+import { FileOutlined, TeamOutlined, UserOutlined, DownOutlined, DesktopOutlined, PieChartOutlined } from '@ant-design/icons';
+import { Button, Menu, Layout, Space, Dropdown } from 'antd';
 import { useState } from 'react';
 const { Header, Sider } = Layout
 
@@ -16,7 +16,7 @@ export default function Visitor() {
                     theme="light"
                     mode="horizontal"
                     defaultSelectedKeys={['2']}
-                    items={new Array(15).fill(null).map((_, index) => {
+                    items={new Array(4).fill(null).map((_, index) => {
                         const key = index + 1;
                         return {
                             key,
@@ -33,9 +33,54 @@ export default function Visitor() {
 }
 
 export function Student() {
+    const items = [
+        {
+            label: <a href="https://www.antgroup.com">1st menu item</a>,
+            key: '0',
+        },
+        {
+            label: <a href="https://www.aliyun.com">2nd menu item</a>,
+            key: '1',
+        },
+        {
+            type: 'divider',
+        },
+        {
+            label: '3rd menu item',
+            key: '3',
+        },
+    ];
+
     return (
         <div>
-            <h1>this is student navigation bar</h1>
+            <Header>
+                <div className="logo" />
+                <Menu
+                    theme="light"
+                    mode="horizontal"
+                    defaultSelectedKeys={['1']}
+                    items={new Array(4).fill(null).map((_, index) => {
+                        const key = index + 1;
+                        return {
+                            key,
+                            label: `nav ${key}`,
+                        };
+                    })}
+                />
+                <Dropdown
+                    menu={{
+                        items,
+                    }}
+                    trigger={['click']}
+                >
+                    <a onClick={(e) => e.preventDefault()}>
+                        <Space>
+                            Click me
+                            <DownOutlined />
+                        </Space>
+                    </a>
+                </Dropdown>
+            </Header>
         </div>
     )
 }

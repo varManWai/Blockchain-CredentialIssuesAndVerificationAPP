@@ -37,7 +37,20 @@ export default function Final_Layout({ children, criteria, footer }) {
 
   const LayoutSelector = () => {
     if (criteria == "student") {
-      return <Student />;
+      return (
+        <div>
+          <Student />
+          {children}
+          <Footer
+            style={{
+              textAlign: "center",
+            }}
+          >
+            Ant Design ©2018 Created by Ant UED
+          </Footer>
+        </div>
+      )
+
     } else if (criteria == "educator") {
       return (
         <Layout style={{ minHeight: "100vh" }}>
@@ -93,7 +106,13 @@ export default function Final_Layout({ children, criteria, footer }) {
         <div>
           <Visitor />
           {children}
-
+          <Footer
+            style={{
+              textAlign: "center",
+            }}
+          >
+            Ant Design ©2018 Created by Ant UED
+          </Footer>
         </div>
       )
     }
