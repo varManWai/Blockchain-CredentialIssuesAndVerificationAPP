@@ -50,6 +50,7 @@ export default function CertificateItem() {
           <SettingOutlined key="setting" />,
           <EditOutlined key="edit" />,
           <EllipsisOutlined key="ellipsis" />,
+          <EllipsisOutlined key="ellipsis" />,
         ]}
       >
         <Meta
