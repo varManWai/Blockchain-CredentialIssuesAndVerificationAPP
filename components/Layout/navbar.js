@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { FileOutlined, TeamOutlined, UserOutlined, DownOutlined, DesktopOutlined, PieChartOutlined } from '@ant-design/icons';
 import { Button, Menu, Layout, Space, Dropdown } from 'antd';
-import { useState } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 const { Header, Sider } = Layout
 
 import styles from '../../styles/Login.module.css'
@@ -110,10 +110,48 @@ export function Educator() {
         getItem('Files', '9', <FileOutlined />),
     ];
 
+    const useMediaQuery = (width) => {
+        const [targetReached, setTargetReached] = useState(false);
+
+        const updateTarget = useCallback((e) => {
+            if (e.matches) {
+                setTargetReached(true);
+            } else {
+                setTargetReached(false);
+            }
+        }, []);
+
+        useEffect(() => {
+            const media = window.matchMedia(`(max-width: ${width}px)`);
+            media.addEventListener("change", updateTarget);
+
+            // Check on mount (callback is not called until a change occurs)
+            if (media.matches) {
+                setTargetReached(true);
+            }
+
+            return () => media.removeEventListener("change", updateTarget);
+        }, []);
+
+        return targetReached;
+    };
+
+    const isBreakpoint = useMediaQuery(584)
+
     return (
-        <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} className={styles.edu_sider}>
-            <div className="logo" />
-            <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" items={items} />
-        </Sider>
+        <div>
+            {isBreakpoint ? (
+                <div>
+                    <h1>small nav</h1>
+                </div>
+            ) : (
+                <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} className={styles.edu_sider}>
+                    <div className="logo" />
+                    <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" items={items} />
+                </Sider>
+            )}
+        </div>
+
+
     )
 }

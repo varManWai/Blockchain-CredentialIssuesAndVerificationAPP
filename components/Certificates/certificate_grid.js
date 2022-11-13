@@ -30,7 +30,7 @@ export default function CertificateGrid() {
                             
                             className={`gutter-row ${styles.margin_bottom_card}`}
                             >
-                            <CertificateItem />
+                            <CertificateItem key={item.key}/>
                         </Col>
                     )
                 })}
