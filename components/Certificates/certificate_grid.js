@@ -6,15 +6,17 @@ import styles from '../../styles/Login.module.css';
 export default function CertificateGrid() {
 
     const items = [
-        { item: 123, product: "name" },
-        { item: 123, product: "name" },
-        { item: 123, product: "name" },
-        { item: 123, product: "name" }
+        { key: 1, item: 123, product: "name" },
+        { key: 2,item: 123, product: "name" },
+        { key: 3,item: 123, product: "name" },
+        { key: 4,item: 123, product: "name" }
     ]
 
     return (
         <div>
-            <Row gutter={{
+            <Row 
+            justify="center"
+            gutter={{
                 xs: 8,
                 sm: 16,
                 md: 24,
