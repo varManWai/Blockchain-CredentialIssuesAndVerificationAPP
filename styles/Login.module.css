@@ -164,6 +164,11 @@
 }
 
 
+/* educator certificates page  */
+.margin_bottom_card{
+  margin-bottom: 2.5rem;
+}
+
 @media (max-width: 480px) {
   .loginForm {
     align-items: flex-start;
