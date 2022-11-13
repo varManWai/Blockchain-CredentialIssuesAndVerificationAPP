@@ -7,6 +7,7 @@ import {
 } from "@ant-design/icons";
 
 import { Card, Avatar } from "antd";
+import { useState } from "react";
 
 export default function CertificateItem() {
   const { Meta } = Card;
@@ -14,6 +15,12 @@ export default function CertificateItem() {
   const style = {
     backgroundImage: "/hello world",
   };
+
+  const [popover,setPopover] = useState(true);
+
+  const handleOnClick = () => {
+    setPopover(false);
+  }
 
   return (
     <div>
@@ -47,7 +54,7 @@ export default function CertificateItem() {
           />
         }
         actions={[
-          <SettingOutlined key="setting" />,
+          <SettingOutlined key="setting" onClick={handleOnClick}/>,
           <EditOutlined key="edit" />,
           <EllipsisOutlined key="ellipsis" />,
           <EllipsisOutlined key="ellipsis" />,
