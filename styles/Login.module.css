@@ -150,32 +150,35 @@
 
   background-color: rgb(239, 239, 239);
   padding: 0px;
-
 }
 
-.edu_signup_image{
+.edu_signup_image {
   height: 100%;
 }
 
 /* educator nav bar */
-.edu_sider{
+.edu_sider {
   background-color: white !important;
-  min-height: 100% ;
+  min-height: 100%;
 }
 
-.nav_logo_section{
+.nav_logo_section {
   background-color: white;
   display: flex;
   justify-content: center;
 }
 
-.nav_logo{
-
+/* educator certificates page  */
+.margin_bottom_card {
+  margin-bottom: 2.5rem;
 }
 
-/* educator certificates page  */
-.margin_bottom_card{
-  margin-bottom: 2.5rem;
+/* all certificate page  */
+.all_certificates_section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (max-width: 480px) {
@@ -183,7 +186,7 @@
     align-items: flex-start;
   }
 
-  .edu_signup_image{
+  .edu_signup_image {
     height: 10%;
   }
 }

@@ -1,6 +1,6 @@
 import CertificateItem from "./certificate_item"
 
-import { Row, Col, Space } from "antd"
+import { Row, Col, Space, Pagination } from "antd"
 import styles from '../../styles/Login.module.css';
 
 export default function CertificateGrid() {
@@ -15,10 +15,21 @@ export default function CertificateGrid() {
         { key: '7', item: 123, product: "name" }
     ]
 
+    const itemRender = (_, type, originalElement) => {
+        if (type === 'prev') {
+            return <a>Previous</a>;
+        }
+        if (type === 'next') {
+            return <a>Next</a>;
+        }
+        return originalElement;
+    };
+
+
     return (
         <div>
             <Row
-                justify="start"
+                justify="center"
                 gutter={{
                     xs: 8,
                     sm: 16,
@@ -37,6 +48,12 @@ export default function CertificateGrid() {
                         </Col>
                     )
                 })}
+
+            </Row>
+            <Row justify="center">
+                <Col>
+                    <Pagination total={80} itemRender={itemRender} />
+                </Col>
             </Row>
         </div>
     )
