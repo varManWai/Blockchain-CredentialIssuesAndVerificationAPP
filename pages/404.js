@@ -1,7 +1,13 @@
-export default function PageNotFound (){
+import { Result, Button } from "antd"
+
+
+export default function PageNotFound() {
     return (
-        <div>
-            <h2>page not found!</h2>
-        </div>
+        <Result
+            status="404"
+            title="404"
+            subTitle="Sorry, the page you visited does not exist."
+            extra={<Button type="primary">Back Home</Button>}
+        />
     )
 }
