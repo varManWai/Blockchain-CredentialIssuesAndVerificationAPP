@@ -1,7 +1,9 @@
 import Link from 'next/link';
 
+import Image from 'next/image';
+
 import { FileOutlined, TeamOutlined, UserOutlined, DownOutlined, DesktopOutlined, PieChartOutlined } from '@ant-design/icons';
-import { Button, Menu, Layout, Space, Dropdown } from 'antd';
+import { Button,Menu, Layout, Space, Dropdown } from 'antd';
 import { useState, useCallback, useEffect } from 'react';
 const { Header, Sider } = Layout
 
@@ -146,7 +148,16 @@ export function Educator() {
                 </div>
             ) : (
                 <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} className={styles.edu_sider}>
-                    <div className="logo" />
+                    <div className={styles.nav_logo_section}>
+                        <Image 
+                            src="/images/resetPwd.jpg"
+                            width={50}
+                            height={50}
+                            priority
+                            
+                            className={styles.nav_logo}
+                        />
+                        </div>
                     <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" items={items} />
                 </Sider>
             )}

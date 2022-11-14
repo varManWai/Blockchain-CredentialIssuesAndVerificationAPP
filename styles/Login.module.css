@@ -160,9 +160,18 @@
 /* educator nav bar */
 .edu_sider{
   background-color: white !important;
-  
+  min-height: 100% ;
 }
 
+.nav_logo_section{
+  background-color: white;
+  display: flex;
+  justify-content: center;
+}
+
+.nav_logo{
+
+}
 
 /* educator certificates page  */
 .margin_bottom_card{
