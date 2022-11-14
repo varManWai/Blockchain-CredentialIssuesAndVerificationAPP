@@ -22,7 +22,6 @@ export default function AllCertificate() {
   return (
     <div className={styles.all_certificates_section}>
       <Button icon={<PlusOutlined />} onClick={showDrawer} type="primary">New</Button>
-      <h2>this is all certificate</h2>
       <Drawer
         title="Create a new account"
         width={720}
