@@ -156,6 +156,11 @@
   height: 100%;
 }
 
+.edu_signup_image_img {
+  object-fit: cover;
+  object-position: center;
+}
+
 /* educator nav bar */
 .edu_sider {
   background-color: white !important;
@@ -192,7 +197,7 @@
   /* border: red solid 2px; */
 }
 
-@media (max-width: 480px) {
+@media (max-width: 580px) {
   .loginForm {
     align-items: flex-start;
   }

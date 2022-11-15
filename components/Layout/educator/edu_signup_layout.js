@@ -24,9 +24,8 @@ export default function Edu_SignUp_Layout({ children }) {
           <Image
             src="/images/forgotPwd.jpg"
             alt={`Picture of sign up Page`}
-            layout="fill"
-            objectFit="cover"
-            objectPosition="center"
+            fill
+            className={styles.edu_signup_image_img}
             priority //the image that must be show first
           ></Image>
         </Col>
