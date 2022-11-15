@@ -3,9 +3,11 @@ import CertificateGrid from "./certificate_grid"
 import { Button, Col, DatePicker, Drawer, Form, Input, Row, Select, Space } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
+
 
 import styles from '../../styles/Login.module.css';
+import { useRouter } from "next/router";
 
 export default function AllCertificate() {
   const [open, setOpen] = useState(false);
@@ -19,9 +21,47 @@ export default function AllCertificate() {
     setOpen(false);
   };
 
+  const router = useRouter()
+
+  const redirectToAddCert = () => {
+    router.push('/educator/certificates/add');
+  }
+
+  const useMediaQuery = (width) => {
+    const [targetReached, setTargetReached] = useState(false);
+
+    const updateTarget = useCallback((e) => {
+      if (e.matches) {
+        setTargetReached(true);
+      } else {
+        setTargetReached(false);
+      }
+    }, []);
+
+    useEffect(() => {
+      const media = window.matchMedia(`(max-width: ${width}px)`);
+      media.addEventListener("change", updateTarget);
+
+      // Check on mount (callback is not called until a change occurs)
+      if (media.matches) {
+        setTargetReached(true);
+      }
+
+      return () => media.removeEventListener("change", updateTarget);
+    }, []);
+
+    return targetReached;
+  };
+
+  const isBreakpoint = useMediaQuery(925)
+
   return (
     <div className={styles.all_certificates_section}>
-      <Button icon={<PlusOutlined />} onClick={showDrawer} type="primary">New</Button>
+
+
+      <div className={styles.add_new_cert}>
+        <Button icon={<PlusOutlined />} onClick={isBreakpoint ? (redirectToAddCert) : (showDrawer)} type="primary">New</Button>
+      </div>
       <Drawer
         title="Create a new account"
         width={720}
