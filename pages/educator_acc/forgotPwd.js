@@ -6,5 +6,6 @@ export default function ForgotPwd() {
     <Edu_SignUp_Layout>
       <Edu_ForgotPwd_Form />
     </Edu_SignUp_Layout>
+    // <h1>123</h1>
   );
 }

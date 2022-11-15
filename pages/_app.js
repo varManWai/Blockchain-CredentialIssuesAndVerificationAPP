@@ -7,23 +7,25 @@ import { useRouter } from "next/router";
 import "antd/dist/antd.css";
 
 function MyApp({ Component, pageProps }) {
+
+
   const GetContent = () => {
     const path = useRouter();
 
     let criteria;
     let footer = true;
 
-    if (path.pathname.includes("/student")) {
-      criteria = "student";
+    if (path.pathname.includes("/educator_acc") ||
+      path.pathname.includes("/student_acc")) {
+      criteria = "none";
       footer = false;
     } else if (path.pathname.includes("/educator")) {
       criteria = "educator";
       footer = false;
     } else if (
-      path.pathname.includes("/acc_educator") ||
-      path.pathname.includes("/acc_student")
+      path.pathname.includes("/student")
     ) {
-      criteria = "none";
+      criteria = "student";
       footer = false;
     } else {
       criteria = "visitor";

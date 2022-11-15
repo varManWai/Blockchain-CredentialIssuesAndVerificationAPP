@@ -120,6 +120,12 @@ export default function Final_Layout({ children, criteria, footer }) {
           </Footer>
         </div>
       )
+    } else {
+      return (
+        <div>
+          {children}
+        </div>
+      )
     }
   };
 
