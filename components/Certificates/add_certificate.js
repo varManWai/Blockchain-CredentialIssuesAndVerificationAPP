@@ -29,6 +29,25 @@ export default function AddCertificate() {
     };
 
 
+    const selectContent = [
+        {
+            value: 'jack',
+            label: 'Jack',
+        },
+        {
+            value: 'lucy',
+            label: 'Lucy',
+        },
+        {
+            value: 'disabled',
+            disabled: true,
+            label: 'Disabled',
+        },
+        {
+            value: 'Yiminghe',
+            label: 'yiminghe',
+        },
+    ]
 
     return (
         <div>
@@ -51,6 +70,15 @@ export default function AddCertificate() {
                 <Form.Item label="TextArea">
                     <TextArea rows={4} />
                 </Form.Item>
+
+                <Select
+                    defaultValue="lucy"
+                    style={{
+                        width: 120,
+                    }}
+                    onChange={handleChange}
+                    options={selectContent}
+                />
                 <Form.Item {...tailLayout}>
                     <Button type="primary" htmlType="submit">
                         Submit
