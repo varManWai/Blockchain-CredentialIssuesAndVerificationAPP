@@ -24,9 +24,8 @@ export default function Stud_Layout({imgSrc, children}) {
           <Image
             src= {imgSrc}
             alt={`Picture of ${imgSrc} Page`}
-            layout="fill"
-            objectFit="cover"
-            objectPosition="bottom"
+            fill
+            className={styles.standard_image}
             priority //the image that must be show first
           ></Image>
         </Col>

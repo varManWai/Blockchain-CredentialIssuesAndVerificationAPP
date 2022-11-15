@@ -156,7 +156,7 @@
   height: 100%;
 }
 
-.edu_signup_image_img {
+.standard_image {
   object-fit: cover;
   object-position: center;
 }
