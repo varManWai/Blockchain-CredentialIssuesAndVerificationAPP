@@ -1,8 +1,10 @@
+import AddCertificate from "../../../components/Certificates/add_certificate"
+
 
 export default function AddCert() {
     return (
         <div>
-            <h1>this is thAdd cert page</h1>
+            <AddCertificate />
         </div>
     )
 }
