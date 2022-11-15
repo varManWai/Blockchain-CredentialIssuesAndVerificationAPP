@@ -151,6 +151,7 @@ export function Educator() {
                     <div className={styles.nav_logo_section}>
                         <Image 
                             src="/images/resetPwd.jpg"
+                            alt='logo'
                             width={50}
                             height={50}
                             priority
