@@ -1,4 +1,5 @@
-import { Form, Input, DatePicker, Button } from "antd"
+import { Form, Select, Input, DatePicker, Button } from "antd"
+
 
 export default function AddCertificate() {
 
@@ -48,6 +49,10 @@ export default function AddCertificate() {
             label: 'yiminghe',
         },
     ]
+
+    const handleChange = (value) => {
+        console.log(`selected ${value}`);
+    };
 
     return (
         <div>
