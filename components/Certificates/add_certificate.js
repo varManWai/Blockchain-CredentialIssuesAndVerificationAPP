@@ -1,5 +1,6 @@
 import { Form, Select, Input, DatePicker, Button } from "antd"
 
+import styles from '../../styles/Login.module.css';
 
 export default function AddCertificate() {
 
@@ -7,16 +8,16 @@ export default function AddCertificate() {
 
     const layout = {
         labelCol: {
-            span: 8,
+            span: 4,
         },
         wrapperCol: {
-            span: 16,
+            span: 20,
         },
     };
 
     const tailLayout = {
         wrapperCol: {
-            span: 16,
+            span: 24,
         },
     };
 
@@ -56,35 +57,30 @@ export default function AddCertificate() {
 
     return (
         <div>
-            <h1>this is the add certificate.</h1>
             <Form {...layout} name="control-ref" >
                 <Form.Item
-                    name="note"
-                    label="Note"
-                    rules={[
-                        {
-                            required: true,
-                        },
-                    ]}
+                    name="title"
+                    label="Title"
                 >
                     <Input />
                 </Form.Item>
-                <Form.Item label="TextArea">
+                <Form.Item label="Date and Time release">
                     <DatePicker showTime onChange={onChange} onOk={onOk} />
                 </Form.Item>
-                <Form.Item label="TextArea">
+                <Form.Item label="Description">
                     <TextArea rows={4} />
                 </Form.Item>
-
-                <Select
-                    defaultValue="lucy"
-                    style={{
-                        width: 120,
-                    }}
-                    onChange={handleChange}
-                    options={selectContent}
-                />
-                <Form.Item {...tailLayout}>
+                <Form.Item label="Group">
+                    <Select
+                        defaultValue="lucy"
+                        style={{
+                            width: 120,
+                        }}
+                        onChange={handleChange}
+                        options={selectContent}
+                    />
+                </Form.Item>
+                <Form.Item {...tailLayout} className={styles.addCert_button_container}>
                     <Button type="primary" htmlType="submit">
                         Submit
                     </Button>
