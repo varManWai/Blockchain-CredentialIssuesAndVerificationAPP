@@ -28,7 +28,11 @@ export default function View_Certificate() {
                         <Col>
                             <Row>
                                 <Col><label htmlFor="">Title</label></Col>
-                                <Col>Edit button</Col>
+                                <Col>
+                                    <Button type="text" ghost>
+                                        Edit
+                                    </Button>
+                                </Col>
                             </Row>
                         </Col>
                         <Col>text tex tex</Col>
@@ -47,7 +51,11 @@ export default function View_Certificate() {
                         <Col>
                             <Row>
                                 <Col><label htmlFor="">Description</label></Col>
-                                <Col>Edit button</Col>
+                                <Col>
+                                    <Button type="text" ghost>
+                                        Edit
+                                    </Button>
+                                </Col>
                             </Row>
                         </Col>
                         <Col>description example</Col>
@@ -58,7 +66,11 @@ export default function View_Certificate() {
                         <Col>
                             <Row>
                                 <Col><label htmlFor="">Group</label></Col>
-                                <Col>Edit button</Col>
+                                <Col>
+                                    <Button type="text" ghost>
+                                        Edit
+                                    </Button>
+                                </Col>
                             </Row>
                         </Col>
                         <Col>this is the group text</Col>
