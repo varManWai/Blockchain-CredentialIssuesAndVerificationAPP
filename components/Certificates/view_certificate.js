@@ -5,7 +5,12 @@ export default function View_Certificate() {
             <h1>this is the view certificate page</h1>
             <Row>
                 <Col>
-                    <Image src="../../public/images/forgotPwd.jpg" />
+                    <Image
+                        src="../../public/images/forgotPwd.jpg"
+                        alt="this is the certificate pdf file show picture"
+                        fill
+                        priority
+                    />
                 </Col>
                 <Col>
                     <Row>
