@@ -22,7 +22,9 @@ export default function View_Certificate() {
                                 <Col><label htmlFor="">Id</label></Col>
                             </Row>
                         </Col>
-                        <Col>text tex tex</Col>
+                        <Col>
+                            <p>1WE23456789QW</p>
+                        </Col>
                     </Row>
                     <Row>
                         <Col>
@@ -35,7 +37,9 @@ export default function View_Certificate() {
                                 </Col>
                             </Row>
                         </Col>
-                        <Col>text tex tex</Col>
+                        <Col>
+                            <p>Lorem ipsum dolor sit amet.</p>
+                        </Col>
                     </Row>
                     <Row>
                         <Col>
@@ -43,7 +47,9 @@ export default function View_Certificate() {
                                 <Col><label htmlFor="">Date and Time</label></Col>
                             </Row>
                         </Col>
-                        <Col>text tex tex</Col>
+                        <Col>
+                            <p>5/10/2022 20:30</p>
+                        </Col>
                     </Row>
                 </Col>
                 <Col>
@@ -58,7 +64,10 @@ export default function View_Certificate() {
                                 </Col>
                             </Row>
                         </Col>
-                        <Col>description example</Col>
+                        <Col>
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                                Expedita ullam ab dolore voluptate dignissimos, magni, sapiente suscipit tempora omnis ratione doloremque. Ullam quod animi adipisci.</p>
+                        </Col>
                     </Row>
                 </Col>
                 <Col>
@@ -73,7 +82,9 @@ export default function View_Certificate() {
                                 </Col>
                             </Row>
                         </Col>
-                        <Col>this is the group text</Col>
+                        <Col>
+                        <p>Group 1</p>
+                        </Col>
                     </Row>
                 </Col>
             </Row>
