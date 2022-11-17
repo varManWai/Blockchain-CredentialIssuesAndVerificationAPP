@@ -31,7 +31,7 @@ export default function View_Certificate() {
                             <Row>
                                 <Col><label htmlFor="">Title</label></Col>
                                 <Col>
-                                    <Button type="text" ghost>
+                                    <Button type="text" primary>
                                         Edit
                                     </Button>
                                 </Col>
@@ -58,7 +58,7 @@ export default function View_Certificate() {
                             <Row>
                                 <Col><label htmlFor="">Description</label></Col>
                                 <Col>
-                                    <Button type="text" ghost>
+                                    <Button type="text" primary>
                                         Edit
                                     </Button>
                                 </Col>
@@ -76,7 +76,7 @@ export default function View_Certificate() {
                             <Row>
                                 <Col><label htmlFor="">Group</label></Col>
                                 <Col>
-                                    <Button type="text" ghost>
+                                    <Button type="text" primary>
                                         Edit
                                     </Button>
                                 </Col>
