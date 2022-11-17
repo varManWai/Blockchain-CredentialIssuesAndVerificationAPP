@@ -1,3 +1,6 @@
+import { Image, Row, Col } from "antd"
+
+import styles from "../../styles/Login.module.css";
 
 export default function View_Certificate() {
     return (
