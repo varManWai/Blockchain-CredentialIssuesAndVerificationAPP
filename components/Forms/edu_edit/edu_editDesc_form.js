@@ -35,7 +35,7 @@ export default function EditDescription() {
                     remember: true,
                 }}
             >
-                <Form.Item label="Description">
+                <Form.Item label="Old description">
                     <TextArea rows={4} disabled value="example description for the  certicate, this is just the example ok!" />
                 </Form.Item>
                 <Form.Item label="New description">

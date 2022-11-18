@@ -30,10 +30,10 @@ export default function EditTitle() {
           remember: true,
         }}
       >
-        <Form.Item label="Title">
+        <Form.Item label="Old title">
           <Input placeholder="your current title" disabled value="example title"/>
         </Form.Item>
-        <Form.Item label="New Title">
+        <Form.Item label="New title">
           <Input placeholder="Your new title" />
         </Form.Item>
         <Form.Item {...tailLayout} className={styles.addCert_button_container}>

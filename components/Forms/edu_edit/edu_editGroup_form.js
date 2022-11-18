@@ -30,7 +30,7 @@ export default function EditGroup() {
                     remember: true,
                 }}
             >
-                <Form.Item label="Group">
+                <Form.Item label="Old group">
                     <Input placeholder="your cuurrent group" disabled value="example group 1" />
                 </Form.Item>
                 <Form.Item label="New group">
