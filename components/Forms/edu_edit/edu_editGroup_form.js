@@ -21,7 +21,7 @@ export default function EditGroup() {
 
     return (
         <div>
-            <h1>this is edit group page</h1>
+            <h1>Edit Group</h1>
             <Form
                 {...layout}
                 name="educator_login"
