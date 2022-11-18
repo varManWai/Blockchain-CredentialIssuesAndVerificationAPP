@@ -3,7 +3,6 @@ import { Form, Input, Button } from "antd";
 import styles from '../../../styles/Login.module.css';
 
 export default function EditTitle() {
-  const [form] = Form.useForm();
 
   const layout = {
     labelCol: {
@@ -22,7 +21,7 @@ export default function EditTitle() {
 
   return (
     <div>
-      <h1>this is edit title page</h1>
+      <h1>Edit Title</h1>
       <Form
         {...layout}
         name="educator_login"
@@ -32,7 +31,7 @@ export default function EditTitle() {
         }}
       >
         <Form.Item label="Title">
-          <Input placeholder="your current title" />
+          <Input placeholder="your current title" disabled value="example title"/>
         </Form.Item>
         <Form.Item label="New Title">
           <Input placeholder="Your new title" />
