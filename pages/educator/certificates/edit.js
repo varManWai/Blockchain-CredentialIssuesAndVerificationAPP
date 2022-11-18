@@ -6,8 +6,8 @@ export default function Edit() {
     return (
         <div>
             {/* <EditTitle /> */}
-            {/* <EditDescription /> */}
-            <EditGroup />
+            <EditDescription />
+            {/* <EditGroup /> */}
         </div>
     )
 }
