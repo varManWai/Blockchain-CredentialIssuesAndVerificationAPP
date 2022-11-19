@@ -106,7 +106,7 @@ export default function AllCertificate() {
         <Button icon={<PlusOutlined />} onClick={isBreakpoint ? (redirectToAddCert) : (showDrawer)} type="primary">New</Button>
       </div>
       <Drawer
-        title="Create a new account"
+        title="Create a new certificate"
         width={720}
         onClose={onClose}
         open={open}
