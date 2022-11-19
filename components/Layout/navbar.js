@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { FileOutlined, TeamOutlined, UserOutlined, DownOutlined, DesktopOutlined, PieChartOutlined } from '@ant-design/icons';
-import { Button,Menu, Layout, Space, Dropdown } from 'antd';
+import { Button, Menu, Layout, Space, Dropdown } from 'antd';
 import { useState, useCallback, useEffect } from 'react';
 const { Header, Sider } = Layout
 
@@ -101,15 +101,14 @@ export function Educator() {
     }
 
     const items = [
-        getItem('Option 1', '1', <PieChartOutlined />),
-        getItem('Option 2', '2', <DesktopOutlined />),
-        getItem('User', 'sub1', <UserOutlined />, [
-            getItem('Tom', '3'),
-            getItem('Bill', '4'),
-            getItem('Alex', '5'),
+        getItem('Dashboard', '1', <PieChartOutlined />),
+        getItem('Certificate', 'sub1', <TeamOutlined />, [
+            getItem('Add', '2'),
         ]),
-        getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-        getItem('Files', '9', <FileOutlined />),
+        getItem('Badge', 'sub2', <UserOutlined />, [
+            getItem('Add', '3'),
+        ]),
+        getItem('Profile', '2', <TeamOutlined />)
     ];
 
     const useMediaQuery = (width) => {
@@ -149,16 +148,16 @@ export function Educator() {
             ) : (
                 <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} className={styles.edu_sider}>
                     <div className={styles.nav_logo_section}>
-                        <Image 
+                        <Image
                             src="/images/resetPwd.jpg"
                             alt='logo'
                             width={50}
                             height={50}
                             priority
-                            
+
                             className={styles.nav_logo}
                         />
-                        </div>
+                    </div>
                     <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" items={items} />
                 </Sider>
             )}
