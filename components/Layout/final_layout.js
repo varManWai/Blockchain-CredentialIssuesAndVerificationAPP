@@ -7,7 +7,7 @@ import { Row, Col, Layout, Breadcrumb, Menu, Dropdown } from "antd";
 const { Header, Footer, Content } = Layout;
 
 import styles from '../../styles/Login.module.css'
-
+import { useRouter } from "next/router";
 
 export default function Final_Layout({ children, criteria, footer }) {
   const handleMenuClick = (e) => {
@@ -55,6 +55,30 @@ export default function Final_Layout({ children, criteria, footer }) {
       )
 
     } else if (criteria == "educator") {
+
+      const router = useRouter();
+      const pathArr = router.pathname.split("/");
+      let keyNum = 0;
+      pathArr.shift();
+      pathArr.shift();
+      pathArr.unshift("Home");
+
+      const handleNav = (event,currentPath) => {
+
+        event.preventDefault();
+        
+        console.log("clicked");
+
+        if(currentPath == "Home"){
+          router.push("/educator/");
+        }else {
+          const redirectPath = router.pathname.split(currentPath);
+          console.log(redirectPath[0]);
+          router.push(redirectPath[0] + currentPath);
+
+        }
+      }
+
       return (
         <>
           <Layout style={{ minHeight: "100vh" }}>
@@ -80,8 +104,14 @@ export default function Final_Layout({ children, criteria, footer }) {
                     margin: "16px 0",
                   }}
                 >
-                  <Breadcrumb.Item>User</Breadcrumb.Item>
-                  <Breadcrumb.Item>Bill</Breadcrumb.Item>
+                  {pathArr.map(path => {
+                    return (
+                      <Breadcrumb.Item key={keyNum++}>
+                        <a href="" onClick={e => handleNav(e,path)}>{path.charAt(0).toUpperCase() + path.slice(1)}</a>
+                      </Breadcrumb.Item>
+                    )
+                  })}
+
                 </Breadcrumb>
 
                 <div
