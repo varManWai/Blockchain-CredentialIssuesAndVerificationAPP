@@ -10,7 +10,7 @@ import styles from '../../styles/Login.module.css';
 import { useRouter } from "next/router";
 
 export default function AllCertificate() {
-  const TextArea = Input;
+  const {TextArea} = Input;
 
 
   const [open, setOpen] = useState(false);
@@ -139,19 +139,19 @@ export default function AllCertificate() {
             </Col>
           </Row>
           <Row gutter={16}>
-            <Col span={12}>
+            <Col span={20}>
               <Form.Item label="Description">
                 <TextArea rows={4} />
               </Form.Item>
             </Col>
           </Row>
           <Row gutter={16}>
-            <Col span={24}>
+            <Col span={20}>
               <Form.Item label="Group">
                 <Select
                   defaultValue="lucy"
                   style={{
-                    width: 120,
+                    width: "100%",
                   }}
                   onChange={handleChange}
                   options={selectContent}
