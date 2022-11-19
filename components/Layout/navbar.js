@@ -8,6 +8,7 @@ import { useState, useCallback, useEffect } from 'react';
 const { Header, Sider } = Layout
 
 import styles from '../../styles/Login.module.css'
+import { useRouter } from 'next/router';
 
 export default function Visitor() {
     return (
@@ -91,6 +92,14 @@ export function Educator() {
 
     const [collapsed, setCollapsed] = useState(false);
 
+    const router = useRouter();
+
+    const redirectTo = (event, path) => {
+        event.preventDefault();
+        router.push(path);
+
+    }
+
     const getItem = (label, key, icon, children) => {
         return {
             key,
@@ -101,14 +110,14 @@ export function Educator() {
     }
 
     const items = [
-        getItem('Dashboard', '1', <AppstoreOutlined />),
-        getItem('Certificate', 'sub1', <BookOutlined />, [
-            getItem('Add', '2'),
+        getItem('Dashboard', '1', <AppstoreOutlined onClick={e => redirectTo(e, "/educator/profile")} />),
+        getItem('Certificate', 'sub1', <BookOutlined onClick={e => redirectTo(e, "/educator/profile")} />, [
+            getItem('Add', '2'), <CheckCircleOutlined onClick={e => redirectTo(e, "/educator/profile")} />
         ]),
-        getItem('Badge', 'sub2', <CheckCircleOutlined />, [
-            getItem('Add', '3'),
+        getItem('Badge', 'sub2', <CheckCircleOutlined onClick={e => redirectTo(e, "/educator/profile")} />, [
+            getItem('Add', '3'), <CheckCircleOutlined onClick={e => redirectTo(e, "/educator/profile")} />
         ]),
-        getItem('Profile', '4', <UserOutlined />)
+        getItem('Profile', '4', <UserOutlined onClick={e => redirectTo(e, "/educator/profile")} />)
     ];
 
     const useMediaQuery = (width) => {
@@ -159,8 +168,8 @@ export function Educator() {
                         />
                     </div>
                     <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" items={items} />
-                    
-                   
+
+
 
                 </Sider>
             )}
