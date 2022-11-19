@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import Image from 'next/image';
 
-import { FileOutlined, TeamOutlined, UserOutlined, DownOutlined, DesktopOutlined, PieChartOutlined } from '@ant-design/icons';
+import { BookOutlined, TeamOutlined, CheckCircleOutlined, UserOutlined, DownOutlined, AppstoreOutlined, PieChartOutlined } from '@ant-design/icons';
 import { Button, Menu, Layout, Space, Dropdown } from 'antd';
 import { useState, useCallback, useEffect } from 'react';
 const { Header, Sider } = Layout
@@ -101,14 +101,14 @@ export function Educator() {
     }
 
     const items = [
-        getItem('Dashboard', '1', <PieChartOutlined />),
-        getItem('Certificate', 'sub1', <TeamOutlined />, [
+        getItem('Dashboard', '1', <AppstoreOutlined />),
+        getItem('Certificate', 'sub1', <BookOutlined />, [
             getItem('Add', '2'),
         ]),
-        getItem('Badge', 'sub2', <UserOutlined />, [
+        getItem('Badge', 'sub2', <CheckCircleOutlined />, [
             getItem('Add', '3'),
         ]),
-        getItem('Profile', '2', <TeamOutlined />)
+        getItem('Profile', '4', <UserOutlined />)
     ];
 
     const useMediaQuery = (width) => {
