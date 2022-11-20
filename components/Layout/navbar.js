@@ -110,14 +110,16 @@ export function Educator() {
     }
 
     const items = [
-        getItem('Dashboard', '1', <AppstoreOutlined onClick={e => redirectTo(e, "/educator/profile")} />),
-        getItem('Certificate', 'sub1', <BookOutlined onClick={e => redirectTo(e, "/educator/profile")} />, [
-            getItem('Add', '2'), <CheckCircleOutlined onClick={e => redirectTo(e, "/educator/profile")} />
+        getItem('Dashboard', '/educator', <AppstoreOutlined onClick={e => redirectTo(e, "/educator/profile")} />),
+        getItem('Certificate', '/educator/certificates', <BookOutlined onClick={e => redirectTo(e, "/educator/profile")} />, [
+            getItem('All', '/educator/certificates'),
+            getItem('Add', '/educator/certificates/add'),
         ]),
-        getItem('Badge', 'sub2', <CheckCircleOutlined onClick={e => redirectTo(e, "/educator/profile")} />, [
-            getItem('Add', '3'), <CheckCircleOutlined onClick={e => redirectTo(e, "/educator/profile")} />
+        getItem('Badge', '/educator/badges/', <CheckCircleOutlined onClick={e => redirectTo(e, "/educator/profile")} />, [
+            getItem('All', '/educator/badges'),
+            getItem('Add', '/educator/badges/add'),
         ]),
-        getItem('Profile', '4', <UserOutlined onClick={e => redirectTo(e, "/educator/profile")} />)
+        getItem('Profile', '/educator/profile', <UserOutlined onClick={e => redirectTo(e, "/educator/profile")} />)
     ];
 
     const useMediaQuery = (width) => {
@@ -167,9 +169,13 @@ export function Educator() {
                             className={styles.nav_logo}
                         />
                     </div>
-                    <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" items={items} />
-
-
+                    <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" onClick={({ key }) => {
+                        if (key === "logout") {
+                            //logout acc
+                        } else {
+                            router.push(key);
+                        }
+                    }} items={items} />
 
                 </Sider>
             )}
