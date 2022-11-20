@@ -94,12 +94,6 @@ export function Educator() {
 
     const router = useRouter();
 
-    const redirectTo = (event, path) => {
-        event.preventDefault();
-        router.push(path);
-
-    }
-
     const getItem = (label, key, icon, children) => {
         return {
             key,
@@ -111,11 +105,11 @@ export function Educator() {
 
     const items = [
         getItem('Dashboard', '/educator', <AppstoreOutlined onClick={e => redirectTo(e, "/educator/profile")} />),
-        getItem('Certificate', '/educator/certificates', <BookOutlined onClick={e => redirectTo(e, "/educator/profile")} />, [
+        getItem('Certificate', 'certificates', <BookOutlined onClick={e => redirectTo(e, "/educator/profile")} />, [
             getItem('All', '/educator/certificates'),
             getItem('Add', '/educator/certificates/add'),
         ]),
-        getItem('Badge', '/educator/badges/', <CheckCircleOutlined onClick={e => redirectTo(e, "/educator/profile")} />, [
+        getItem('Badge', 'badges', <CheckCircleOutlined onClick={e => redirectTo(e, "/educator/profile")} />, [
             getItem('All', '/educator/badges'),
             getItem('Add', '/educator/badges/add'),
         ]),
@@ -150,6 +144,10 @@ export function Educator() {
 
     const isBreakpoint = useMediaQuery(584)
 
+    const currentPath = router.pathname;
+
+    console.log(currentPath);
+
     return (
         <div>
             {isBreakpoint ? (
@@ -169,11 +167,12 @@ export function Educator() {
                             className={styles.nav_logo}
                         />
                     </div>
-                    <Menu theme="light" defaultSelectedKeys={['1']} mode="inline" onClick={({ key }) => {
+                    <Menu theme="light" defaultSelectedKeys={[`${currentPath}`]} mode="inline" onClick={({ key }) => {
                         if (key === "logout") {
                             //logout acc
                         } else {
                             router.push(key);
+                            
                         }
                     }} items={items} />
 
