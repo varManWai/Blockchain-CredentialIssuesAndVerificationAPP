@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { BookOutlined, TeamOutlined, CheckCircleOutlined, UserOutlined, DownOutlined, AppstoreOutlined, PieChartOutlined } from '@ant-design/icons';
 import { Button, Menu, Layout, Space, Dropdown } from 'antd';
 import { useState, useCallback, useEffect } from 'react';
+
 const { Header, Sider } = Layout
 
 import styles from '../../styles/Login.module.css'
@@ -92,6 +93,8 @@ export function Educator() {
 
     const [collapsed, setCollapsed] = useState(false);
 
+    const [menuCollapsed, setMenuCollapsed] = useState(false);
+
     const router = useRouter();
 
     const getItem = (label, key, icon, children) => {
@@ -146,8 +149,6 @@ export function Educator() {
 
     const currentPath = router.pathname;
 
-    console.log(currentPath);
-
     return (
         <div>
             {isBreakpoint ? (
@@ -167,14 +168,22 @@ export function Educator() {
                             className={styles.nav_logo}
                         />
                     </div>
-                    <Menu theme="light" defaultSelectedKeys={[`${currentPath}`]} mode="inline" onClick={({ key }) => {
-                        if (key === "logout") {
-                            //logout acc
-                        } else {
-                            router.push(key);
-                            
-                        }
-                    }} items={items} />
+                    <Menu
+                        theme="light"
+                        defaultSelectedKeys={[`${currentPath}`]} 
+                        mode="inline" 
+                        onClick={({ key }) => {
+                            if (key === "logout") {
+                                //logout acc
+                            } else {
+
+                                router.push(key);
+                                
+                            }
+                        }}
+                        defaultOpenKeys={['/educator/certificates']} 
+                        items={items}
+                    />
 
                 </Sider>
             )}
