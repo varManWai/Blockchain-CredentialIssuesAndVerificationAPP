@@ -4,8 +4,8 @@ import {
     CheckCircleOutlined,
     UserOutlined,
     DownOutlined,
-    AppstoreOutlined,
-    PieChartOutlined,
+    SafetyOutlined,
+    DesktopOutlined,
     BarsOutlined,
 } from "@ant-design/icons";
 import { Button, Menu, Layout, Space, Dropdown, Drawer, Row, Col } from "antd";
@@ -183,13 +183,13 @@ export function Educator() {
                                 onClose={onClose}
                                 open={visible}
                             >
-                                <Row justify="center" align="center" style={{ minHeight: '100%'}}>
+                                <Row justify="center" align="center" style={{ minHeight: '100%' }}>
                                     <Col>
                                         <Row justify="center" align="center" >
                                             <Col span={24}>
                                                 <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator") }}>
                                                     <Space>
-                                                        <UserOutlined />
+                                                        <DesktopOutlined />
                                                         Dashboard
                                                     </Space>
                                                 </a>
@@ -197,7 +197,7 @@ export function Educator() {
                                             <Col span={24}>
                                                 <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator/certificates") }}>
                                                     <Space>
-                                                        <UserOutlined />
+                                                        <BookOutlined />
                                                         Certificates
                                                     </Space>
                                                 </a>
@@ -205,7 +205,7 @@ export function Educator() {
                                             <Col span={24}>
                                                 <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator/badges") }}>
                                                     <Space>
-                                                        <UserOutlined />
+                                                        <SafetyOutlined />
                                                         Badges
                                                     </Space>
                                                 </a>
