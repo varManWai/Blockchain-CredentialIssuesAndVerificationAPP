@@ -183,36 +183,48 @@ export function Educator() {
                                 onClose={onClose}
                                 open={visible}
                             >
-                                <Row justify="center" align="center">
-                                    <Col span={24}>
-                                        <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator") }}>
-                                            <Space>
-                                                <UserOutlined />
-                                                Dashboard
-                                            </Space>
-                                        </a>
+                                <Row justify="center" align="center" style={{ minHeight: '100%'}}>
+                                    <Col>
+                                        <Row justify="center" align="center" >
+                                            <Col span={24}>
+                                                <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator") }}>
+                                                    <Space>
+                                                        <UserOutlined />
+                                                        Dashboard
+                                                    </Space>
+                                                </a>
+                                            </Col>
+                                            <Col span={24}>
+                                                <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator/certificates") }}>
+                                                    <Space>
+                                                        <UserOutlined />
+                                                        Certificates
+                                                    </Space>
+                                                </a>
+                                            </Col>
+                                            <Col span={24}>
+                                                <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator/badges") }}>
+                                                    <Space>
+                                                        <UserOutlined />
+                                                        Badges
+                                                    </Space>
+                                                </a>
+                                            </Col>
+                                            <Col span={24}>
+                                                <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator/profile") }}>
+                                                    <Space>
+                                                        <UserOutlined />
+                                                        Profile
+                                                    </Space>
+                                                </a>
+                                            </Col>
+                                        </Row>
                                     </Col>
-                                    <Col span={24}>
-                                        <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator/certificates") }}>
+                                    <Col span={24} style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-end' }} onClick={() => { router.push("/educator/profile") }}>
+                                        <a className={styles.drawer_nav_link_danger} >
                                             <Space>
                                                 <UserOutlined />
-                                                Certificates
-                                            </Space>
-                                        </a>
-                                    </Col>
-                                    <Col span={24}>
-                                        <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator/badges") }}>
-                                            <Space>
-                                                <UserOutlined />
-                                                Badges
-                                            </Space>
-                                        </a>
-                                    </Col>
-                                    <Col span={24}>
-                                        <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator/profile") }}>
-                                            <Space>
-                                                <UserOutlined />
-                                                Profile
+                                                Sign Out
                                             </Space>
                                         </a>
                                     </Col>

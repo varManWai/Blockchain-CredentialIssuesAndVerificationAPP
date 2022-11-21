@@ -66,6 +66,27 @@
   
 }
 
+
+/* drawer */
+.drawer_nav_link {
+  color: black;
+  font-size: 2rem;
+  display: block;
+  text-align: center;
+  margin-bottom: 5vh;
+}
+
+.drawer_nav_link_danger{
+  color: red;
+  font-size: 2rem;
+  display: block;
+  text-align: center;
+  border: red solid 2px;
+  background-color: white;
+  width: 100%;
+
+}
+
 @media (max-width: 980px) {
   .navbar_section {
     padding: 2vw 1rem;
