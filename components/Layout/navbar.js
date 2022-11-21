@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 import { BookOutlined, TeamOutlined, CheckCircleOutlined, UserOutlined, DownOutlined, AppstoreOutlined, PieChartOutlined } from '@ant-design/icons';
-import { Button, Menu, Layout, Space, Dropdown } from 'antd';
+import { Button, Menu, Layout, Space, Dropdown, Row, Col } from 'antd';
 import { useState, useCallback, useEffect } from 'react';
 
 const { Header, Sider } = Layout
@@ -93,30 +93,31 @@ export function Educator() {
 
     const [collapsed, setCollapsed] = useState(false);
 
-    const [menuCollapsed, setMenuCollapsed] = useState(false);
-
     const router = useRouter();
 
-    const getItem = (label, key, icon, children) => {
+    const getItem = (label, key, icon, children, type, danger) => {
         return {
             key,
             icon,
             children,
             label,
+            type,
+            danger,
         };
     }
 
     const items = [
-        getItem('Dashboard', '/educator', <AppstoreOutlined onClick={e => redirectTo(e, "/educator/profile")} />),
-        getItem('Certificate', 'certificates', <BookOutlined onClick={e => redirectTo(e, "/educator/profile")} />, [
+        getItem('Dashboard', '/educator', <AppstoreOutlined />),
+        getItem('Certificate', 'certificates', <BookOutlined />, [
             getItem('All', '/educator/certificates'),
             getItem('Add', '/educator/certificates/add'),
-        ]),
-        getItem('Badge', 'badges', <CheckCircleOutlined onClick={e => redirectTo(e, "/educator/profile")} />, [
+        ], "group"),
+        getItem('Badge', 'badges', <CheckCircleOutlined />, [
             getItem('All', '/educator/badges'),
             getItem('Add', '/educator/badges/add'),
-        ]),
-        getItem('Profile', '/educator/profile', <UserOutlined onClick={e => redirectTo(e, "/educator/profile")} />)
+        ], "divider"),
+        getItem('Profile', '/educator/profile', <UserOutlined />),
+        getItem('Sign Out', '', <UserOutlined />, "", "", true)
     ];
 
     const useMediaQuery = (width) => {
@@ -156,36 +157,23 @@ export function Educator() {
                     <h1>small nav</h1>
                 </div>
             ) : (
-                <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} className={styles.edu_sider}>
-                    <div className={styles.nav_logo_section}>
-                        <Image
-                            src="/images/resetPwd.jpg"
-                            alt='logo'
-                            width={50}
-                            height={50}
-                            priority
+                <Row justify="center" align="center">
+                    <Col span={2}>Logo</Col>
+                    <Col span={20}>
+                        <Row justify="space-between" align="center">
+                            <Col span={20}>
+                                <Row align="center">
+                                    <Col span={2}>Nav1</Col>
+                                    <Col span={2}>Nav1</Col>
+                                    <Col span={2}>Nav1</Col>
+                                    <Col span={2}>Nav1</Col>
+                                </Row>
+                            </Col>
+                            <Col span={4}>Profile</Col>
+                        </Row>
+                    </Col>
+                </Row>
 
-                            className={styles.nav_logo}
-                        />
-                    </div>
-                    <Menu
-                        theme="light"
-                        defaultSelectedKeys={[`${currentPath}`]} 
-                        mode="inline" 
-                        onClick={({ key }) => {
-                            if (key === "logout") {
-                                //logout acc
-                            } else {
-
-                                router.push(key);
-                                
-                            }
-                        }}
-                        defaultOpenKeys={['/educator/certificates']} 
-                        items={items}
-                    />
-
-                </Sider>
             )}
         </div>
 

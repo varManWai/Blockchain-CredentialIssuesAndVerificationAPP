@@ -83,20 +83,13 @@ export default function Final_Layout({ children, criteria, footer }) {
         <>
           <Layout style={{ minHeight: "100vh" }}>
             <Educator />
-            <Layout className="site-layout">
-              <Header
-                className="site-layout-background"
-                style={{
-                  padding: 0,
-                  background: "white",
-                }}
-              />
+            <Layout>
               {/* <Dropdown.Button menu={menuProps} placement="bottom" icon={<UserOutlined />}>
               Dropdown
             </Dropdown.Button> */}
               <Content
                 style={{
-                  margin: "0 16px",
+                  margin: "0 1.6rem",
                 }}
               >
                 <Breadcrumb
