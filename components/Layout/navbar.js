@@ -129,7 +129,6 @@ export function Educator() {
 
     const isBreakpoint = useMediaQuery(584);
 
-    const [current, setCurrent] = useState("mail");
     const [visible, setVisible] = useState(false);
 
     const showDrawer = () => {
@@ -139,106 +138,151 @@ export function Educator() {
         setVisible(false);
     };
 
-    const rediretTo = (location) => {
+    const items = [
+        {
+            label: <a href="" onClick={() => router.push("/educator/profile")}>Profile</a>,
+            key: '0',
+        },
 
-        router.push(location);
-
-    }
+        {
+            type: 'divider',
+        },
+        {
+            label: <a href="" onClick={() => router.push("/educator")}>Sign Out</a>,
+            key: '1',
+        },
+    ];
 
     return (
         <div>
             {isBreakpoint ? (
-                <div>
-                    <h1>small nav</h1>
-                </div>
-            ) : (
                 <nav>
-                    <Row className={styles.navbar_section} justify="center" align="center" >
-                        <Col className={styles.navbar_section_items} span={2}>
-                            <Image 
-                            src="/images/forgotPwd.jpg"
-                            alt="this is our logo"
-                            fill
-                            priority
+                    <Row className={styles.navbar_section} justify="space-between" align="center" >
+                        <Col className={styles.navbar_section_items} span={4}>
+                            <Image
+                                src="/images/forgotPwd.jpg"
+                                alt="this is our logo"
+                                fill
+                                priority
+                                sizes="100%"
+                                className={styles.navbar_section_items_1_image}
                             />
                         </Col>
-                        <Col className={styles.navbar_section_items} span={22}>
+                        <Col className={styles.navbar_section_items} >
+                            <Button
+                                className={styles.barsMenu}
+                                type="primary"
+                                onClick={showDrawer}
+                            >
+                                <BarsOutlined />
+                                {/* <span className={styles.barsBtn} /> */}
+                            </Button>
+                            <Drawer
+                                title=""
+                                placement="right"
+                                onClose={onClose}
+                                open={visible}
+                            >
+                                <Row justify="center" align="center">
+                                    <Col span={24}>
+                                        <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator") }}>
+                                            <Space>
+                                                <UserOutlined />
+                                                Dashboard
+                                            </Space>
+                                        </a>
+                                    </Col>
+                                    <Col span={24}>
+                                        <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator/certificates") }}>
+                                            <Space>
+                                                <UserOutlined />
+                                                Certificates
+                                            </Space>
+                                        </a>
+                                    </Col>
+                                    <Col span={24}>
+                                        <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator/badges") }}>
+                                            <Space>
+                                                <UserOutlined />
+                                                Badges
+                                            </Space>
+                                        </a>
+                                    </Col>
+                                    <Col span={24}>
+                                        <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator/profile") }}>
+                                            <Space>
+                                                <UserOutlined />
+                                                Profile
+                                            </Space>
+                                        </a>
+                                    </Col>
+                                </Row>
+                            </Drawer>
+                        </Col>
+                    </Row>
+                </nav>
+            ) : (
+                <nav>
+                    <Row className={styles.navbar_section} justify="space-between" align="center" >
+                        <Col className={styles.navbar_section_items} span={3}>
+                            <Image
+                                src="/images/forgotPwd.jpg"
+                                alt="this is our logo"
+                                fill
+                                priority
+                                sizes="100%"
+                                className={styles.navbar_section_items_1_image}
+                            />
+                        </Col>
+                        <Col className={styles.navbar_section_items} span={20}>
                             <Row className={styles.navbar_section_items_section} justify="space-between" align="center">
-                                <Col span={22}>
+                                <Col span={20}>
                                     <Row>
                                         <Space size="large">
                                             <Col>
-                                                <a className={styles.navbar_section_items_section_1_item}  onClick={() => router.push("/educator")}>Dashboard</a>
+                                                <a className={styles.navbar_section_items_section_1_item} onClick={() => router.push("/educator")}>Dashboard</a>
                                             </Col>
                                             <Col >
-                                                <a className={styles.navbar_section_items_section_1_item}  onClick={() => router.push("/educator/certificates")}>Certificates</a>
+                                                <a className={styles.navbar_section_items_section_1_item} onClick={() => router.push("/educator/certificates")}>Certificates</a>
                                             </Col>
                                             <Col >
-                                                <a className={styles.navbar_section_items_section_1_item}  onClick={() => router.push("/educator/badges")}>Badges</a>
+                                                <a className={styles.navbar_section_items_section_1_item} onClick={() => router.push("/educator/badges")}>Badges</a>
                                             </Col>
                                             <Col >
-                                                <a className={styles.navbar_section_items_section_1_item}  onClick={() => router.push("/educator/groups")}>groups</a>
+                                                <a className={styles.navbar_section_items_section_1_item} onClick={() => router.push("/educator/groups")}>groups</a>
                                             </Col>
                                         </Space>
                                     </Row>
                                 </Col>
-                                <Col className={styles.navbar_section_items_section_2} span={2}>Profile</Col>
+                                <Col className={styles.navbar_section_items_section_2} span={4}>
+                                    <Dropdown
+                                        placement="bottom"
+                                        arrow={{
+                                            pointAtCenter: true,
+                                        }}
+                                        menu={{
+                                            items,
+                                        }}
+                                        trigger={['click']}
+                                        className={styles.navbar_section_items_section_2_dropdown}
+                                    >
+
+                                        <button className={styles.navbar_section_items_section_2_button}
+                                            onClick={(e) => e.preventDefault()}>
+                                            <Image
+                                                src="/images/resetPwd.jpg"
+                                                alt="personal image"
+                                                fill
+                                                priority
+                                                sizes="100%"
+                                                className={styles.navbar_section_items_section_2_item}
+                                            />
+                                        </button>
+                                    </Dropdown>
+                                </Col>
                             </Row>
                         </Col>
                     </Row>
-
-
-
-                    <Button
-                        className={styles.barsMenu}
-                        type="primary"
-                        onClick={showDrawer}
-                    >
-                        <BarsOutlined />
-                        {/* <span className={styles.barsBtn} /> */}
-                    </Button>
-                    <Drawer
-                        title="Basic Drawer"
-                        placement="right"
-                        closable={false}
-                        onClose={onClose}
-                        open={visible}
-                    >
-                        <Row justify="center" align="center">
-                            <Col span={24}>
-                                <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator") }}>
-                                    <Space>
-                                        <UserOutlined />
-                                        Dashboard
-                                    </Space>
-                                </a>
-                            </Col>
-                            <Col span={24}>
-                                <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator/certificates") }}>
-                                    <Space>
-                                        <UserOutlined />
-                                        Certificates
-                                    </Space>
-                                </a>
-                            </Col>
-                            <Col span={24}>
-                                <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator/badges") }}>
-                                    <Space>
-                                        <UserOutlined />
-                                        Badges
-                                    </Space>
-                                </a>
-                            </Col>
-                            <Col span={24}>
-                                <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator/profile") }}>
-                                    <Space>
-                                        <UserOutlined />
-                                        Profile
-                                    </Space>
-                                </a>
-                            </Col>
-                        </Row>
-                    </Drawer>
                 </nav>
             )}
         </div>
