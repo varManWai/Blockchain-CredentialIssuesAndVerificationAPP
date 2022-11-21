@@ -6,6 +6,7 @@ import {
     DownOutlined,
     AppstoreOutlined,
     PieChartOutlined,
+    BarsOutlined,
 } from "@ant-design/icons";
 import { Button, Menu, Layout, Space, Dropdown, Drawer, Row, Col } from "antd";
 import { useState, useCallback, useEffect } from "react";
@@ -149,71 +150,81 @@ export function Educator() {
                     <h1>small nav</h1>
                 </div>
             ) : (
-                <nav className={styles.menuBar}>
-                    <div className={styles.logo}>
-                        <a href="www.marca.com">logo</a>
-                    </div>
-                    <div className={styles.menuCon}>
-                        <div className={styles.leftMenu}>
-                            <Menu mode="horizontal">
-                                <Menu.Item key="mail">
-                                    <a href="www.marca.com">Home</a>
-                                </Menu.Item>
-                                {/* <SubMenu title={<span>Blogs</span>}>
-                                    <MenuItemGroup title="Item 1">
-                                        <Menu.Item key="setting:1">Option 1</Menu.Item>
-                                        <Menu.Item key="setting:2">Option 2</Menu.Item>
-                                    </MenuItemGroup>
-                                    <MenuItemGroup title="Item 2">
-                                        <Menu.Item key="setting:3">Option 3</Menu.Item>
-                                        <Menu.Item key="setting:4">Option 4</Menu.Item>
-                                    </MenuItemGroup>
-                                </SubMenu> */}
-                                <Menu.Item key="alipay">
-                                    <a href="www.marca.com">Contact Us</a>
-                                </Menu.Item>
-                            </Menu>
-                        </div>
-                        <div className={styles.rightMenu}>
-                            <Menu mode="horizontal">
-                                <Menu.Item key="mail">
-                                    <a href="www.marca.com">Signin</a>
-                                </Menu.Item>
-                                <Menu.Item key="app">
-                                    <a href="www.marca.com">Signup</a>
-                                </Menu.Item>
-                            </Menu>
-                        </div>
-                        <Button
-                            className={styles.barsMenu}
-                            type="primary"
-                            onClick={showDrawer}
-                        >
-                            <span className={styles.barsBtn} />
-                        </Button>
-                        <Drawer
-                            title="Basic Drawer"
-                            placement="right"
-                            closable={false}
-                            onClose={onClose}
-                            open={visible}
-                        >
-                            <Row justify="center" align="center">
-                                <Col span={24}>
-                                    <a onClick={() => { router.push("/educator") }}>nav 1</a>
+                <nav>
+                    <Row className={styles.navbar_section} justify="center" align="center" >
+                        <Col className={styles.navbar_section_items} span={2}>Logo</Col>
+                        <Col className={styles.navbar_section_items} span={18}>
+                            <Row className={styles.navbar_section_items_section} justify="space-between">
+                                <Col span={22}>
+                                    <Row>
+                                        <Col span={3}>
+                                            <a href="" onClick={() => router.push("/educator")}></a> nav 1
+                                        </Col>
+                                        <Col span={3}>
+                                            <a href="" onClick={() => router.push("/educator")}></a> Nav 2
+                                        </Col>
+                                        <Col span={3}>
+                                            <a href="" onClick={() => router.push("/educator")}></a> Nav 3
+                                        </Col>
+                                    </Row>
                                 </Col>
-                                <Col span={24}>
-                                    <a onClick={() => { router.push("/educator/certificates") }}>nav 1</a>
-                                </Col>
-                                <Col span={24}>
-                                    <a onClick={() => { router.push("/educator/badges") }}>nav 1</a>
-                                </Col>
-                                <Col span={24}>
-                                    <a onClick={() => { router.push("/educator/profile") }}>nav 1</a>
-                                </Col>
+                                <Col span={2}>Profile</Col>
                             </Row>
-                        </Drawer>
-                    </div>
+                        </Col>
+                    </Row>
+
+
+
+                    <Button
+                        className={styles.barsMenu}
+                        type="primary"
+                        onClick={showDrawer}
+                    >
+                        <BarsOutlined />
+                        {/* <span className={styles.barsBtn} /> */}
+                    </Button>
+                    <Drawer
+                        title="Basic Drawer"
+                        placement="right"
+                        closable={false}
+                        onClose={onClose}
+                        open={visible}
+                    >
+                        <Row justify="center" align="center">
+                            <Col span={24}>
+                                <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator") }}>
+                                    <Space>
+                                        <UserOutlined />
+                                        Dashboard
+                                    </Space>
+                                </a>
+                            </Col>
+                            <Col span={24}>
+                                <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator/certificates") }}>
+                                    <Space>
+                                        <UserOutlined />
+                                        Certificates
+                                    </Space>
+                                </a>
+                            </Col>
+                            <Col span={24}>
+                                <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator/badges") }}>
+                                    <Space>
+                                        <UserOutlined />
+                                        Badges
+                                    </Space>
+                                </a>
+                            </Col>
+                            <Col span={24}>
+                                <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator/profile") }}>
+                                    <Space>
+                                        <UserOutlined />
+                                        Profile
+                                    </Space>
+                                </a>
+                            </Col>
+                        </Row>
+                    </Drawer>
                 </nav>
             )}
         </div>
