@@ -11,6 +11,8 @@ import {
 import { Button, Menu, Layout, Space, Dropdown, Drawer, Row, Col } from "antd";
 import { useState, useCallback, useEffect } from "react";
 
+import Image from "next/image";
+
 const { Header, Sider } = Layout;
 const { MenuItemGroup } = Menu;
 
@@ -152,23 +154,35 @@ export function Educator() {
             ) : (
                 <nav>
                     <Row className={styles.navbar_section} justify="center" align="center" >
-                        <Col className={styles.navbar_section_items} span={2}>Logo</Col>
+                        <Col className={styles.navbar_section_items} span={2}>
+                            <Image 
+                            src="/images/forgotPwd.jpg"
+                            alt="this is our logo"
+                            fill
+                            priority
+                            />
+                        </Col>
                         <Col className={styles.navbar_section_items} span={18}>
-                            <Row className={styles.navbar_section_items_section} justify="space-between">
+                            <Row className={styles.navbar_section_items_section} justify="space-between" align="center">
                                 <Col span={22}>
                                     <Row>
-                                        <Col span={3}>
-                                            <a href="" onClick={() => router.push("/educator")}></a> nav 1
-                                        </Col>
-                                        <Col span={3}>
-                                            <a href="" onClick={() => router.push("/educator")}></a> Nav 2
-                                        </Col>
-                                        <Col span={3}>
-                                            <a href="" onClick={() => router.push("/educator")}></a> Nav 3
-                                        </Col>
+                                        <Space size="large">
+                                            <Col>
+                                                <a className={styles.navbar_section_items_section_1_item} href="" onClick={() => router.push("/educator")}>Dashboard</a>
+                                            </Col>
+                                            <Col >
+                                                <a className={styles.navbar_section_items_section_1_item} href="" onClick={() => router.push("/educator/certificates")}>Certificates</a>
+                                            </Col>
+                                            <Col >
+                                                <a className={styles.navbar_section_items_section_1_item} href="" onClick={() => router.push("/educator/badges")}>Badges</a>
+                                            </Col>
+                                            <Col >
+                                                <a className={styles.navbar_section_items_section_1_item} href="" onClick={() => router.push("/educator/groups")}>groups</a>
+                                            </Col>
+                                        </Space>
                                     </Row>
                                 </Col>
-                                <Col span={2}>Profile</Col>
+                                <Col className={styles.navbar_section_items_section_2} span={2}>Profile</Col>
                             </Row>
                         </Col>
                     </Row>
