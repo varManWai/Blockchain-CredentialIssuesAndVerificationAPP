@@ -1,12 +1,12 @@
 .navbar_section {
   background-color: white;
-  border: red solid 2px;
+  border: green solid 2px;
   padding: 0vw 3vw;
 }
 
 .navbar_section_items {
   border: red solid 2px;
-
+  width: 100%;
 
 }
 
@@ -36,4 +36,10 @@
   display: block;
 
 
+}
+
+@media (max-width: 980px) {
+  .navbar_section {
+    padding: 0vw 1rem;
+  }
 }

@@ -162,22 +162,22 @@ export function Educator() {
                             priority
                             />
                         </Col>
-                        <Col className={styles.navbar_section_items} span={18}>
+                        <Col className={styles.navbar_section_items} span={22}>
                             <Row className={styles.navbar_section_items_section} justify="space-between" align="center">
                                 <Col span={22}>
                                     <Row>
                                         <Space size="large">
                                             <Col>
-                                                <a className={styles.navbar_section_items_section_1_item} href="" onClick={() => router.push("/educator")}>Dashboard</a>
+                                                <a className={styles.navbar_section_items_section_1_item}  onClick={() => router.push("/educator")}>Dashboard</a>
                                             </Col>
                                             <Col >
-                                                <a className={styles.navbar_section_items_section_1_item} href="" onClick={() => router.push("/educator/certificates")}>Certificates</a>
+                                                <a className={styles.navbar_section_items_section_1_item}  onClick={() => router.push("/educator/certificates")}>Certificates</a>
                                             </Col>
                                             <Col >
-                                                <a className={styles.navbar_section_items_section_1_item} href="" onClick={() => router.push("/educator/badges")}>Badges</a>
+                                                <a className={styles.navbar_section_items_section_1_item}  onClick={() => router.push("/educator/badges")}>Badges</a>
                                             </Col>
                                             <Col >
-                                                <a className={styles.navbar_section_items_section_1_item} href="" onClick={() => router.push("/educator/groups")}>groups</a>
+                                                <a className={styles.navbar_section_items_section_1_item}  onClick={() => router.push("/educator/groups")}>groups</a>
                                             </Col>
                                         </Space>
                                     </Row>
