@@ -1,6 +1,6 @@
-import { Form, Select, Input, DatePicker, Button } from "antd"
+import { Form, Select, Input, DatePicker, Row, Col, Button } from "antd"
 
-import styles from '../../styles/Login.module.css';
+import styles from './addCert.module.css';
 
 export default function AddCertificate() {
 
@@ -8,12 +8,13 @@ export default function AddCertificate() {
 
     const layout = {
         labelCol: {
-            span: 4,
+            span: 24,
         },
         wrapperCol: {
-            span: 20,
+            span: 24,
         },
     };
+
 
     const tailLayout = {
         wrapperCol: {
@@ -56,35 +57,59 @@ export default function AddCertificate() {
     };
 
     return (
-        <div>
+        <div className={styles.add_cert_container}>
             <Form {...layout} name="control-ref" >
-                <Form.Item
-                    name="title"
-                    label="Title"
-                >
-                    <Input />
-                </Form.Item>
-                <Form.Item label="Date and Time release">
-                    <DatePicker showTime onChange={onChange} onOk={onOk} />
-                </Form.Item>
-                <Form.Item label="Description">
-                    <TextArea rows={4} />
-                </Form.Item>
-                <Form.Item label="Group">
-                    <Select
-                        defaultValue="lucy"
-                        style={{
-                            width: 120,
-                        }}
-                        onChange={handleChange}
-                        options={selectContent}
-                    />
-                </Form.Item>
-                <Form.Item {...tailLayout} className={styles.addCert_button_container}>
-                    <Button type="primary" htmlType="submit">
-                        Submit
-                    </Button>
-                </Form.Item>
+                <Row gutter={16}>
+                    <Col span={12}>
+                        <Form.Item
+                            name="title"
+                            label="Title"
+                        >
+                            <Input />
+                        </Form.Item>
+                    </Col>
+                    <Col span={12}>
+                        <Form.Item label="Date and Time release">
+                            <DatePicker
+                                showTime
+                                onChange={onChange}
+                                onOk={onOk}
+                                style={{
+                                    width: "100%",
+                                }} />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={16}>
+                    <Col span={24}>
+                        <Form.Item label="Description">
+                            <TextArea rows={4} />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={16}>
+                    <Col span={24}>
+                        <Form.Item label="Group">
+                            <Select
+                                defaultValue="lucy"
+                                style={{
+                                    width: "100%",
+                                }}
+                                onChange={handleChange}
+                                options={selectContent}
+                            />
+                        </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={16}>
+                    <Col span={24}>
+                        <Form.Item {...tailLayout} className={styles.addCert_button_container}>
+                            <Button type="primary" htmlType="submit">
+                                Submit
+                            </Button>
+                        </Form.Item>
+                    </Col>
+                </Row>
             </Form>
         </div>
     )

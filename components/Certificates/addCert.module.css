@@ -1,0 +1,11 @@
+.add_cert_container {
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* add cert page */
+.addCert_button_container {
+  display: flex;
+  justify-content: flex-end;
+}
