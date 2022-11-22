@@ -4,9 +4,11 @@ import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
 
 import { Card, Avatar } from "antd";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
-export default function CertificateItem() {
+export default function CertificateItem({ cert }) {
   const { Meta } = Card;
+  const router = useRouter();
 
   const style = {
     backgroundImage: "/hello world",
@@ -31,12 +33,15 @@ export default function CertificateItem() {
           />
         }
         actions={[
-          <EyeOutlined key="setting" onClick={() => console.log("clicked")} />,
-          <EditOutlined key="edit" />,
-          <DeleteOutlined key="ellipsis" />,
+          <EyeOutlined key="view" onClick={() => router.push(`/educator/certificates/${cert.id}`)} />,
+          <EditOutlined key="edit" onClick={() => console.log("clicked 2")} />,
+          <DeleteOutlined
+            key="delete"
+            onClick={() => console.log("clicked 3")}
+          />,
         ]}
       >
-        <Meta title="Card title" description="This is the description" />
+        <Meta title={cert.product} description={cert.description} />
       </Card>
     </div>
   );

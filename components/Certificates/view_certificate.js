@@ -1,89 +1,116 @@
-import { Image, Row, Col , Button } from "antd"
+import { Image, Row, Col, Button } from "antd"
 
-import styles from "../../styles/Login.module.css";
+import styles from "./viewCert.module.css";
+
+
 
 export default function View_Certificate() {
     return (
         <div>
-            <h1>this is the view certificate page</h1>
-            <Row>
-                <Col>
+            <Row
+                className={styles.view_cert_container}
+                wrap
+            >
+                <Col
+                    className={styles.view_cert_section1}
+                    span={12}
+                    xs={{
+                        span: 24,
+                    }}
+                    sm={{
+                        span: 12,
+                    }}
+                    lg={{
+                        span: 12,
+                    }}
+
+                >
                     <Image
-                        src="../../public/images/forgotPwd.jpg"
-                        alt="this is the certificate pdf file show picture"
+                        src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                        alt="certificate pdf file "
                         fill
                         priority
+                        className={styles.view_cert_image}
                     />
                 </Col>
-                <Col>
+                <Col
+
+                    span={12}
+                    className={styles.view_cert_section2}
+                    xs={{
+                        span: 24,
+                    }}
+                    sm={{
+                        span: 12,
+                    }}
+                    lg={{
+                        span: 12,
+                    }}
+                >
                     <Row>
-                        <Col>
+                        <Col span={24}>
                             <Row>
-                                <Col><label htmlFor="">Id</label></Col>
+                                <Col span={24}><label htmlFor="" className={styles.view_cert_labels}>Id</label></Col>
                             </Row>
                         </Col>
-                        <Col>
-                            <p>1WE23456789QW</p>
+                        <Col span={24}>
+                            <p className={styles.view_cert_texts}>1WE23456789QW</p>
                         </Col>
                     </Row>
                     <Row>
-                        <Col>
-                            <Row>
-                                <Col><label htmlFor="">Title</label></Col>
+                        <Col span={24}>
+                            <Row justify="space-between">
+                                <Col><label htmlFor="" className={styles.view_cert_labels}>Title</label></Col>
                                 <Col>
-                                    <Button type="text" primary>
+                                    <a className={styles.view_cert_link} type="text" primary>
                                         Edit
-                                    </Button>
+                                    </a>
+                                </Col>
+                            </Row>
+                        </Col>
+                        <Col span={24}>
+                            <p className={styles.view_cert_texts}>Lorem ipsum dolor sit amet.</p>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col >
+                            <Row>
+                                <Col span={24}><label htmlFor="" className={styles.view_cert_labels}>Date and Time</label></Col>
+                            </Row>
+                        </Col>
+                        <Col span={24}>
+                            <p className={styles.view_cert_texts}>5/10/2022 20:30</p>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col span={24}>
+                            <Row justify="space-between">
+                                <Col><label htmlFor="" className={styles.view_cert_labels}>Description</label></Col>
+                                <Col>
+                                    <a className={styles.view_cert_link} type="text" primary>
+                                        Edit
+                                    </a>
                                 </Col>
                             </Row>
                         </Col>
                         <Col>
-                            <p>Lorem ipsum dolor sit amet.</p>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col>
-                            <Row>
-                                <Col><label htmlFor="">Date and Time</label></Col>
-                            </Row>
-                        </Col>
-                        <Col>
-                            <p>5/10/2022 20:30</p>
-                        </Col>
-                    </Row>
-                </Col>
-                <Col>
-                    <Row>
-                        <Col>
-                            <Row>
-                                <Col><label htmlFor="">Description</label></Col>
-                                <Col>
-                                    <Button type="text" primary>
-                                        Edit
-                                    </Button>
-                                </Col>
-                            </Row>
-                        </Col>
-                        <Col>
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                            <p className={styles.view_cert_texts}>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
                                 Expedita ullam ab dolore voluptate dignissimos, magni, sapiente suscipit tempora omnis ratione doloremque. Ullam quod animi adipisci.</p>
                         </Col>
                     </Row>
-                </Col>
-                <Col>
                     <Row>
-                        <Col>
-                            <Row>
-                                <Col><label htmlFor="">Group</label></Col>
+                        <Col span={24}>
+                            <Row justify="space-between">
+                                <Col><label htmlFor="" className={styles.view_cert_labels}>Group</label></Col>
                                 <Col>
-                                    <Button type="text" primary>
+                                    <a className={styles.view_cert_link} type="text" primary>
                                         Edit
-                                    </Button>
+                                    </a>
                                 </Col>
                             </Row>
                         </Col>
-                        <Col>
-                        <p>Group 1</p>
+                        <Col span={24}>
+                            <p className={styles.view_cert_texts}>Group 1</p>
                         </Col>
                     </Row>
                 </Col>

@@ -257,7 +257,7 @@ export function Educator() {
 
     const items = [
         {
-            label: <a href="" onClick={() => router.push("/educator/profile")}>Profile</a>,
+            label: <a onClick={() => router.push("/educator/profile")}>Profile</a>,
             key: '0',
         },
 
@@ -265,7 +265,7 @@ export function Educator() {
             type: 'divider',
         },
         {
-            label: <a href="" onClick={() => router.push("/educator")}>Sign Out</a>,
+            label: <a onClick={() => router.push("/educator")}>Sign Out</a>,
             key: '1',
         },
     ];
