@@ -1,6 +1,7 @@
 import { Form, Select, Input, DatePicker, Row, Col, Button } from "antd"
 
 import styles from './addCert.module.css';
+import { useState, useCallback, useEffect } from "react";
 
 export default function AddCertificate() {
 
@@ -32,6 +33,34 @@ export default function AddCertificate() {
     };
 
 
+    const useMediaQuery = (width) => {
+        const [targetReached, setTargetReached] = useState(false);
+
+        const updateTarget = useCallback((e) => {
+            if (e.matches) {
+                setTargetReached(true);
+            } else {
+                setTargetReached(false);
+            }
+        }, []);
+
+        useEffect(() => {
+            const media = window.matchMedia(`(max-width: ${width}px)`);
+            media.addEventListener("change", updateTarget);
+
+            // Check on mount (callback is not called until a change occurs)
+            if (media.matches) {
+                setTargetReached(true);
+            }
+
+            return () => media.removeEventListener("change", updateTarget);
+        }, []);
+
+        return targetReached;
+    };
+
+    const isBreakpoint = useMediaQuery(584);
+
     const selectContent = [
         {
             value: 'jack',
@@ -60,7 +89,7 @@ export default function AddCertificate() {
         <div className={styles.add_cert_container}>
             <Form {...layout} name="control-ref" >
                 <Row gutter={16}>
-                    <Col span={12}>
+                    <Col span={isBreakpoint ? 24 : 12}>
                         <Form.Item
                             name="title"
                             label="Title"
@@ -68,7 +97,7 @@ export default function AddCertificate() {
                             <Input />
                         </Form.Item>
                     </Col>
-                    <Col span={12}>
+                    <Col span={isBreakpoint ? 24 : 12}>
                         <Form.Item label="Date and Time release">
                             <DatePicker
                                 showTime
