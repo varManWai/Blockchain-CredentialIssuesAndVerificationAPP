@@ -1,5 +1,5 @@
 .navbar_section {
-  background-color: white;
+  background-color: rgb(24,144,255);
   padding: 0.5vw 3vw;
 }
 
@@ -25,10 +25,14 @@
 .navbar_section_items_section_2 {
 }
 
+.barsMenu{
+  background-color: rgb(0, 105, 203);;
+}
+
 .navbar_section_items_section_1_item {
   text-align: center;
-  color: rgb(59, 59, 59);
-  font-weight: 400;
+  color: rgb(255, 255, 255);
+  font-weight: 700;
   padding: 2vh 1rem;
   text-transform: capitalize;
 
@@ -48,7 +52,7 @@
   justify-content: center;
   align-items: center; */
 
-  background-color: white;
+  background-color: rgb(24,144,255);
 
   position: relative;
 }
@@ -63,7 +67,7 @@
   width: 4rem !important;
   height: 4rem !important;
   margin: auto;
-  border: rgb(197, 197, 197) solid 3px;
+  border: rgb(255, 255, 255) solid 3px;
 
   
 }

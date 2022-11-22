@@ -42,6 +42,7 @@
   display: block;
   width: 100%;
   /* border: red solid 2px; */
+  margin-bottom: 0.5rem;
 }
 
 .view_cert_link {
