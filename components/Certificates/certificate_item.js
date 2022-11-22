@@ -1,10 +1,6 @@
 import Image from "next/image";
 
-import {
-  EllipsisOutlined,
-  EditOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
 
 import { Card, Avatar } from "antd";
 import { useState } from "react";
@@ -16,11 +12,11 @@ export default function CertificateItem() {
     backgroundImage: "/hello world",
   };
 
-  const [popover,setPopover] = useState(true);
+  const [popover, setPopover] = useState(true);
 
   const handleOnClick = () => {
     setPopover(false);
-  }
+  };
 
   return (
     <div>
@@ -35,16 +31,12 @@ export default function CertificateItem() {
           />
         }
         actions={[
-          <SettingOutlined key="setting" onClick={handleOnClick}/>,
+          <EyeOutlined key="setting" onClick={() => console.log("clicked")} />,
           <EditOutlined key="edit" />,
-          <EllipsisOutlined key="ellipsis" />,
-          <EllipsisOutlined key="ellipsis" />,
+          <DeleteOutlined key="ellipsis" />,
         ]}
       >
-        <Meta
-          title="Card title"
-          description="This is the description"
-        />
+        <Meta title="Card title" description="This is the description" />
       </Card>
     </div>
   );
