@@ -104,7 +104,7 @@ export function Student() {
         <div>
             {isBreakpoint ? (
                 <nav>
-                    <Row className={styles.navbar_section} justify="space-between" align="center" >
+                    <Row className={styles.navbar_section_student} justify="space-between" align="center" >
                         <Col className={styles.navbar_section_items} span={4}>
                             <Image
                                 src="/images/forgotPwd.jpg"
@@ -117,7 +117,7 @@ export function Student() {
                         </Col>
                         <Col className={styles.navbar_section_items} >
                             <Button
-                                className={styles.barsMenu}
+                                className={styles.barsMenu_student}
                                 type="primary"
                                 onClick={showDrawer}
                             >
@@ -158,7 +158,7 @@ export function Student() {
                 </nav>
             ) : (
                 <nav>
-                    <Row className={styles.navbar_section} justify="space-between" align="center" >
+                    <Row className={styles.navbar_section_student} justify="space-between" align="center" >
                         <Col className={styles.navbar_section_items} span={3}>
                             <Image
                                 src="/images/forgotPwd.jpg"
@@ -175,7 +175,7 @@ export function Student() {
                                     <Row>
                                         <Space size="large">
                                             <Col>
-                                                <a className={styles.navbar_section_items_section_1_item} onClick={() => router.push("/educator")}>Credentials</a>
+                                                <a className={styles.navbar_section_items_section_1_item_student} onClick={() => router.push("/student/credentials")}>Credentials</a>
                                             </Col>
                                         </Space>
                                     </Row>
@@ -193,7 +193,7 @@ export function Student() {
                                         className={styles.navbar_section_items_section_2_dropdown}
                                     >
 
-                                        <button className={styles.navbar_section_items_section_2_button}
+                                        <button className={styles.navbar_section_items_section_2_button_student}
                                             onClick={(e) => e.preventDefault()}>
                                             <Image
                                                 src="/images/resetPwd.jpg"

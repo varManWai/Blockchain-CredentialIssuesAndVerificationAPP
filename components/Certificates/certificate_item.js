@@ -6,6 +6,8 @@ import { Card, Avatar } from "antd";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
+import styles from './certItem.module.css';
+
 export default function CertificateItem({ cert }) {
   const { Meta } = Card;
   const router = useRouter();
@@ -34,14 +36,17 @@ export default function CertificateItem({ cert }) {
         }
         actions={[
           <EyeOutlined key="view" onClick={() => router.push(`/educator/certificates/${cert.id}`)} />,
-          <EditOutlined key="edit" onClick={() => console.log("clicked 2")} />,
+          // <EditOutlined key="edit" onClick={() => console.log("clicked 2")} />,
           <DeleteOutlined
             key="delete"
             onClick={() => console.log("clicked 3")}
           />,
         ]}
       >
-        <Meta title={cert.product} description={cert.description} />
+        <div className={styles.meta} >
+          <p className={styles.title}>{cert.product} </p>
+          <p className={styles.description}>{cert.description}</p>
+        </div>
       </Card>
     </div>
   );

@@ -1,8 +1,12 @@
+import AllCredentials from "../../../components/Credentials/all_credentials"
 
-export default function Credentials () {
+
+export default function Credentials() {
     return (
-        <div>
-            <h2>this is the student credentials page</h2>
+        <div 
+            style={{padding:"3rem 0px"}}
+        >
+            <AllCredentials />
         </div>
     )
 }

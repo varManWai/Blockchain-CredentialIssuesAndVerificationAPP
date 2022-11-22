@@ -40,21 +40,6 @@ export default function Final_Layout({ children, criteria, footer }) {
 
   const LayoutSelector = () => {
     if (criteria == "student") {
-      return (
-        <div>
-          <Student />
-          {children}
-          <Footer
-            style={{
-              textAlign: "center",
-            }}
-          >
-            Ant Design ©2018 Created by Ant UED
-          </Footer>
-        </div>
-      )
-
-    } else if (criteria == "educator") {
 
       const router = useRouter();
       const pathArr = router.pathname.split("/");
@@ -63,21 +48,76 @@ export default function Final_Layout({ children, criteria, footer }) {
       pathArr.shift();
       pathArr.unshift("Home");
 
-      const handleNav = (event,currentPath) => {
+      const handleNav = (event, currentPath) => {
 
         event.preventDefault();
-        
+
         console.log("clicked");
 
-        if(currentPath == "Home"){
+        if (currentPath == "Home") {
           router.push("/educator/");
-        }else {
+        } else {
           const redirectPath = router.pathname.split(currentPath);
           console.log(redirectPath[0]);
           router.push(redirectPath[0] + currentPath);
 
         }
       }
+
+      return (
+        <>
+          <Layout style={{ minHeight: "100vh" }}>
+            <Student />
+            <Layout>
+              {/* <Dropdown.Button menu={menuProps} placement="bottom" icon={<UserOutlined />}>
+              Dropdown
+            </Dropdown.Button> */}
+              <Content
+                style={{
+                  margin: "0 1.6rem",
+                }}
+              >
+                <Breadcrumb
+                  style={{
+                    margin: "16px 0",
+                  }}
+                >
+                  {pathArr.map(path => {
+                    return (
+                      <Breadcrumb.Item key={keyNum++}>
+                        <a href="" onClick={e => handleNav(e, path)}>{path.charAt(0).toUpperCase() + path.slice(1)}</a>
+                      </Breadcrumb.Item>
+                    )
+                  })}
+
+                </Breadcrumb>
+
+                <div
+                  className="site-layout-background"
+                  style={{
+                    padding: 24,
+                    minHeight: 360,
+                    background: "white",
+                  }}
+                >
+                  {children}
+                </div>
+              </Content>
+              <Footer
+                style={{
+                  textAlign: "center",
+                }}
+              >
+                Ant Design ©2018 Created by Ant UED
+              </Footer>
+            </Layout>
+          </Layout>
+        </>
+      )
+
+    } else if (criteria == "educator") {
+
+
 
       return (
         <>
@@ -100,7 +140,7 @@ export default function Final_Layout({ children, criteria, footer }) {
                   {pathArr.map(path => {
                     return (
                       <Breadcrumb.Item key={keyNum++}>
-                        <a href="" onClick={e => handleNav(e,path)}>{path.charAt(0).toUpperCase() + path.slice(1)}</a>
+                        <a href="" onClick={e => handleNav(e, path)}>{path.charAt(0).toUpperCase() + path.slice(1)}</a>
                       </Breadcrumb.Item>
                     )
                   })}
