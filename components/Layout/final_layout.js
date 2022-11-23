@@ -64,8 +64,6 @@ export default function Final_Layout({ children, criteria, footer }) {
   const LayoutSelector = () => {
     if (criteria == "student") {
 
-
-
       return (
         <>
           <Layout style={{ minHeight: "100vh" }}>

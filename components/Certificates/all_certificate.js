@@ -171,7 +171,7 @@ export default function AllCertificate() {
           </Row>
         </Form>
       </Drawer>
-      <CertificateGrid items={items} />
+      <CertificateGrid items={items} remove={true}/>
     </div>
   )
 }

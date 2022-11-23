@@ -3,7 +3,7 @@ import CertificateItem from "./certificate_item"
 import { Row, Col, Space, Pagination } from "antd"
 import styles from '../../styles/Login.module.css';
 
-export default function CertificateGrid({items}) {
+export default function CertificateGrid({items,remove}) {
 
     
 
@@ -36,7 +36,7 @@ export default function CertificateGrid({items}) {
                             key={item.key}
                             className={`gutter-row ${styles.margin_bottom_card}`}
                         >
-                            <CertificateItem cert={item}/>
+                            <CertificateItem cert={item} remove={remove} />
                         </Col>
                     )
                 })}

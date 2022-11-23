@@ -16,7 +16,7 @@ export default function AllCredentials() {
 
     return (
         <div className={styles.all_certificates_section}>
-            <CertificateGrid items={items} />
+            <CertificateGrid items={items} remove={false}/>
         </div>
     )
 }
