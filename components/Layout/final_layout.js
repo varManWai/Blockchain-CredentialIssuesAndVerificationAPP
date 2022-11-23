@@ -38,31 +38,33 @@ export default function Final_Layout({ children, criteria, footer }) {
     onClick: handleMenuClick,
   };
 
+  const router = useRouter();
+  const pathArr = router.pathname.split("/");
+  let keyNum = 0;
+  pathArr.shift();
+  pathArr.shift();
+  pathArr.unshift("Home");
+
+  const handleNav = (event, currentPath) => {
+
+    event.preventDefault();
+
+    console.log("clicked");
+
+    if (currentPath == "Home") {
+      router.push("/educator/");
+    } else {
+      const redirectPath = router.pathname.split(currentPath);
+      console.log(redirectPath[0]);
+      router.push(redirectPath[0] + currentPath);
+
+    }
+  }
+
   const LayoutSelector = () => {
     if (criteria == "student") {
 
-      const router = useRouter();
-      const pathArr = router.pathname.split("/");
-      let keyNum = 0;
-      pathArr.shift();
-      pathArr.shift();
-      pathArr.unshift("Home");
 
-      const handleNav = (event, currentPath) => {
-
-        event.preventDefault();
-
-        console.log("clicked");
-
-        if (currentPath == "Home") {
-          router.push("/educator/");
-        } else {
-          const redirectPath = router.pathname.split(currentPath);
-          console.log(redirectPath[0]);
-          router.push(redirectPath[0] + currentPath);
-
-        }
-      }
 
       return (
         <>
