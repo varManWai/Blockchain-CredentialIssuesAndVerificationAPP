@@ -1,11 +1,8 @@
-import CertificateItem from "./certificate_item"
-
+import CredentialItem from "./credentials_item";
 import { Row, Col, Space, Pagination } from "antd"
 import styles from '../../styles/Login.module.css';
 
-export default function CertificateGrid({items}) {
-
-    
+export default function CredentialGrid({ items }) {
 
     const itemRender = (_, type, originalElement) => {
         if (type === 'prev') {
@@ -36,7 +33,7 @@ export default function CertificateGrid({items}) {
                             key={item.key}
                             className={`gutter-row ${styles.margin_bottom_card}`}
                         >
-                            <CertificateItem cert={item} />
+                            <CredentialItem cert={item} />
                         </Col>
                     )
                 })}

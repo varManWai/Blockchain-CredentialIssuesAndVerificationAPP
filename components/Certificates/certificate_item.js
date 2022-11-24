@@ -22,6 +22,16 @@ export default function CertificateItem({ cert }) {
     setPopover(false);
   };
 
+
+
+  let actions = [
+    <EyeOutlined key="view" onClick={() => router.push(`/educator/certificates/${cert.id}`)} />,
+    < DeleteOutlined
+      key="delete"
+      onClick={() => console.log("clicked 3")}
+    />
+  ];
+
   return (
     <div>
       <Card
@@ -34,20 +44,13 @@ export default function CertificateItem({ cert }) {
             src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
           />
         }
-        actions={[
-          <EyeOutlined key="view" onClick={() => router.push(`/educator/certificates/${cert.id}`)} />,
-          // <EditOutlined key="edit" onClick={() => console.log("clicked 2")} />,
-          <DeleteOutlined
-            key="delete"
-            onClick={() => console.log("clicked 3")}
-          />,
-        ]}
+        actions={actions}
       >
         <div className={styles.meta} >
           <p className={styles.title}>{cert.product} </p>
           <p className={styles.description}>{cert.description}</p>
         </div>
       </Card>
-    </div>
+    </div >
   );
 }

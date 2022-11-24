@@ -1,4 +1,4 @@
-import CertificateGrid from "../Certificates/certificate_grid"
+import CredentialGrid from './credential_grid';
 
 import styles from '../../styles/Login.module.css';
 
@@ -16,7 +16,7 @@ export default function AllCredentials() {
 
     return (
         <div className={styles.all_certificates_section}>
-            <CertificateGrid items={items} remove={false}/>
+            <CredentialGrid items={items} />
         </div>
     )
 }
