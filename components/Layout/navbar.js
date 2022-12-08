@@ -47,7 +47,7 @@ const useMediaQuery = (width) => {
     return targetReached;
 };
 
-const router = useRouter();
+
 
 export default function Visitor() {
     return (
@@ -75,7 +75,7 @@ export default function Visitor() {
 }
 
 export function Student() {
-
+    const router = useRouter();
     const isBreakpoint = useMediaQuery(584);
 
     const [visible, setVisible] = useState(false);
@@ -218,7 +218,7 @@ export function Student() {
 }
 
 export function Educator() {
-
+    const router = useRouter();
     const isBreakpoint = useMediaQuery(584);
 
     const [visible, setVisible] = useState(false);
