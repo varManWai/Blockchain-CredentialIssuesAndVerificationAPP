@@ -2,12 +2,14 @@ import { Schema, model, models } from "mongoose";
 
 const badgeEducatorSchema = new Schema({
   badgeID: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: "Badge",
+    required: true,
   },
   educatorID: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: "Educator",
+    required: true,
   },
 });
 

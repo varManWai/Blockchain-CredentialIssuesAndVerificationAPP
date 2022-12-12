@@ -22,8 +22,9 @@ const badgeSchema = new Schema({
     required: true,
   },
   studentID: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Student'
+    type: Schema.Types.ObjectId,
+    ref: 'Student',
+    required: true,
 }
 });
 
