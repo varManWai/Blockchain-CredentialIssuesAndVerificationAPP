@@ -11,7 +11,7 @@ import styles from '../../styles/Login.module.css';
 import { useRouter } from "next/router";
 
 
-export default function AllCertificate({Certificates}) {
+export default function AllCertificate({ Certificates, path }) {
 
   const router = useRouter();
 
@@ -31,7 +31,7 @@ export default function AllCertificate({Certificates}) {
     event.preventDefault();
 
 
-    const res = await fetch("/api/educator/certificates/add", {
+    const res = await fetch(`api/educator/${path}/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -132,7 +132,7 @@ export default function AllCertificate({Certificates}) {
   return (
     <div className={styles.all_certificates_section}>
       <div className={styles.add_new_cert}>
-        <Button icon={<PlusOutlined />} onClick={isBreakpoint ? (() => { router.push('/educator/certificates/add'); }) : (() => { setOpen(true) })} type="primary">New</Button>
+        <Button icon={<PlusOutlined />} onClick={isBreakpoint ? (() => { router.push(`/educator/${path}/add`); }) : (() => { setOpen(true) })} type="primary">New</Button>
       </div>
       <Drawer
         title="Create a new certificate"
@@ -190,7 +190,7 @@ export default function AllCertificate({Certificates}) {
           </Row>
         </Form>
       </Drawer>
-      <CertificateGrid items={Certificates} />
+      <CertificateGrid items={Certificates} specDeletePath={path} />
     </div>
   )
 }

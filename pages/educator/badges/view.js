@@ -1,9 +1,9 @@
-import View_Certificate from "../../../components/Certificates/view_certificate"
+import View_Badge from "../../../components/Certificates/view_Badge"
 
 export default function viewCertificate () {
     return (
         <div>
-            <View_Certificate />
+            <View_Badge />
         </div>
     )
 }

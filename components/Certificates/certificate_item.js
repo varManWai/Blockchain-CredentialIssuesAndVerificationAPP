@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 
 import styles from './certItem.module.css';
 
-export default function CertificateItem({ cert }) {
+export default function CertificateItem({ cert , deletePath}) {
   const { Meta } = Card;
   const router = useRouter();
 
@@ -23,7 +23,7 @@ export default function CertificateItem({ cert }) {
   };
 
   const deleteCertificate = async () => {
-    const res = await fetch("/api/educator/certificates/delete", {
+    const res = await fetch(`/api/educator/${deletePath}/delete`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

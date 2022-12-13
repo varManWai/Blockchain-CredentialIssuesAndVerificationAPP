@@ -3,7 +3,7 @@ import CertificateItem from "./certificate_item"
 import { Row, Col, Space, Pagination } from "antd"
 import styles from '../../styles/Login.module.css';
 
-export default function CertificateGrid({ items }) {
+export default function CertificateGrid({ items , specDeletePath}) {
 
 
 
@@ -30,9 +30,9 @@ export default function CertificateGrid({ items }) {
                 }}
                 wrap
             >
-                {items == undefined ?
+                {items == undefined || items.length == 0?
                     <div>
-                        <h2>No certificate yet</h2>
+                        <h2>0 credentials</h2>
                     </div>
                     :
                     items.map((item) => {
@@ -41,11 +41,12 @@ export default function CertificateGrid({ items }) {
                                 key={item._id}
                                 className={`gutter-row ${styles.margin_bottom_card}`}
                             >
-                                <CertificateItem cert={item} />
+                                <CertificateItem cert={item} deletePath={specDeletePath}/>
                             </Col>
                         )
                     })}
-                {/* {console.log(items)} */}
+                {/* {console.log("below the things")}
+                {console.log(items)} */}
 
             </Row>
             <Row justify="center">

@@ -6,7 +6,7 @@ import connectMongo from '../../../utils/connectMongo';
 export default function Certificates({Certificates}) {
     return (
         <div>
-            <AllCertificate Certificates={Certificates}/>
+            <AllCertificate Certificates={Certificates} path="certificates"/>
         </div>
     )
 }
