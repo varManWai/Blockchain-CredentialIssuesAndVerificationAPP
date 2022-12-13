@@ -1,10 +1,6 @@
 import { Schema, model, models } from "mongoose";
 
 const badgeSchema = new Schema({
-  date: {
-    type: String,
-    required: true,
-  },
   title: {
     type: String,
     required: true,

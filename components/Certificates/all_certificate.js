@@ -13,7 +13,7 @@ export default function AllCertificate() {
   
   const router = useRouter();
   
-  const { TextArea } = Input;  // for text area
+  const { TextArea } = Input;  // for text area field
   const [open, setOpen] = useState(false);  //for drawer
 
   //FORM Attributes
@@ -28,7 +28,6 @@ export default function AllCertificate() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        date: "12/12/2022",
         title: title,
         desc: desc,
         dateIssued: dataIssued,
