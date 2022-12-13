@@ -25,7 +25,7 @@ export default function CertificateItem({ cert }) {
 
 
   let actions = [
-    <EyeOutlined key="view" onClick={() => router.push(`/educator/certificates/${cert.id}`)} />,
+    <EyeOutlined key="view" onClick={() => router.push(`/educator/certificates/${cert._id}`)} />,
     < DeleteOutlined
       key="delete"
       onClick={() => console.log("clicked 3")}
@@ -47,8 +47,8 @@ export default function CertificateItem({ cert }) {
         actions={actions}
       >
         <div className={styles.meta} >
-          <p className={styles.title}>{cert.product} </p>
-          <p className={styles.description}>{cert.description}</p>
+          <p className={styles.title}>{cert.title} </p>
+          <p className={styles.description}>{cert.desc}</p>
         </div>
       </Card>
     </div >

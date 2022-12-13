@@ -4,7 +4,7 @@ import styles from "./viewCert.module.css";
 
 
 
-export default function View_Certificate() {
+export default function View_Certificate({Certificate}) {
     return (
         <div>
             <Row
@@ -54,7 +54,7 @@ export default function View_Certificate() {
                             </Row>
                         </Col>
                         <Col span={24}>
-                            <p className={styles.view_cert_texts}>1WE23456789QW</p>
+                            <p className={styles.view_cert_texts}>{Certificate._id}</p>
                         </Col>
                     </Row>
                     <Row>
@@ -69,7 +69,7 @@ export default function View_Certificate() {
                             </Row>
                         </Col>
                         <Col span={24}>
-                            <p className={styles.view_cert_texts}>Lorem ipsum dolor sit amet.</p>
+                            <p className={styles.view_cert_texts}>{Certificate.title}</p>
                         </Col>
                     </Row>
                     <Row>
@@ -79,7 +79,7 @@ export default function View_Certificate() {
                             </Row>
                         </Col>
                         <Col span={24}>
-                            <p className={styles.view_cert_texts}>5/10/2022 20:30</p>
+                            <p className={styles.view_cert_texts}>{Certificate.dateIssued}</p>
                         </Col>
                     </Row>
                     <Row>
@@ -94,8 +94,7 @@ export default function View_Certificate() {
                             </Row>
                         </Col>
                         <Col>
-                            <p className={styles.view_cert_texts}>Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                                Expedita ullam ab dolore voluptate dignissimos, magni, sapiente suscipit tempora omnis ratione doloremque. Ullam quod animi adipisci.</p>
+                            <p className={styles.view_cert_texts}>{Certificate.desc}</p>
                         </Col>
                     </Row>
                     <Row>

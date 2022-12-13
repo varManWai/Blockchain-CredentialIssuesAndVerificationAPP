@@ -6,15 +6,21 @@ import { PlusOutlined } from "@ant-design/icons";
 import { useState, useCallback, useEffect } from "react";
 
 
+
 import styles from '../../styles/Login.module.css';
 import { useRouter } from "next/router";
 
-export default function AllCertificate() {
-  
+
+export default function AllCertificate({Certificates}) {
+
   const router = useRouter();
-  
+
   const { TextArea } = Input;  // for text area field
   const [open, setOpen] = useState(false);  //for drawer
+
+  const onClose = () => {
+    setOpen(false);
+  }
 
   //FORM Attributes
   const [title, setTitle] = useState("");
@@ -22,6 +28,9 @@ export default function AllCertificate() {
   const [dataIssued, setDateIssued] = useState("");
 
   const createCertificate = async (event) => {
+    event.preventDefault();
+
+
     const res = await fetch("/api/educator/certificates/add", {
       method: "POST",
       headers: {
@@ -35,7 +44,7 @@ export default function AllCertificate() {
       }),
     });
     const data = await res.json();
-    console.log(data);
+    // console.log(data);
 
     router.reload();
   };
@@ -101,18 +110,6 @@ export default function AllCertificate() {
   };
 
 
-  //sample code for showing the certificate - start
-  const items = [
-    { key: '1', id: '1', item: 123, product: "name 1", description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque, accjansdjknajnd jnjsdnjanjsndbhuhnjn jnasdnjandsj santium." },
-    { key: '2', id: '2', item: 123, product: "name 2", description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque, accusantium." },
-    { key: '3', id: '3', item: 123, product: "name 3", description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque, accusantium." },
-    { key: '4', id: '4', item: 123, product: "name 4", description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque, accusantium." },
-    { key: '5', id: '5', item: 123, product: "name 5", description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque, accusantium." },
-    { key: '6', id: '6', item: 123, product: "name 6", description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque, accusantium." },
-    { key: '7', id: '7', item: 123, product: "name 7", description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque, accusantium." },
-  ]
-  //sample code for showing the certificate - end
-
   //date selector - start 
   const onChange = (value, dateString) => {
     console.log('Selected Time: ', value);
@@ -140,7 +137,7 @@ export default function AllCertificate() {
       <Drawer
         title="Create a new certificate"
         width={720}
-        onClose={() => { setOpen(false) }}
+        onClose={onClose}
         open={open}
         bodyStyle={{
           paddingBottom: 80,
@@ -148,7 +145,7 @@ export default function AllCertificate() {
         extra={
           <Space>
             <Button onClick={onClose}>Cancel</Button>
-            <Button onClick={onClose} type="primary">
+            <Button onClick={createCertificate} type="primary">
               Submit
             </Button>
           </Space>
@@ -193,7 +190,8 @@ export default function AllCertificate() {
           </Row>
         </Form>
       </Drawer>
-      <CertificateGrid items={items} />
+      <CertificateGrid items={Certificates} />
     </div>
   )
 }
+

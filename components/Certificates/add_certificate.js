@@ -32,7 +32,7 @@ export default function AddCertificate() {
         const data = await res.json();
         console.log(data);
 
-        router.reload();
+        router.push('/educator/certificates');
     };
 
     //Layout for the form - start
