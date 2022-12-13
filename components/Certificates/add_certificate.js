@@ -4,7 +4,7 @@ import styles from './addCert.module.css';
 import { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 
-export default function AddCertificate() {
+export default function AddCertificate({path}) {
 
     const router = useRouter();
 
@@ -17,7 +17,7 @@ export default function AddCertificate() {
     const [address, setAddress] = useState("");
 
     const createCertificate = async (event) => {
-        const res = await fetch("/api/educator/certificates/add", {
+        const res = await fetch(`/api/educator/${path}/add`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -32,7 +32,7 @@ export default function AddCertificate() {
         const data = await res.json();
         console.log(data);
 
-        router.push('/educator/certificates');
+        router.push(`/educator/${path}`);
     };
 
     //Layout for the form - start

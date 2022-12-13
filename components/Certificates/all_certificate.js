@@ -31,7 +31,7 @@ export default function AllCertificate({ Certificates, path }) {
     event.preventDefault();
 
 
-    const res = await fetch(`api/educator/${path}/add`, {
+    const res = await fetch(`/api/educator/${path}/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -135,7 +135,7 @@ export default function AllCertificate({ Certificates, path }) {
         <Button icon={<PlusOutlined />} onClick={isBreakpoint ? (() => { router.push(`/educator/${path}/add`); }) : (() => { setOpen(true) })} type="primary">New</Button>
       </div>
       <Drawer
-        title="Create a new certificate"
+        title={`Create a new ${path}`}
         width={720}
         onClose={onClose}
         open={open}
