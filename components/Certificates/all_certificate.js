@@ -6,31 +6,52 @@ import { PlusOutlined } from "@ant-design/icons";
 import { useState, useCallback, useEffect } from "react";
 
 
+
 import styles from '../../styles/Login.module.css';
 import { useRouter } from "next/router";
 
-export default function AllCertificate() {
-  const { TextArea } = Input;
 
+export default function AllCertificate({ Certificates, path }) {
 
-  const [open, setOpen] = useState(false);
+  const router = useRouter();
 
-  const { Option } = Select;
+  const { TextArea } = Input;  // for text area field
+  const [open, setOpen] = useState(false);  //for drawer
 
-  const showDrawer = () => {
-    setOpen(true);
-  };
   const onClose = () => {
     setOpen(false);
-  };
-
-  const router = useRouter()
-
-  const redirectToAddCert = () => {
-    router.push('/educator/certificates/add');
   }
 
+  //FORM Attributes
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  const [dataIssued, setDateIssued] = useState("");
+
+  const createCertificate = async (event) => {
+    event.preventDefault();
+
+
+    const res = await fetch(`/api/educator/${path}/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: title,
+        desc: desc,
+        dateIssued: dataIssued,
+        address: "address got from the smart contract",
+      }),
+    });
+    const data = await res.json();
+    // console.log(data);
+
+    router.reload();
+  };
+
+  //code for responsive - start
   const useMediaQuery = (width) => {
+
     const [targetReached, setTargetReached] = useState(false);
 
     const updateTarget = useCallback((e) => {
@@ -56,18 +77,11 @@ export default function AllCertificate() {
     return targetReached;
   };
 
-  const isBreakpoint = useMediaQuery(925)
-
-  const onChange = (value, dateString) => {
-    console.log('Selected Time: ', value);
-    console.log('Formatted Selected Time: ', dateString);
-  };
-
-  const onOk = (value) => {
-    console.log('onOk: ', value);
-  };
+  const isBreakpoint = useMediaQuery(925);
+  //code for responsive - end
 
 
+  //sample data for the group selection field - start
   const selectContent = [
     {
       value: 'jack',
@@ -87,10 +101,7 @@ export default function AllCertificate() {
       label: 'yiminghe',
     },
   ]
-
-  const handleChange = (value) => {
-    console.log(`selected ${value}`);
-  };
+  //sample data for the group selection field - end
 
   const tailLayout = {
     wrapperCol: {
@@ -98,25 +109,33 @@ export default function AllCertificate() {
     },
   };
 
-  const items = [
-    { key: '1', id: '1', item: 123, product: "name 1", description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque, accjansdjknajnd jnjsdnjanjsndbhuhnjn jnasdnjandsj santium." },
-    { key: '2', id: '2', item: 123, product: "name 2", description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque, accusantium." },
-    { key: '3', id: '3', item: 123, product: "name 3", description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque, accusantium." },
-    { key: '4', id: '4', item: 123, product: "name 4", description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque, accusantium." },
-    { key: '5', id: '5', item: 123, product: "name 5", description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque, accusantium." },
-    { key: '6', id: '6', item: 123, product: "name 6", description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque, accusantium." },
-    { key: '7', id: '7', item: 123, product: "name 7", description: "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque, accusantium." },
-  ]
+
+  //date selector - start 
+  const onChange = (value, dateString) => {
+    console.log('Selected Time: ', value);
+    console.log('Formatted Selected Time: ', dateString);
+    setDateIssued(dateString);
+  };
+
+  const onOk = (value) => {
+    console.log('onOk: ', value);
+  };
+  //date selector - end
+
+
+  //group selector - start
+  const handleChange = (value) => {
+    console.log(`selected ${value}`);
+  };
+  //group selector - end
 
   return (
     <div className={styles.all_certificates_section}>
-
-
       <div className={styles.add_new_cert}>
-        <Button icon={<PlusOutlined />} onClick={isBreakpoint ? (redirectToAddCert) : (showDrawer)} type="primary">New</Button>
+        <Button icon={<PlusOutlined />} onClick={isBreakpoint ? (() => { router.push(`/educator/${path}/add`); }) : (() => { setOpen(true) })} type="primary">New</Button>
       </div>
       <Drawer
-        title="Create a new certificate"
+        title={`Create a new ${path}`}
         width={720}
         onClose={onClose}
         open={open}
@@ -126,20 +145,20 @@ export default function AllCertificate() {
         extra={
           <Space>
             <Button onClick={onClose}>Cancel</Button>
-            <Button onClick={onClose} type="primary">
+            <Button onClick={createCertificate} type="primary">
               Submit
             </Button>
           </Space>
         }
       >
-        <Form layout="vertical" hideRequiredMark>
+        <Form layout="vertical" requiredMark onSubmitCapture={createCertificate}>
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item
                 name="title"
                 label="Title"
               >
-                <Input />
+                <Input value={title} onChange={(event) => { setTitle(event.target.value) }} />
               </Form.Item>
             </Col>
             <Col span={12}>
@@ -151,7 +170,7 @@ export default function AllCertificate() {
           <Row gutter={16}>
             <Col span={20}>
               <Form.Item label="Description">
-                <TextArea rows={4} />
+                <TextArea rows={4} value={desc} onChange={(event) => { setDesc(event.target.value) }} />
               </Form.Item>
             </Col>
           </Row>
@@ -171,7 +190,8 @@ export default function AllCertificate() {
           </Row>
         </Form>
       </Drawer>
-      <CertificateGrid items={items}/>
+      <CertificateGrid items={Certificates} specDeletePath={path} />
     </div>
   )
 }
+

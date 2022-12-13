@@ -10,7 +10,7 @@ import {
 } from "@ant-design/icons";
 import { Button, Menu, Layout, Space, Dropdown, Drawer, Row, Col } from "antd";
 import { useState, useCallback, useEffect } from "react";
-
+import Link from "next/link";
 import Image from "next/image";
 
 const { Header, Sider } = Layout;
@@ -19,6 +19,35 @@ const { MenuItemGroup } = Menu;
 import { useRouter } from "next/router";
 
 import styles from "./navbar.module.css";
+
+
+const useMediaQuery = (width) => {
+    const [targetReached, setTargetReached] = useState(false);
+
+    const updateTarget = useCallback((e) => {
+        if (e.matches) {
+            setTargetReached(true);
+        } else {
+            setTargetReached(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        const media = window.matchMedia(`(max-width: ${width}px)`);
+        media.addEventListener("change", updateTarget);
+
+        // Check on mount (callback is not called until a change occurs)
+        if (media.matches) {
+            setTargetReached(true);
+        }
+
+        return () => media.removeEventListener("change", updateTarget);
+    }, []);
+
+    return targetReached;
+};
+
+
 
 export default function Visitor() {
     return (
@@ -47,33 +76,6 @@ export default function Visitor() {
 
 export function Student() {
     const router = useRouter();
-
-    const useMediaQuery = (width) => {
-        const [targetReached, setTargetReached] = useState(false);
-
-        const updateTarget = useCallback((e) => {
-            if (e.matches) {
-                setTargetReached(true);
-            } else {
-                setTargetReached(false);
-            }
-        }, []);
-
-        useEffect(() => {
-            const media = window.matchMedia(`(max-width: ${width}px)`);
-            media.addEventListener("change", updateTarget);
-
-            // Check on mount (callback is not called until a change occurs)
-            if (media.matches) {
-                setTargetReached(true);
-            }
-
-            return () => media.removeEventListener("change", updateTarget);
-        }, []);
-
-        return targetReached;
-    };
-
     const isBreakpoint = useMediaQuery(584);
 
     const [visible, setVisible] = useState(false);
@@ -87,7 +89,7 @@ export function Student() {
 
     const items = [
         {
-            label: <a href="" onClick={() => router.push("/educator/profile")}>Profile</a>,
+            label: <Link href="/educator/profile" >Profile</Link>,
             key: '0',
         },
 
@@ -95,7 +97,7 @@ export function Student() {
             type: 'divider',
         },
         {
-            label: <a href="" onClick={() => router.push("/educator")}>Sign Out</a>,
+            label: <Link href="/educator">Sign Out</Link>,
             key: '1',
         },
     ];
@@ -134,12 +136,12 @@ export function Student() {
                                     <Col>
                                         <Row justify="center" align="center" >
                                             <Col span={24}>
-                                                <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator/certificates") }}>
+                                                <Link className={styles.drawer_nav_link} href="/educator/certificates">
                                                     <Space>
                                                         <BookOutlined />
                                                         Credentials
                                                     </Space>
-                                                </a>
+                                                </Link>
                                             </Col>
                                         </Row>
                                     </Col>
@@ -175,7 +177,7 @@ export function Student() {
                                     <Row>
                                         <Space size="large">
                                             <Col>
-                                                <a className={styles.navbar_section_items_section_1_item_student} onClick={() => router.push("/student/credentials")}>Credentials</a>
+                                                <Link className={styles.navbar_section_items_section_1_item_student} href="/student/credentials">Credentials</Link>
                                             </Col>
                                         </Space>
                                     </Row>
@@ -217,33 +219,6 @@ export function Student() {
 
 export function Educator() {
     const router = useRouter();
-
-    const useMediaQuery = (width) => {
-        const [targetReached, setTargetReached] = useState(false);
-
-        const updateTarget = useCallback((e) => {
-            if (e.matches) {
-                setTargetReached(true);
-            } else {
-                setTargetReached(false);
-            }
-        }, []);
-
-        useEffect(() => {
-            const media = window.matchMedia(`(max-width: ${width}px)`);
-            media.addEventListener("change", updateTarget);
-
-            // Check on mount (callback is not called until a change occurs)
-            if (media.matches) {
-                setTargetReached(true);
-            }
-
-            return () => media.removeEventListener("change", updateTarget);
-        }, []);
-
-        return targetReached;
-    };
-
     const isBreakpoint = useMediaQuery(584);
 
     const [visible, setVisible] = useState(false);
@@ -257,7 +232,7 @@ export function Educator() {
 
     const items = [
         {
-            label: <a onClick={() => router.push("/educator/profile")}>Profile</a>,
+            label: <Link href="/educator/profile">Profile</Link>,
             key: '0',
         },
 
@@ -265,7 +240,7 @@ export function Educator() {
             type: 'divider',
         },
         {
-            label: <a onClick={() => router.push("/educator")}>Sign Out</a>,
+            label: <Link href="/educator">Sign out</Link>,
             key: '1',
         },
     ];
@@ -304,36 +279,36 @@ export function Educator() {
                                     <Col>
                                         <Row justify="center" align="center" >
                                             <Col span={24}>
-                                                <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator") }}>
+                                                <Link className={styles.drawer_nav_link} href="/educator">
                                                     <Space>
                                                         <DesktopOutlined />
                                                         Dashboard
                                                     </Space>
-                                                </a>
+                                                </Link>
                                             </Col>
                                             <Col span={24}>
-                                                <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator/certificates") }}>
+                                                <Link className={styles.drawer_nav_link} href="/educator/certificates">
                                                     <Space>
                                                         <BookOutlined />
                                                         Certificates
                                                     </Space>
-                                                </a>
+                                                </Link>
                                             </Col>
                                             <Col span={24}>
-                                                <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator/badges") }}>
+                                                <Link className={styles.drawer_nav_link} href="/educator/badges">
                                                     <Space>
                                                         <SafetyOutlined />
                                                         Badges
                                                     </Space>
-                                                </a>
+                                                </Link>
                                             </Col>
                                             <Col span={24}>
-                                                <a className={styles.drawer_nav_link} onClick={() => { router.push("/educator/profile") }}>
+                                                <Link className={styles.drawer_nav_link} href="/educator/profile">
                                                     <Space>
                                                         <UserOutlined />
                                                         Profile
                                                     </Space>
-                                                </a>
+                                                </Link>
                                             </Col>
                                         </Row>
                                     </Col>
@@ -369,16 +344,16 @@ export function Educator() {
                                     <Row>
                                         <Space size="large">
                                             <Col>
-                                                <a className={styles.navbar_section_items_section_1_item} onClick={() => router.push("/educator")}>Dashboard</a>
+                                                <Link className={styles.navbar_section_items_section_1_item} href="/educator">Dashboard</Link>
                                             </Col>
                                             <Col >
-                                                <a className={styles.navbar_section_items_section_1_item} onClick={() => router.push("/educator/certificates")}>Certificates</a>
+                                                <Link className={styles.navbar_section_items_section_1_item} href="/educator/certificates">Certificates</Link>
                                             </Col>
                                             <Col >
-                                                <a className={styles.navbar_section_items_section_1_item} onClick={() => router.push("/educator/badges")}>Badges</a>
+                                                <Link className={styles.navbar_section_items_section_1_item} href="/educator/badges">Badges</Link>
                                             </Col>
                                             <Col >
-                                                <a className={styles.navbar_section_items_section_1_item} onClick={() => router.push("/educator/groups")}>groups</a>
+                                                <Link className={styles.navbar_section_items_section_1_item} href="/educator/groups">groups</Link>
                                             </Col>
                                         </Space>
                                     </Row>

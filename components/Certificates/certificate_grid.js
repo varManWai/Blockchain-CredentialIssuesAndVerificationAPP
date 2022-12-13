@@ -3,9 +3,9 @@ import CertificateItem from "./certificate_item"
 import { Row, Col, Space, Pagination } from "antd"
 import styles from '../../styles/Login.module.css';
 
-export default function CertificateGrid({items}) {
+export default function CertificateGrid({ items , specDeletePath}) {
 
-    
+
 
     const itemRender = (_, type, originalElement) => {
         if (type === 'prev') {
@@ -30,16 +30,23 @@ export default function CertificateGrid({items}) {
                 }}
                 wrap
             >
-                {items.map((item) => {
-                    return (
-                        <Col
-                            key={item.key}
-                            className={`gutter-row ${styles.margin_bottom_card}`}
-                        >
-                            <CertificateItem cert={item} />
-                        </Col>
-                    )
-                })}
+                {items == undefined || items.length == 0?
+                    <div>
+                        <h2>0 credentials</h2>
+                    </div>
+                    :
+                    items.map((item) => {
+                        return (
+                            <Col
+                                key={item._id}
+                                className={`gutter-row ${styles.margin_bottom_card}`}
+                            >
+                                <CertificateItem cert={item} deletePath={specDeletePath}/>
+                            </Col>
+                        )
+                    })}
+                {/* {console.log("below the things")}
+                {console.log(items)} */}
 
             </Row>
             <Row justify="center">
