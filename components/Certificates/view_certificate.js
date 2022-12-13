@@ -1,10 +1,30 @@
 import { Image, Row, Col, Button } from "antd"
+import { useRouter } from "next/router";
 
 import styles from "./viewCert.module.css";
 
 
 
-export default function View_Certificate({Certificate}) {
+export default function View_Certificate({ Certificate }) {
+
+    const router = useRouter();
+
+    const deleteCertificate = async () =>{
+        const res = await fetch("/api/educator/certificates/delete", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            _id: Certificate._id,
+          }),
+        });
+        const data = await res.json();
+        console.log(data);
+        
+        router.push('/educator/certificates');
+      }
+
     return (
         <div>
             <Row
@@ -110,6 +130,13 @@ export default function View_Certificate({Certificate}) {
                         </Col>
                         <Col span={24}>
                             <p className={styles.view_cert_texts}>Group 1</p>
+                        </Col>
+                    </Row>
+                    <Row style={{width:"100%"}}>
+                        <Col style={{width:"100%"}}>
+                            <Button onClick={deleteCertificate} style={{width:"100%"}} type="danger">
+                                Delete
+                            </Button>
                         </Col>
                     </Row>
                 </Col>

@@ -22,13 +22,27 @@ export default function CertificateItem({ cert }) {
     setPopover(false);
   };
 
+  const deleteCertificate = async () => {
+    const res = await fetch("/api/educator/certificates/delete", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        _id: cert._id,
+      }),
+    });
+    const data = await res.json();
+    console.log(data);
 
+    router.push('/educator/certificates');
+  }
 
   let actions = [
     <EyeOutlined key="view" onClick={() => router.push(`/educator/certificates/${cert._id}`)} />,
     < DeleteOutlined
       key="delete"
-      onClick={() => console.log("clicked 3")}
+      onClick={deleteCertificate}
     />
   ];
 
