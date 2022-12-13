@@ -1,5 +1,5 @@
-import connectMongo from '../../../utils/connectMongo';
-import Certificate from '../../../models/certificate';
+import connectMongo from '../../../../utils/connectMongo';
+import Certificate from '../../../../models/certificate';
 
 // /**
 //  * @param {import('next').NextApiRequest} req

@@ -2,8 +2,11 @@ import { Form, Select, Input, DatePicker, Row, Col, Button } from "antd"
 
 import styles from './addCert.module.css';
 import { useState, useCallback, useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function AddCertificate() {
+
+    const router = useRouter();
 
     const { TextArea } = Input;
 
@@ -16,17 +19,13 @@ export default function AddCertificate() {
         },
     };
 
-
     const tailLayout = {
         wrapperCol: {
             span: 24,
         },
     };
 
-    const onChange = (value, dateString) => {
-        console.log('Selected Time: ', value);
-        console.log('Formatted Selected Time: ', dateString);
-    };
+    
 
     const onOk = (value) => {
         console.log('onOk: ', value);
@@ -91,9 +90,7 @@ export default function AddCertificate() {
     const [address, setAddress] = useState("");
 
     const createCertificate = async (event) => {
-        event.preventDefault();
-
-        const res = await fetch("/api/educator/certificate/add", {
+        const res = await fetch("/api/educator/certificates/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -103,14 +100,19 @@ export default function AddCertificate() {
                 title: title,
                 desc: desc,
                 dateIssued: dataIssued,
-                address: address,
-                student: Types.ObjectId("6394d3ddcef135c5f57771d2"),
+                address: "address got from the smart contract",
             }),
         });
         const data = await res.json();
         console.log(data);
 
         router.reload();
+    };
+
+    const onChange = (value, dateString) => {
+        console.log('Selected Time: ', value);
+        console.log('Formatted Selected Time: ', dateString);
+        setDateIssued(dateString);
     };
 
     return (
@@ -122,7 +124,7 @@ export default function AddCertificate() {
                             name="title"
                             label="Title"
                         >
-                            <Input />
+                            <Input value={title} onChange={(event)=>{setTitle(event.target.value)}} />
                         </Form.Item>
                     </Col>
                     <Col span={isBreakpoint ? 24 : 12}>
@@ -140,7 +142,7 @@ export default function AddCertificate() {
                 <Row gutter={16}>
                     <Col span={24}>
                         <Form.Item label="Description">
-                            <TextArea rows={4} />
+                            <TextArea rows={4} value={desc} onChange={(event)=>{setDesc(event.target.value)}}/>
                         </Form.Item>
                     </Col>
                 </Row>
