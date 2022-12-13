@@ -20,12 +20,7 @@ const badgeSchema = new Schema({
   address: {
     type: String,
     required: true,
-  },
-  studentID: {
-    type: Schema.Types.ObjectId,
-    ref: 'Student',
-    required: true,
-}
+  }
 });
 
 const Badge = models.Badge || model("Badge", badgeSchema);

@@ -85,9 +85,37 @@ export default function AddCertificate() {
         console.log(`selected ${value}`);
     };
 
+    const [title, setTitle] = useState("");
+    const [desc, setDesc] = useState("");
+    const [dataIssued, setDateIssued] = useState("");
+    const [address, setAddress] = useState("");
+
+    const createCertificate = async (event) => {
+        event.preventDefault();
+
+        const res = await fetch("/api/educator/certificate/add", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                date: "12/12/2022",
+                title: title,
+                desc: desc,
+                dateIssued: dataIssued,
+                address: address,
+                student: Types.ObjectId("6394d3ddcef135c5f57771d2"),
+            }),
+        });
+        const data = await res.json();
+        console.log(data);
+
+        router.reload();
+    };
+
     return (
         <div className={styles.add_cert_container}>
-            <Form {...layout} name="control-ref" >
+            <Form {...layout} name="control-ref" onSubmitCapture={createCertificate}>
                 <Row gutter={16}>
                     <Col span={isBreakpoint ? 24 : 12}>
                         <Form.Item

@@ -21,11 +21,6 @@ const certificateSchema = new Schema({
     type: String,
     required: true,
   },
-  studentID: {
-    type: Schema.Types.ObjectId,
-    ref: 'Student',
-    required: true,
-}
 });
 
 const Certificate =
