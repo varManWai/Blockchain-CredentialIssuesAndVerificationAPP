@@ -35,7 +35,7 @@ export default function CertificateItem({ cert , deletePath}) {
     const data = await res.json();
     console.log(data);
 
-    router.push('/educator/certificates');
+    router.push(`/educator/${deletePath}`);
   }
 
   let actions = [
