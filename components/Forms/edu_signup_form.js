@@ -1,5 +1,6 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Row, Col, Select, Option, AutoComplete } from "antd";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { useState } from "react";
@@ -9,11 +10,6 @@ import styles from "../../styles/Login.module.css";
 
 export default function Edu_SignUp_Form() {
     const router = useRouter();
-
-    const redirectToLogin = (event) => {
-        event.preventDefault();
-        router.push('/acc_educator/login');
-    }
 
     const [autoCompleteResult, setAutoCompleteResult] = useState([]);
 
@@ -57,6 +53,39 @@ export default function Edu_SignUp_Form() {
         },
     };
 
+    const [name,setName] = useState('');
+    const [email,setEmail] = useState('');
+    const [password,setPassword] = useState('');
+    const [jobTitle,setJobTitle] = useState('');
+    const [phoneNo,setPhoneNo] = useState('');
+    const [orgName,setOrgName] = useState('');
+    const [orgURL,setOrgURL] = useState('');
+
+    const registerEducator = async (event) => {
+        event.preventDefault();
+
+        const res = await fetch(`/api/educator/signup`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password,
+                name:name,
+                phoneNum:phoneNo,
+                jobTitle:jobTitle,
+                orgName:orgName,
+                orgURL:orgURL,
+                accountType: 'free'
+            }),
+        });
+        const data = await res.json();
+        // console.log(data);
+
+        router.push('/educator_acc/login');
+    };
+
     return (
         <div className={styles.sub_loginForm}>
             <h2 className={styles.header}>Sign Up</h2>
@@ -71,10 +100,12 @@ export default function Edu_SignUp_Form() {
                 initialValues={{
                     remember: true,
                 }}
+
+                onSubmitCapture={registerEducator}
             >
                 <Form.Item
-                    name="firstName"
-                    label="First Name"
+                    name="name"
+                    label="Name"
                     rules={[
                         {
                             required: true,
@@ -83,20 +114,7 @@ export default function Edu_SignUp_Form() {
                         },
                     ]}
                 >
-                    <Input />
-                </Form.Item>
-                <Form.Item
-                    name="lastName"
-                    label="Last Name"
-                    rules={[
-                        {
-                            required: true,
-                            message: 'Please input your last name!',
-                            whitespace: true,
-                        },
-                    ]}
-                >
-                    <Input />
+                    <Input value={name} onChange={(event)=>{setName(event.target.value)}}/>
                 </Form.Item>
                 <Form.Item
                     name="email"
@@ -112,7 +130,7 @@ export default function Edu_SignUp_Form() {
                         },
                     ]}
                 >
-                    <Input />
+                    <Input value={email} onChange={(event)=>{setEmail(event.target.value)}}/>
                 </Form.Item>
 
                 <Form.Item
@@ -149,7 +167,7 @@ export default function Edu_SignUp_Form() {
                         }),
                     ]}
                 >
-                    <Input.Password />
+                    <Input.Password value={password} onChange={(event)=>{setPassword(event.target.value)}}/>
                 </Form.Item>
 
                 <Form.Item
@@ -164,7 +182,7 @@ export default function Edu_SignUp_Form() {
                         },
                     ]}
                 >
-                    <Input />
+                    <Input value={jobTitle} onChange={(event)=>{setJobTitle(event.target.value)}}/>
                 </Form.Item>
 
                 <Form.Item
@@ -177,7 +195,7 @@ export default function Edu_SignUp_Form() {
                         },
                     ]}
                 >
-                    <Input />
+                    <Input value={phoneNo} onChange={(event)=>{setPhoneNo(event.target.value)}}/>
                 </Form.Item>
 
                 <Form.Item
@@ -191,7 +209,7 @@ export default function Edu_SignUp_Form() {
                         },
                     ]}
                 >
-                    <Input />
+                    <Input value={orgName} onChange={(event)=>{setOrgName(event.target.value)}}/>
                 </Form.Item>
 
                 <Form.Item
@@ -206,7 +224,7 @@ export default function Edu_SignUp_Form() {
                     className={styles.margin_bottom_input}
                 >
                     <AutoComplete options={websiteOptions} onChange={onWebsiteChange} placeholder="website">
-                        <Input />
+                        <Input value={orgURL} onChange={(event)=>{setOrgURL(event.target.value)}}/>
                     </AutoComplete>
                 </Form.Item>
 
@@ -218,13 +236,13 @@ export default function Edu_SignUp_Form() {
                         htmlType="submit"
                         className={`login-form-button ${styles.login_button}`}
                     >
-                        Log in
+                        Sign Up
                     </Button>
                 </Form.Item>
 
                 <Form.Item className={`${styles.margin_bottom_input} ${styles.text_align}`}
                     {...tailFormItemLayout}>
-                    Already have an account? <a href="" onClick={redirectToLogin} >Login</a>
+                    Already have an account? <Link href="/educator_acc/login" >Login</Link>
                 </Form.Item>
             </Form>
         </div>

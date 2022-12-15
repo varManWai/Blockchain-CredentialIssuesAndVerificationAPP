@@ -1,21 +1,26 @@
-import connectMongo from '../../../../utils/connectMongo';
-import Badge from '../../../../models/badge';
+import connectMongo from '../../../utils/connectMongo';
+import Educator from '../../../models/educator';
 
 // /**
 //  * @param {import('next').NextApiRequest} req
 //  * @param {import('next').NextApiResponse} res
 //  */
-export default async function deleteStudent(req, res) {
+export default async function LoginEducator(req, res) {
   try {
     // console.log('CONNECTING TO MONGO');
     await connectMongo();
     // console.log('CONNECTED TO MONGO');
 
     // console.log('CREATING DOCUMENT');
-    const badge = await Badge.deleteOne(req.body);
+
+    // const data = JSON.parse(req.body);
+
+    console.log(req.body.email);
+
+    // const Educator = await Educator.findOne(req.body);
     // console.log('CREATED DOCUMENT');
 
-    res.json({ badge });
+    res.json({ Educator });
   } catch (error) {
     console.log(error);
     res.json({ error });

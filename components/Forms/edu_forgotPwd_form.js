@@ -1,15 +1,11 @@
 import { Form, Input, Button } from "antd";
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 import styles from "../../styles/Login.module.css";
 
 export default function Edu_ForgotPwd_Form() {
   const router = useRouter();
-
-  const redirectToLogin = (event) => {
-    event.preventDefault();
-    router.push("/acc_student/login");
-  };
 
   const [form] = Form.useForm();
 
@@ -49,13 +45,12 @@ export default function Edu_ForgotPwd_Form() {
           </Button>
         </Form.Item>
       </Form>
-      <a
-        href=""
-        onClick={redirectToLogin}
+      <Link
+        href="/educator_acc/login"
         className={styles.forgotPwd_redirect}
       >
         Back to login
-      </a>
+      </Link>
     </div>
   );
 }

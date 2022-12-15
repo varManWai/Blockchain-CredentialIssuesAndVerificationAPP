@@ -7,13 +7,13 @@ import Badge from '../../../../models/badge';
 //  */
 export default async function AddCertificate(req, res) {
   try {
-    console.log('CONNECTING TO MONGO');
+    // console.log('CONNECTING TO MONGO');
     await connectMongo();
-    console.log('CONNECTED TO MONGO');
+    // console.log('CONNECTED TO MONGO');
 
-    console.log('CREATING DOCUMENT');
+    // console.log('CREATING DOCUMENT');
     const badge = await Badge.create(req.body);
-    console.log('CREATED DOCUMENT');
+    // console.log('CREATED DOCUMENT');
 
     res.json({ badge });
   } catch (error) {

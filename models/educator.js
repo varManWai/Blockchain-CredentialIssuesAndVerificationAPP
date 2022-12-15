@@ -10,11 +10,7 @@ const educatorSchema = new Schema({
     type: String,
     require: true,
   },
-  fName: {
-    type: String,
-    required: true,
-  },
-  lName: {
+  name: {
     type: String,
     required: true,
   },
@@ -30,7 +26,7 @@ const educatorSchema = new Schema({
     type: String,
     required: true,
   },
-  orgUrl: {
+  orgURL: {
     type: String,
     required: true,
   },

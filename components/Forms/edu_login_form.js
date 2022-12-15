@@ -1,6 +1,9 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Row, Col } from "antd";
+import Password from "antd/lib/input/Password";
+import Link from "next/link";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 import styles from "../../styles/Login.module.css";
 
@@ -8,15 +11,28 @@ import styles from "../../styles/Login.module.css";
 export default function Edu_Login_Form() {
     const router = useRouter();
 
-    const redirectToSignUp = (event) => {
-        event.preventDefault();
-        router.push('/acc_educator/signup');
-    }
 
-    const redirectToForgotPwd = (event) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const loginEducator = async (event) => {
         event.preventDefault();
-        router.push('/acc_educator/forgotPwd');
-    }
+
+        const res = await fetch(`/api/educator/login`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                email: email,
+                password: password,
+            }),
+        });
+        const data = await res.json();
+        // console.log(data);
+
+        router.reload();
+    };
 
     return (
         <div className={styles.sub_loginForm}>
@@ -33,6 +49,7 @@ export default function Edu_Login_Form() {
                 initialValues={{
                     remember: true,
                 }}
+                onSubmitCapture={loginEducator}
             >
                 <Form.Item
                     name="email"
@@ -50,6 +67,8 @@ export default function Edu_Login_Form() {
                     <Input
                         prefix={<UserOutlined className="site-form-item-icon" />}
                         placeholder="Email"
+                        value={email}
+                        onChange={(event) => { setEmail(event.target.value) }}
                     />
                 </Form.Item>
                 <Form.Item
@@ -66,6 +85,8 @@ export default function Edu_Login_Form() {
                         prefix={<LockOutlined className="site-form-item-icon" />}
                         type="password"
                         placeholder="Password"
+                        value={password}
+                        onChange={(event) => { setPassword(event.target.value) }}
                     />
                 </Form.Item>
                 <Form.Item>
@@ -77,9 +98,9 @@ export default function Edu_Login_Form() {
                         </Col>
 
                         <Col>
-                            <a className="login-form-forgot" href="" onClick={redirectToForgotPwd}>
+                            <Link className="login-form-forgot" href="/educator_acc/forgotPwd">
                                 Forgot password
-                            </a>
+                            </Link>
                         </Col>
                     </Row>
                 </Form.Item>
@@ -95,7 +116,7 @@ export default function Edu_Login_Form() {
                 </Form.Item>
 
                 <Form.Item className={styles.text_align}>
-                    Don't have an account? <a href="" onClick={redirectToSignUp}>Sign Up</a>
+                    Don't have an account? <Link href="/educator_acc/signup" >Sign Up</Link>
                 </Form.Item>
             </Form>
         </div>

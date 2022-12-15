@@ -7,13 +7,13 @@ import Certificate from '../../../../models/certificate';
 //  */
 export default async function deleteStudent(req, res) {
   try {
-    console.log('CONNECTING TO MONGO');
+    // console.log('CONNECTING TO MONGO');
     await connectMongo();
-    console.log('CONNECTED TO MONGO');
+    // console.log('CONNECTED TO MONGO');
 
-    console.log('CREATING DOCUMENT');
+    // console.log('CREATING DOCUMENT');
     const certificate = await Certificate.deleteOne(req.body);
-    console.log('CREATED DOCUMENT');
+    // console.log('CREATED DOCUMENT');
 
     res.json({ certificate });
   } catch (error) {

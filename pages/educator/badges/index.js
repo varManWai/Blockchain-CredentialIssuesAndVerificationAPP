@@ -7,7 +7,7 @@ export default function Badges({Badges}) {
     return (
         <div>
             <AllBadge Certificates={Badges} path="badges"/>
-            {console.log(Badges)}
+            {/* {console.log(Badges)} */}
         </div>
     )
 }
@@ -15,13 +15,13 @@ export default function Badges({Badges}) {
 export const getServerSideProps = async () => {
 
   try {
-    console.log("CONNECTING TO MONGO");
+    // console.log("CONNECTING TO MONGO");
     await connectMongo();
-    console.log("CONNECTED TO MONGO");
+    // console.log("CONNECTED TO MONGO");
 
-    console.log("FETCHING DOCUMENTS");
+    // console.log("FETCHING DOCUMENTS");
     const Badges = await BadgeModel.find();
-    console.log("FETCHED DOCUMENTS");
+    // console.log("FETCHED DOCUMENTS");
 
 
 
