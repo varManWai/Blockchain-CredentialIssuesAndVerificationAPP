@@ -1,5 +1,5 @@
-import connectMongo from '../../../utils/connectMongo';
-import Educator from '../../../models/educator';
+import connectMongo from "../../../utils/connectMongo";
+import Educator from "../../../models/educator";
 
 // /**
 //  * @param {import('next').NextApiRequest} req
@@ -15,12 +15,24 @@ export default async function LoginEducator(req, res) {
 
     // const data = JSON.parse(req.body);
 
-    console.log(req.body.email);
+    const { email, password } = req.body;
 
-    // const Educator = await Educator.findOne(req.body);
+    const educator = await Educator.findOne({
+      email: email,
+      password: password,
+    });
+
+    console.log(educator);
+
+    if(educator == null){
+      console.log('no matched');
+    }else{
+      console.log('matched');
+    }
+
     // console.log('CREATED DOCUMENT');
 
-    res.json({ Educator });
+    res.json({ educator });
   } catch (error) {
     console.log(error);
     res.json({ error });

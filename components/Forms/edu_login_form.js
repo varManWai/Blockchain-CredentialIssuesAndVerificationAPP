@@ -11,6 +11,7 @@ import styles from "../../styles/Login.module.css";
 export default function Edu_Login_Form() {
     const router = useRouter();
 
+    const [error, setError] = useState(false);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -29,9 +30,20 @@ export default function Edu_Login_Form() {
             }),
         });
         const data = await res.json();
-        // console.log(data);
+        console.log("\n this is the data data");
+        console.log(data);
 
-        router.reload();
+        const { educator } = data;
+
+
+
+        if (educator == null) {
+            setError(true);
+            // router.reload();
+        } else {
+            console.log('redirect to other page');
+            // router.push('/educator/certificates');
+        }
     };
 
     return (
@@ -40,6 +52,17 @@ export default function Edu_Login_Form() {
             <p className={styles.sub_header}><span className={styles.emphasize_word}>Educator</span>, Welcome Back</p>
 
             <button>Google</button>
+
+            {
+                error
+                    ?
+                    <div>
+                        <p>Invalid Email or Password 1</p>
+                    </div>
+                    :
+                    ''
+            }
+
 
             <hr className={styles.hr_line} />
 
