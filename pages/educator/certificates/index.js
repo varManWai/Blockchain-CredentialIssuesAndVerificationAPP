@@ -3,7 +3,17 @@ import AllCertificate from "../../../components/Certificates/all_certificate"
 import CertificateModel from "../../../models/certificate";
 import connectMongo from '../../../utils/connectMongo';
 
+
+import { useSession } from "next-auth/react";
+
 export default function Certificates({Certificates}) {
+
+  // const [session, loading] = useSession();
+
+  // console.log(session);
+  // console.log(loading);
+
+
     return (
         <div>
             <AllCertificate Certificates={Certificates} path="certificates"/>

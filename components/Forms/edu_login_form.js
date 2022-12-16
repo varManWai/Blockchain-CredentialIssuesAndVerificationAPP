@@ -3,9 +3,13 @@ import { Button, Checkbox, Form, Input, Row, Col } from "antd";
 import Password from "antd/lib/input/Password";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import styles from "../../styles/Login.module.css";
+
+
+import { signIn } from 'next-auth/react';
+
 
 
 export default function Edu_Login_Form() {
@@ -13,37 +17,23 @@ export default function Edu_Login_Form() {
 
     const [error, setError] = useState(false);
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const emailInputRef = useRef();
+    const passwordInputRef = useRef();
 
     const loginEducator = async (event) => {
         event.preventDefault();
 
-        const res = await fetch(`/api/educator/login`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                email: email,
-                password: password,
-            }),
-        });
-        const data = await res.json();
-        console.log("\n this is the data data");
-        console.log(data);
-
-        const { educator } = data;
+        const enteredEmail = emailInputRef.current.input.value;
+        const enteredPassword = passwordInputRef.current.input.value;
 
 
+        const result = await signIn('credentials', {
+            redirect: false,
+            email: enteredEmail,
+            password: enteredPassword,
+        })
 
-        if (educator == null) {
-            setError(true);
-            // router.reload();
-        } else {
-            console.log('redirect to other page');
-            // router.push('/educator/certificates');
-        }
+        console.log(result);
     };
 
     return (
@@ -90,8 +80,7 @@ export default function Edu_Login_Form() {
                     <Input
                         prefix={<UserOutlined className="site-form-item-icon" />}
                         placeholder="Email"
-                        value={email}
-                        onChange={(event) => { setEmail(event.target.value) }}
+                        ref={emailInputRef}
                     />
                 </Form.Item>
                 <Form.Item
@@ -108,8 +97,7 @@ export default function Edu_Login_Form() {
                         prefix={<LockOutlined className="site-form-item-icon" />}
                         type="password"
                         placeholder="Password"
-                        value={password}
-                        onChange={(event) => { setPassword(event.target.value) }}
+                        ref={passwordInputRef}
                     />
                 </Form.Item>
                 <Form.Item>
