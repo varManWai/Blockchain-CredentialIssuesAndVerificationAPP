@@ -19,6 +19,7 @@ const { MenuItemGroup } = Menu;
 import { useRouter } from "next/router";
 
 import styles from "./navbar.module.css";
+import { useSession, signOut } from "next-auth/react";
 
 
 const useMediaQuery = (width) => {
@@ -219,6 +220,15 @@ export function Student() {
 
 export function Educator() {
     const router = useRouter();
+
+    // const [session,loading] = useSession();
+
+    // if(session){
+    //     router.replace('/educator_acc/login');    
+    // }
+
+
+
     const isBreakpoint = useMediaQuery(584);
 
     const [visible, setVisible] = useState(false);
@@ -230,6 +240,10 @@ export function Educator() {
         setVisible(false);
     };
 
+    const logoutHandler = () => {
+        signOut();
+    }
+
     const items = [
         {
             label: <Link href="/educator/profile">Profile</Link>,
@@ -240,7 +254,7 @@ export function Educator() {
             type: 'divider',
         },
         {
-            label: <Link href="/educator">Sign out</Link>,
+            label: <a onClick={logoutHandler}>Sign out</a>,
             key: '1',
         },
     ];
@@ -316,7 +330,7 @@ export function Educator() {
                                         <a className={styles.drawer_nav_link_danger} >
                                             <Space>
                                                 <UserOutlined />
-                                                Sign Out
+                                                <a onClick={logoutHandler}>Logout</a>
                                             </Space>
                                         </a>
                                     </Col>

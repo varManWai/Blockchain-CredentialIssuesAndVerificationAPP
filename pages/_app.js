@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 
 import "antd/dist/antd.css";
 import { useLayoutEffect } from "react";
+import { SessionProvider } from "next-auth/react";
 function MyApp({ Component, pageProps }) {
 
   const path = useRouter();
@@ -27,11 +28,15 @@ function MyApp({ Component, pageProps }) {
     criteria = "visitor";
   }
 
+
+
   return (
     <>
-      <Final_Layout criteria={criteria} footer={footer}>
-        <Component {...pageProps} />
-      </Final_Layout>
+      <SessionProvider>
+        <Final_Layout criteria={criteria} footer={footer}>
+          <Component {...pageProps} />
+        </Final_Layout>
+      </SessionProvider>
     </>
   );
 }

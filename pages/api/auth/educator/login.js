@@ -1,5 +1,5 @@
-import connectMongo from "../../../utils/connectMongo";
-import Educator from "../../../models/educator";
+import connectMongo from "../../../../utils/connectMongo";
+import Educator from "../../../../models/educator";
 
 // /**
 //  * @param {import('next').NextApiRequest} req

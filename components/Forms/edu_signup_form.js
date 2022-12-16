@@ -3,7 +3,7 @@ import { Button, Checkbox, Form, Input, Row, Col, Select, Option, AutoComplete }
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import styles from "../../styles/Login.module.css";
 
@@ -53,37 +53,68 @@ export default function Edu_SignUp_Form() {
         },
     };
 
-    const [name,setName] = useState('');
-    const [email,setEmail] = useState('');
-    const [password,setPassword] = useState('');
-    const [jobTitle,setJobTitle] = useState('');
-    const [phoneNo,setPhoneNo] = useState('');
-    const [orgName,setOrgName] = useState('');
-    const [orgURL,setOrgURL] = useState('');
+    const nameInputRef = useRef();
+    const emailInputRef = useRef();
+    const passwordInputRef = useRef();
+    const jobTitleInputRef = useRef();
+    const phoneNoInputRef = useRef();
+    const orgNameInputRef = useRef();
+    const orgURLInputRef = useRef();
 
+   
     const registerEducator = async (event) => {
         event.preventDefault();
 
-        const res = await fetch(`/api/educator/signup`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                email: email,
-                password: password,
-                name:name,
-                phoneNum:phoneNo,
-                jobTitle:jobTitle,
-                orgName:orgName,
-                orgURL:orgURL,
-                accountType: 'free'
-            }),
-        });
-        const data = await res.json();
-        // console.log(data);
+        const enteredName = nameInputRef.current.input.value;
+        const enteredEmail = emailInputRef.current.input.value;
+        const enteredPassword = passwordInputRef.current.input.value;
+        const enteredJobTitle = jobTitleInputRef.current.input.value;
+        const enteredPhoneNo = phoneNoInputRef.current.input.value;
+        const enteredOrgName = orgNameInputRef.current.input.value;
+        const enteredOrgURL = orgURLInputRef.current.input.value;
+    
+        console.log(enteredName);
+        console.log(enteredEmail);
+        console.log(enteredPassword);
+        console.log(enteredJobTitle);
+        console.log(enteredPhoneNo);
+        console.log(enteredOrgURL);
 
-        router.push('/educator_acc/login');
+
+        try {
+            const res = await fetch(`/api/auth/educator/signup`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    email: enteredEmail,
+                    password: enteredPassword,
+                    name: enteredName,
+                    phoneNum: enteredPhoneNo,
+                    jobTitle: enteredJobTitle,
+                    orgName: enteredOrgName,
+                    orgURL: enteredOrgURL,
+                    accountType: 'free',
+                }),
+            });
+
+            const result = await res.json();
+
+            if (!res.ok) {
+                throw new Error(data.message || 'Something went wrong!');
+            }
+
+            console.log(result);
+
+
+
+        } catch (err) {
+            console.log('Error happend on: educator sign up page');
+            console.log(err);
+        }
+
+        // router.push('/educator_acc/login');
     };
 
     return (
@@ -114,7 +145,7 @@ export default function Edu_SignUp_Form() {
                         },
                     ]}
                 >
-                    <Input value={name} onChange={(event)=>{setName(event.target.value)}}/>
+                    <Input ref={nameInputRef} />
                 </Form.Item>
                 <Form.Item
                     name="email"
@@ -130,7 +161,7 @@ export default function Edu_SignUp_Form() {
                         },
                     ]}
                 >
-                    <Input value={email} onChange={(event)=>{setEmail(event.target.value)}}/>
+                    <Input ref={emailInputRef} />
                 </Form.Item>
 
                 <Form.Item
@@ -167,7 +198,7 @@ export default function Edu_SignUp_Form() {
                         }),
                     ]}
                 >
-                    <Input.Password value={password} onChange={(event)=>{setPassword(event.target.value)}}/>
+                    <Input.Password ref={passwordInputRef} />
                 </Form.Item>
 
                 <Form.Item
@@ -182,7 +213,7 @@ export default function Edu_SignUp_Form() {
                         },
                     ]}
                 >
-                    <Input value={jobTitle} onChange={(event)=>{setJobTitle(event.target.value)}}/>
+                    <Input ref={jobTitleInputRef} />
                 </Form.Item>
 
                 <Form.Item
@@ -195,7 +226,7 @@ export default function Edu_SignUp_Form() {
                         },
                     ]}
                 >
-                    <Input value={phoneNo} onChange={(event)=>{setPhoneNo(event.target.value)}}/>
+                    <Input ref={phoneNoInputRef} />
                 </Form.Item>
 
                 <Form.Item
@@ -209,7 +240,7 @@ export default function Edu_SignUp_Form() {
                         },
                     ]}
                 >
-                    <Input value={orgName} onChange={(event)=>{setOrgName(event.target.value)}}/>
+                    <Input ref={orgNameInputRef} />
                 </Form.Item>
 
                 <Form.Item
@@ -224,7 +255,7 @@ export default function Edu_SignUp_Form() {
                     className={styles.margin_bottom_input}
                 >
                     <AutoComplete options={websiteOptions} onChange={onWebsiteChange} placeholder="website">
-                        <Input value={orgURL} onChange={(event)=>{setOrgURL(event.target.value)}}/>
+                        <Input ref={orgURLInputRef} />
                     </AutoComplete>
                 </Form.Item>
 
