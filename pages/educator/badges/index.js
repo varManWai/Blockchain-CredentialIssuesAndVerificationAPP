@@ -2,6 +2,8 @@ import { getSession } from "next-auth/react";
 import AllBadge from "../../../components/Certificates/all_certificate";
 
 import BadgeModel from "../../../models/badge";
+import Badge_Educator from "../../../models/badge_educator";
+import Educator from "../../../models/educator";
 import connectMongo from "../../../utils/connectMongo";
 
 export default function Badges({ Badges }) {
@@ -25,21 +27,37 @@ export const getServerSideProps = async (context) => {
     };
   }
 
-  try {
-    // console.log("CONNECTING TO MONGO");
-    await connectMongo();
-    // console.log("CONNECTED TO MONGO");
+  console.log(session.user.email);
 
-    // console.log("FETCHING DOCUMENTS");
-    const Badges = await BadgeModel.find();
-    // console.log("FETCHED DOCUMENTS");
+  try {
+    await connectMongo();
+
+    const { _id } = await Educator.findOne({ email: session.user.email });
+
+    console.log(_id);
+
+    const certArr = await Badge_Educator.find({ educatorID: _id });
+
+    console.log(certArr);
+
+    const badges = await certArr.map(async (badgeId) => {
+      const badge = await BadgeModel.findById({
+        _id: badgeId.badgeID,
+      });
+      return badge;
+    });
+
+    const badgesData = await Promise.all(badges).then((values) => {
+      return values;
+    });
+
+    console.log(badgesData);
 
     return {
       props: {
-        Badges: JSON.parse(JSON.stringify(Badges)),
+        Badges: JSON.parse(JSON.stringify(badgesData)),
       },
     };
-
   } catch (error) {
     console.log(error);
 
