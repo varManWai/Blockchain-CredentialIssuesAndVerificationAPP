@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-      <SessionProvider>
+      <SessionProvider session={pageProps.session}>
         <Final_Layout criteria={criteria} footer={footer}>
           <Component {...pageProps} />
         </Final_Layout>

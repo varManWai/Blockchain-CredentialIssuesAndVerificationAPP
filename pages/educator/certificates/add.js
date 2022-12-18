@@ -4,7 +4,7 @@ import AddCertificate from "../../../components/Certificates/add_certificate"
 export default function AddCert() {
     return (
         <div>
-            <AddCertificate path="certificates"/>
+            <AddCertificate path="certificates" />
         </div>
     )
 }

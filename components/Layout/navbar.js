@@ -75,148 +75,7 @@ export default function Visitor() {
     );
 }
 
-export function Student() {
-    const router = useRouter();
-    const isBreakpoint = useMediaQuery(584);
 
-    const [visible, setVisible] = useState(false);
-
-    const showDrawer = () => {
-        setVisible(true);
-    };
-    const onClose = () => {
-        setVisible(false);
-    };
-
-    const items = [
-        {
-            label: <Link href="/educator/profile" >Profile</Link>,
-            key: '0',
-        },
-
-        {
-            type: 'divider',
-        },
-        {
-            label: <Link href="/educator">Sign Out</Link>,
-            key: '1',
-        },
-    ];
-
-    return (
-        <div>
-            {isBreakpoint ? (
-                <nav>
-                    <Row className={styles.navbar_section_student} justify="space-between" align="center" >
-                        <Col className={styles.navbar_section_items} span={4}>
-                            <Image
-                                src="/images/forgotPwd.jpg"
-                                alt="this is our logo"
-                                fill
-                                priority
-                                sizes="100%"
-                                className={styles.navbar_section_items_1_image}
-                            />
-                        </Col>
-                        <Col className={styles.navbar_section_items} >
-                            <Button
-                                className={styles.barsMenu_student}
-                                type="primary"
-                                onClick={showDrawer}
-                            >
-                                <BarsOutlined />
-                                {/* <span className={styles.barsBtn} /> */}
-                            </Button>
-                            <Drawer
-                                title=""
-                                placement="right"
-                                onClose={onClose}
-                                open={visible}
-                            >
-                                <Row justify="center" align="center" style={{ minHeight: '100%' }}>
-                                    <Col>
-                                        <Row justify="center" align="center" >
-                                            <Col span={24}>
-                                                <Link className={styles.drawer_nav_link} href="/educator/certificates">
-                                                    <Space>
-                                                        <BookOutlined />
-                                                        Credentials
-                                                    </Space>
-                                                </Link>
-                                            </Col>
-                                        </Row>
-                                    </Col>
-                                    <Col span={24} style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-end' }} onClick={() => { router.push("/educator/profile") }}>
-                                        <a className={styles.drawer_nav_link_danger} >
-                                            <Space>
-                                                <UserOutlined />
-                                                Sign Out
-                                            </Space>
-                                        </a>
-                                    </Col>
-                                </Row>
-                            </Drawer>
-                        </Col>
-                    </Row>
-                </nav>
-            ) : (
-                <nav>
-                    <Row className={styles.navbar_section_student} justify="space-between" align="center" >
-                        <Col className={styles.navbar_section_items} span={3}>
-                            <Image
-                                src="/images/forgotPwd.jpg"
-                                alt="this is our logo"
-                                fill
-                                priority
-                                sizes="100%"
-                                className={styles.navbar_section_items_1_image}
-                            />
-                        </Col>
-                        <Col className={styles.navbar_section_items} span={20}>
-                            <Row className={styles.navbar_section_items_section} justify="space-between" align="center">
-                                <Col span={20}>
-                                    <Row>
-                                        <Space size="large">
-                                            <Col>
-                                                <Link className={styles.navbar_section_items_section_1_item_student} href="/student/credentials">Credentials</Link>
-                                            </Col>
-                                        </Space>
-                                    </Row>
-                                </Col>
-                                <Col className={styles.navbar_section_items_section_2} span={4}>
-                                    <Dropdown
-                                        placement="bottom"
-                                        arrow={{
-                                            pointAtCenter: true,
-                                        }}
-                                        menu={{
-                                            items,
-                                        }}
-                                        trigger={['click']}
-                                        className={styles.navbar_section_items_section_2_dropdown}
-                                    >
-
-                                        <button className={styles.navbar_section_items_section_2_button_student}
-                                            onClick={(e) => e.preventDefault()}>
-                                            <Image
-                                                src="/images/resetPwd.jpg"
-                                                alt="personal image"
-                                                fill
-                                                priority
-                                                sizes="100%"
-                                                className={styles.navbar_section_items_section_2_item}
-                                            />
-                                        </button>
-                                    </Dropdown>
-                                </Col>
-                            </Row>
-                        </Col>
-                    </Row>
-                </nav>
-            )}
-        </div>
-    );
-}
 
 export function Educator() {
     const router = useRouter();
@@ -254,7 +113,7 @@ export function Educator() {
             type: 'divider',
         },
         {
-            label: <a onClick={logoutHandler}>Sign out</a>,
+            label: <a onClick={logoutHandler}>Logout</a>,
             key: '1',
         },
     ];

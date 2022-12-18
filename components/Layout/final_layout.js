@@ -39,7 +39,10 @@ export default function Final_Layout({ children, criteria, footer }) {
   };
 
   const router = useRouter();
-  const pathArr = router.pathname.split("/");
+  
+  let pathArr = router.pathname.split('/');
+
+
   let keyNum = 0;
   pathArr.shift();
   pathArr.shift();
@@ -64,56 +67,7 @@ export default function Final_Layout({ children, criteria, footer }) {
   const LayoutSelector = () => {
     if (criteria == "student") {
 
-      return (
-        <>
-          <Layout style={{ minHeight: "100vh" }}>
-            <Student />
-            <Layout>
-              {/* <Dropdown.Button menu={menuProps} placement="bottom" icon={<UserOutlined />}>
-              Dropdown
-            </Dropdown.Button> */}
-              <Content
-                style={{
-                  margin: "0 1.6rem",
-                }}
-              >
-                <Breadcrumb
-                  style={{
-                    margin: "16px 0",
-                  }}
-                >
-                  {pathArr.map(path => {
-                    return (
-                      <Breadcrumb.Item key={keyNum++}>
-                        <a href="" onClick={e => handleNav(e, path)}>{path.charAt(0).toUpperCase() + path.slice(1)}</a>
-                      </Breadcrumb.Item>
-                    )
-                  })}
-
-                </Breadcrumb>
-
-                <div
-                  className="site-layout-background"
-                  style={{
-                    padding: 24,
-                    minHeight: 360,
-                    background: "white",
-                  }}
-                >
-                  {children}
-                </div>
-              </Content>
-              <Footer
-                style={{
-                  textAlign: "center",
-                }}
-              >
-                Ant Design ©2018 Created by Ant UED
-              </Footer>
-            </Layout>
-          </Layout>
-        </>
-      )
+      
 
     } else if (criteria == "educator") {
 

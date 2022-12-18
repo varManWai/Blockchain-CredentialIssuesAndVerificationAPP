@@ -4,24 +4,37 @@ import CertificateModel from "../../../models/certificate";
 import connectMongo from '../../../utils/connectMongo';
 
 
-import { useSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 
-export default function Certificates({Certificates}) {
+export default function Certificates({ Certificates }) {
 
-  // const [session, loading] = useSession();
-
-  // console.log(session);
-  // console.log(loading);
+  const { data: session, status } = useSession();
 
 
-    return (
-        <div>
-            <AllCertificate Certificates={Certificates} path="certificates"/>
-        </div>
-    )
+
+
+  return (
+    <div>
+      {console.log(session)}
+      <AllCertificate Certificates={Certificates} path="certificates" />
+    </div>
+  )
 }
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context) => {
+
+  const session = await getSession({ req: context.req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/educator_acc/login',
+        permanent: false
+      }
+    }
+  }
+
+
 
   try {
     // console.log("CONNECTING TO MONGO");
@@ -37,6 +50,7 @@ export const getServerSideProps = async () => {
     return {
       props: {
         Certificates: JSON.parse(JSON.stringify(Certificates)),
+        Session: session,
       },
     };
   } catch (error) {

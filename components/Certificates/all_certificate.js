@@ -12,9 +12,8 @@ import { useRouter } from "next/router";
 
 
 export default function AllCertificate({ Certificates, path }) {
-
   const router = useRouter();
-
+  
   const { TextArea } = Input;  // for text area field
   const [open, setOpen] = useState(false);  //for drawer
 

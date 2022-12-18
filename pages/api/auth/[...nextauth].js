@@ -32,6 +32,8 @@ export default NextAuth({
           throw new Error("Could not log you in");
         }
 
+        // session.userId = educator.id;
+        
         return { email: educator.email };
       },
     }),

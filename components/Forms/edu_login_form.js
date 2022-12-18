@@ -34,6 +34,11 @@ export default function Edu_Login_Form() {
         })
 
         console.log(result);
+
+        if(!result.error){
+            router.replace('/educator/certificates');
+        }
+
     };
 
     return (

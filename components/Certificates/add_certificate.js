@@ -3,6 +3,8 @@ import { Form, Select, Input, DatePicker, Row, Col, Button } from "antd"
 import styles from './addCert.module.css';
 import { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+import { Types } from "mongoose";
 
 export default function AddCertificate({path}) {
 
@@ -16,6 +18,10 @@ export default function AddCertificate({path}) {
     const [dataIssued, setDateIssued] = useState("");
     const [address, setAddress] = useState("");
 
+    const {data:session,status} = useSession();
+
+    console.log(session.user.email);
+
     const createCertificate = async (event) => {
         const res = await fetch(`/api/educator/${path}/add`, {
             method: "POST",
@@ -27,6 +33,7 @@ export default function AddCertificate({path}) {
                 desc: desc,
                 dateIssued: dataIssued,
                 address: "address got from the smart contract",
+                educatorEmail: session.user.email,
             }),
         });
         const data = await res.json();

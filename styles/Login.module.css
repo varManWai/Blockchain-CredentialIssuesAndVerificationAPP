@@ -32,10 +32,6 @@
   height: 100%;
 }
 
-.sub_loginForm {
-  width: 100%;
-  max-width: 500px;
-}
 
 .hr_line {
   margin: 2.5rem auto;
@@ -58,9 +54,6 @@
   color: rgb(105, 105, 105);
 }
 
-.login_button {
-  width: 100%;
-}
 
 .text_align {
   text-align: center;
@@ -179,13 +172,7 @@
 }
 
 /* all certificate page  */
-.all_certificates_section {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 
-}
 
 .add_new_cert {
   display: flex;
