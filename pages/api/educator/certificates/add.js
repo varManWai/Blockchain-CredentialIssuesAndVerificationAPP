@@ -55,9 +55,9 @@ export default async function AddCertificate(req, res) {
       educatorID: educatorID,
     });
 
-    console.log("CREATED DOCUMENT");
+    // console.log("CREATED DOCUMENT");
 
-    // res.json({ certificate });
+    res.status(201).json({ message: "Created Certificate!" });
   } catch (error) {
     console.log(error);
     res.json({ error });

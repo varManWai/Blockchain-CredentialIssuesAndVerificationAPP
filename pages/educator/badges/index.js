@@ -1,18 +1,29 @@
-import AllBadge from "../../../components/Certificates/all_certificate"
+import { getSession } from "next-auth/react";
+import AllBadge from "../../../components/Certificates/all_certificate";
 
 import BadgeModel from "../../../models/badge";
-import connectMongo from '../../../utils/connectMongo';
+import connectMongo from "../../../utils/connectMongo";
 
-export default function Badges({Badges}) {
-    return (
-        <div>
-            <AllBadge Certificates={Badges} path="badges"/>
-            {/* {console.log(Badges)} */}
-        </div>
-    )
+export default function Badges({ Badges }) {
+  return (
+    <div>
+      <AllBadge Certificates={Badges} path="badges" />
+      {/* {console.log(Badges)} */}
+    </div>
+  );
 }
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context) => {
+  const session = await getSession({ req: context.req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/educator_acc/login",
+        permanent: false,
+      },
+    };
+  }
 
   try {
     // console.log("CONNECTING TO MONGO");
@@ -23,13 +34,12 @@ export const getServerSideProps = async () => {
     const Badges = await BadgeModel.find();
     // console.log("FETCHED DOCUMENTS");
 
-
-
     return {
       props: {
         Badges: JSON.parse(JSON.stringify(Badges)),
       },
     };
+
   } catch (error) {
     console.log(error);
 
@@ -37,4 +47,4 @@ export const getServerSideProps = async () => {
       notFound: true,
     };
   }
-}
+};
