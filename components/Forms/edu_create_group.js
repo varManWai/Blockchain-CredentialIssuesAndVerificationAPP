@@ -1,31 +1,35 @@
 import React from 'react';
 import { useRef } from 'react';
-
-
-
+import { useRouter } from "next/router";
 
 export default function Edu_create_group() {
 
+    const router = useRouter();
     const nameInputRef = useRef();
     const descriptionInputRef = useRef();
 
-
-    function submitFormHandler(event) {
+    const submitFormHandler = async (event) => {
         event.preventDefault();
 
         const enteredName = nameInputRef.current.value;
         const enteredDesc = descriptionInputRef.current.value;
+        // const reqBody = { groupName: enteredName, desc: enteredDesc, educatorID: '639ac3c99a9c5160501265ac' };
 
-        const reqBody = { name: enteredName, desc: enteredDesc };
-
-        fetch('/api/group', {
-            method: 'POST', body: JSON.stringify(reqBody),
+        const res = await fetch(`/api/educator/group/add`, {
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json',
+                "Content-Type": "application/json",
             },
-        }).then((response) => response.json()).then((data) => console.log(data));
+            body: JSON.stringify({
+                groupName: enteredName,
+                desc: enteredDesc,
+                educatorID:'639ac3c99a9c5160501265ac'
+            }),
+        });
+        //const data = await res.json();
 
-    }
+        router.push('/educator/group/')
+    };
 
     return (
 
