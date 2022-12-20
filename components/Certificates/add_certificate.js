@@ -1,12 +1,17 @@
-import { Form, Select, Input, DatePicker, Row, Col, Button } from "antd"
+import { Form, Select, message, Input, DatePicker, Row, Col, Button } from "antd"
 
 import styles from './addCert.module.css';
 import { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { Types } from "mongoose";
+import Loader from '../Layout/loader';
 
-export default function AddCertificate({path}) {
+
+import factory from "../../ethereum/factory";
+import web3 from "../../ethereum/web3";
+
+export default function AddCertificate({ path }) {
 
     const router = useRouter();
 
@@ -15,31 +20,60 @@ export default function AddCertificate({path}) {
     //FORM Attributes
     const [title, setTitle] = useState("");
     const [desc, setDesc] = useState("");
-    const [dataIssued, setDateIssued] = useState("");
+    const [dateIssued, setDateIssued] = useState("");
     const [address, setAddress] = useState("");
 
-    const {data:session,status} = useSession();
+    const { data: session, status } = useSession();
 
-    console.log(session.user.email);
+    const [loading, setLoading] = useState(false);
+    // console.log(session.user.email);
+
+
 
     const createCertificate = async (event) => {
-        const res = await fetch(`/api/educator/${path}/add`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                title: title,
-                desc: desc,
-                dateIssued: dataIssued,
-                address: "address got from the smart contract",
-                educatorEmail: session.user.email,
-            }),
-        });
-        const data = await res.json();
-        console.log(data);
 
-        router.push(`/educator/${path}`);
+        setLoading(true);
+
+        console.log("the blockchain stuff start from here");
+
+        const accounts = await web3.eth.getAccounts();
+
+        console.log(accounts);
+
+        try {
+
+            await factory.methods.createCertificate(title, desc, dateIssued).send({
+                from: accounts[0],
+            });
+
+            const certAddress = await factory.methods.getDeployedCertificates().call();
+
+            console.log(certAddress);
+
+            const res = await fetch(`/api/educator/${path}/add`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    title: title,
+                    desc: desc,
+                    dateIssued: dateIssued,
+                    address: certAddress[certAddress.length -1],
+                    educatorEmail: session.user.email,
+                }),
+            });
+            const data = await res.json();
+            console.log(data);
+
+
+            setLoading(false);
+            router.push(`/educator/${path}`);
+
+        } catch (err) {
+            console.log(err);
+        }
+        setLoading(false);
     };
 
     //Layout for the form - start
@@ -130,62 +164,71 @@ export default function AddCertificate({path}) {
         console.log(`selected ${value}`);
     };
     //group selector - end
-
     return (
-        <div className={styles.add_cert_container}>
-            <Form {...layout} name="control-ref" onSubmitCapture={createCertificate}>
-                <Row gutter={16}>
-                    <Col span={isBreakpoint ? 24 : 12}>
-                        <Form.Item
-                            name="title"
-                            label="Title"
-                        >
-                            <Input value={title} onChange={(event) => { setTitle(event.target.value) }} />
-                        </Form.Item>
-                    </Col>
-                    <Col span={isBreakpoint ? 24 : 12}>
-                        <Form.Item label="Date and Time release">
-                            <DatePicker
-                                showTime
-                                onChange={onChange}
-                                onOk={onOk}
-                                style={{
-                                    width: "100%",
-                                }} />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row gutter={16}>
-                    <Col span={24}>
-                        <Form.Item label="Description">
-                            <TextArea rows={4} value={desc} onChange={(event) => { setDesc(event.target.value) }} />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row gutter={16}>
-                    <Col span={24}>
-                        <Form.Item label="Group">
-                            <Select
-                                defaultValue="lucy"
-                                style={{
-                                    width: "100%",
-                                }}
-                                onChange={handleChange}
-                                options={selectContent}
-                            />
-                        </Form.Item>
-                    </Col>
-                </Row>
-                <Row gutter={16}>
-                    <Col span={24}>
-                        <Form.Item {...tailLayout} className={styles.addCert_button_container}>
-                            <Button type="primary" htmlType="submit">
-                                Submit
-                            </Button>
-                        </Form.Item>
-                    </Col>
-                </Row>
-            </Form>
-        </div>
+        <>
+            {loading
+                ?
+                <Loader />
+                :
+                <div className={styles.add_cert_container}>
+                    <Form {...layout} name="control-ref" onSubmitCapture={createCertificate}>
+                        <Row gutter={16}>
+                            <Col span={isBreakpoint ? 24 : 12}>
+                                <Form.Item
+                                    name="title"
+                                    label="Title"
+                                >
+                                    <Input value={title} onChange={(event) => { setTitle(event.target.value) }} />
+                                </Form.Item>
+                            </Col>
+                            <Col span={isBreakpoint ? 24 : 12}>
+                                <Form.Item label="Date and Time release">
+                                    <DatePicker
+                                        showTime
+                                        onChange={onChange}
+                                        onOk={onOk}
+                                        style={{
+                                            width: "100%",
+                                        }} />
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                        <Row gutter={16}>
+                            <Col span={24}>
+                                <Form.Item label="Description">
+                                    <TextArea rows={4} value={desc} onChange={(event) => { setDesc(event.target.value) }} />
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                        <Row gutter={16}>
+                            <Col span={24}>
+                                <Form.Item label="Group">
+                                    <Select
+                                        defaultValue="lucy"
+                                        style={{
+                                            width: "100%",
+                                        }}
+                                        onChange={handleChange}
+                                        options={selectContent}
+                                    />
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                        <Row gutter={16}>
+                            <Col span={24}>
+                                <Form.Item {...tailLayout} className={styles.addCert_button_container}>
+                                    <Button type="primary" htmlType="submit">
+                                        Submit
+                                    </Button>
+                                </Form.Item>
+                            </Col>
+                        </Row>
+                    </Form>
+                </div>
+            }
+
+
+        </>
+
     )
 }

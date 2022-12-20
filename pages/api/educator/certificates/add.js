@@ -6,6 +6,8 @@ import Certificate_Educator from "../../../../models/certificate_educator";
 import { getSession, useSession } from "next-auth/react";
 import Educator from "../../../../models/educator";
 
+
+
 // /**
 //  * @param {import('next').NextApiRequest} req
 //  * @param {import('next').NextApiResponse} res
@@ -20,6 +22,8 @@ export default async function AddCertificate(req, res) {
     const { _id, title, desc, dateIssued, address } = await Certificate.create(
       req.body
     );
+
+    
 
     console.log("----------------------------------------");
     console.log(_id);
@@ -48,7 +52,6 @@ export default async function AddCertificate(req, res) {
     console.log("Educator ID");
     console.log(educatorID);
     console.log("----------------------------------------");
-
 
     const certificateEducator = await Certificate_Educator.create({
       certificateID: _id,

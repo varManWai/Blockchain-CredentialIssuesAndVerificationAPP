@@ -3,7 +3,7 @@ import styles from './loader.module.css';
 
 export default function Loader() {
   return (
-    <Row justify="center" align="center" className={styles.center}>
+    <Row justify="center" align="middle" className={styles.center}>
       <Space>
         <Spin size="large" />
       </Space>
