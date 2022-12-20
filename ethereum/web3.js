@@ -1,7 +1,5 @@
 import Web3 from "web3";
 
-console.log("some shitter");
-
 const path = require("path");
 
 const dotenv = require("dotenv");
