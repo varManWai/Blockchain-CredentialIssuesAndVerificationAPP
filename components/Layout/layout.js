@@ -85,6 +85,7 @@ export default function EducatorLayout({ children }) {
                 className="site-layout-background"
                 style={{
                   padding: 24,
+                  paddingBottom: 50,
                   minHeight: 360,
                   background: "white",
                 }}
