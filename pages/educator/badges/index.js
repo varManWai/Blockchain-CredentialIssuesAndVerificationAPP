@@ -1,5 +1,5 @@
 import { getSession } from "next-auth/react";
-import AllBadge from "../../../components/Certificates/all_certificate";
+import AllBadge from "../../../components/Credentials/allCredentials";
 
 import BadgeModel from "../../../models/badge";
 import Badge_Educator from "../../../models/badge_educator";

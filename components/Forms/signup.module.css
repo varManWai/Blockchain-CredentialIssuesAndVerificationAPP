@@ -1,0 +1,36 @@
+.header {
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+.sub_header {
+  font-size: 1.8rem;
+  font-weight: 500;
+  text-transform: capitalize;
+  text-align: center;
+  color: rgb(105, 105, 105);
+}
+
+.emphasize_word {
+  color: rgb(24, 144, 255);
+}
+
+.hr_line {
+  margin: 2.5rem auto;
+}
+
+.margin_bottom_input {
+  margin-bottom: 5rem;
+}
+
+.text_align {
+  text-align: center;
+}
+
+.login_button{
+    width: 100%;
+}

@@ -1,4 +1,4 @@
-import AddBadge from "../../../components/Certificates/add_certificate"
+import AddBadge from "../../../components/Credentials/addCredential"
 
 
 export default function AddCert() {

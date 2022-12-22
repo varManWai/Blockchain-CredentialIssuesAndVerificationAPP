@@ -1,4 +1,4 @@
-import View_Badge from "../../../components/Certificates/view_certificate"
+import View_Badge from "../../../components/Credentials/viewCredential"
 
 import BadgeModel from "../../../models/badge";
 import connectMongo from '../../../utils/connectMongo';

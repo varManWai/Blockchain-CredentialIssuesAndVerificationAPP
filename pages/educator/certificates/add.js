@@ -1,5 +1,5 @@
 import { getSession } from "next-auth/react";
-import AddCertificate from "../../../components/Certificates/add_certificate"
+import AddCertificate from "../../../components/Credentials/addCredential"
 
 
 export default function AddCert() {

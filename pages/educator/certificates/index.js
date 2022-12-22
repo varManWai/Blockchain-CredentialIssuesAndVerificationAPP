@@ -1,4 +1,4 @@
-import AllCertificate from "../../../components/Certificates/all_certificate"
+import AllCertificate from "../../../components/Credentials/allCredentials"
 
 import CertificateModel from "../../../models/certificate";
 import connectMongo from '../../../utils/connectMongo';
@@ -29,7 +29,7 @@ export const getServerSideProps = async (context) => {
     if (!session) {
       return {
         redirect: {
-          destination: "/educator_acc/login",
+          destination: "/educator/login",
           permanent: false,
         },
       };

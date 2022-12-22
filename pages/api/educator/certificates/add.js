@@ -6,7 +6,31 @@ import Certificate_Educator from "../../../../models/certificate_educator";
 import { getSession, useSession } from "next-auth/react";
 import Educator from "../../../../models/educator";
 
+import nodemailer from "nodemailer";
 
+const path = require("path");
+
+const dotenv = require("dotenv");
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
+
+const email = process.env.EMAIL;
+const pass = process.env.EMAIL_PASS;
+
+console.log(email);
+console.log(pass);
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: email,
+    pass: pass,
+  },
+});
+
+const mailOptions = {
+  from: email,
+  to: ["isaacworking31@gmail.com","laizoke98@gmail.com"],
+};
 
 // /**
 //  * @param {import('next').NextApiRequest} req
@@ -23,7 +47,47 @@ export default async function AddCertificate(req, res) {
       req.body
     );
 
-    
+    const generateEmailContent = (_id) => {
+      return {
+        html: `<!DOCTYPE html>
+        <html lang="en">
+        
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+        </head>
+        
+        <body>
+            <h2 style="text-align:center">Hello!</h2>
+        
+            <hr>
+        
+            <p style="text-align:justify">Congratulation on your achievement and thank you for being a part of CredBLOCK. For
+                those who have yet to claim the digital credentials, fret not! We have extended the dealine for these
+                redemptions.</p>
+        
+        
+            <br>
+        
+            <p style="text-align:justify">To redeeem your digital credential, Please click the <a
+                    href="http://localhost:3000/certificates/claim/${"1234"}">link</a>.</p>
+        
+        
+            <img alt="image" src="http://cdn.mcauto-images-production.sendgrid.net/a600765390647751/069c42c9-e60e-4364-bc4c-434bba7a9e14/1920x1280.jpg"
+                width="100%" />
+        </body>
+        
+        </html>`,
+      };
+    };
+
+    await transporter.sendMail({
+      from:email,to:"laizoke98@gmail.com",
+      ...generateEmailContent(_id),
+      subject: "Claim Credential",
+    });
 
     console.log("----------------------------------------");
     console.log(_id);

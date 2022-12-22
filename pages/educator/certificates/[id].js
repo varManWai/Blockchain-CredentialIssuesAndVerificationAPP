@@ -1,4 +1,4 @@
-import View_Certificate from "../../../components/Certificates/view_certificate"
+import View_Certificate from "../../../components/Credentials/viewCredential"
 
 import CertificateModel from "../../../models/certificate";
 import connectMongo from '../../../utils/connectMongo';
