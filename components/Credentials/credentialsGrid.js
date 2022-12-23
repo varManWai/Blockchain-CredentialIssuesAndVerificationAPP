@@ -54,8 +54,6 @@ export default function CredentialsGrid({ items, specDeletePath }) {
             }
           })
         )}
-        {/* {console.log("below the things")}
-                {console.log(items)} */}
       </Row>
       <Row justify="center">
         <Col>

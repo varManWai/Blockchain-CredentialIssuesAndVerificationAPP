@@ -99,7 +99,7 @@ export default function CertificateItem({ cert, deletePath, imageAddress }) {
                     />
                   </>
                 ) : (
-                  <img src="/images/forgotPwd.jpg" width={300} height={300} alt="default badge image" srcSet="" />
+                  <img src="/images/defaultBadge.png" width={300} height={300} alt="default badge image" srcSet="" />
                 )}
               </>
             }
