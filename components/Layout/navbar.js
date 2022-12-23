@@ -19,7 +19,7 @@ const { MenuItemGroup } = Menu;
 import { useRouter } from "next/router";
 
 import styles from "./navbar.module.css";
-import { useSession, signOut } from "next-auth/react";
+import { useSession, signOut, getSession } from "next-auth/react";
 
 
 
@@ -27,11 +27,16 @@ import { useSession, signOut } from "next-auth/react";
 export default function Educator() {
     const router = useRouter();
 
-    // const [session,loading] = useSession();
+    const { data: session, status } = useSession()
 
-    // if(session){
-    //     router.replace('/educator_acc/login');    
-    // }
+
+    useEffect(() => {
+        getSession().then((session) => {
+            if (!session) {
+                router.replace("/educator/login");
+            }
+        });
+    }, [router]);
 
     const useMediaQuery = (width) => {
         const [targetReached, setTargetReached] = useState(false);
@@ -89,7 +94,7 @@ export default function Educator() {
         },
     ];
 
-    const { data: session, status } = useSession()
+
     const [isLogin, setIsLogin] = useState(true);
 
     useEffect(() => {
