@@ -6,7 +6,7 @@ import connectMongo from '../../../utils/connectMongo';
 export default function viewBadge ({BadgeData}) {
     return (
         <div>
-            <View_Badge Certificate={BadgeData}/>
+            <View_Badge Certificate={BadgeData} CredentialType="badge"/>
         </div>
     )
 }

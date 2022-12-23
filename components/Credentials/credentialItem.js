@@ -3,12 +3,12 @@ import Image from "next/image";
 import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
 
 import { Card, Avatar } from "antd";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useRouter } from "next/router";
 
-import styles from './credentialItem.module.css';
+import styles from "./credentialItem.module.css";
 
-export default function CertificateItem({ cert , deletePath}) {
+export default function CertificateItem({ cert, deletePath }) {
   const { Meta } = Card;
   const router = useRouter();
 
@@ -36,15 +36,17 @@ export default function CertificateItem({ cert , deletePath}) {
     console.log(data);
 
     router.push(`/educator/${deletePath}`);
-  }
+  };
 
   let actions = [
-    <EyeOutlined key="view" onClick={() => router.push(`/educator/${deletePath}/${cert._id}`)} />,
-    < DeleteOutlined
-      key="delete"
-      onClick={deleteCertificate}
-    />
+    <EyeOutlined
+      key="view"
+      onClick={() => router.push(`/educator/${deletePath}/${cert._id}`)}
+    />,
+    <DeleteOutlined key="delete" onClick={deleteCertificate} />,
   ];
+
+  const pdfRef = useRef();
 
   return (
     <div>
@@ -53,14 +55,45 @@ export default function CertificateItem({ cert , deletePath}) {
           width: 300,
         }}
         cover={
-          <img
-            alt="example"
-            src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-          />
+          <>
+            {deletePath === "certificates"
+              ?
+              <div className={styles.content} ref={pdfRef}>
+                <div>
+                  <div className={styles.subContent}>
+                    <h1 className={styles.userName}>username</h1>
+                    <hr style={{ width: "100%" }} />
+                    <p id="text" className={styles.paragraph}>
+                      {cert.title}
+                    </p>
+                    <p id="text" className={styles.paragraph2}>
+                      {cert.desc}
+                    </p>
+                  </div>
+                  <div className={styles.subContent2}>
+                    <img
+                      src="/images/signatureCred.png"
+                      alt="this is the signature"
+                      className={styles.signature}
+                    />
+                    <hr style={{ width: "100%" }} />
+                    <img
+                      src="/images/logo-stud.svg"
+                      alt="this is the credBLOCK logo"
+                      className={styles.logo}
+                    />
+                  </div>
+                </div>
+              </div>
+              :
+              <img src="/images/resetPwd.jpg" alt="my badge image" width={300} height={150} srcset="" />
+
+            }
+          </>
         }
         actions={actions}
       >
-        <div className={styles.meta} >
+        <div className={styles.meta}>
           <p className={styles.title}>{cert.title} </p>
           <p className={styles.description}>{cert.desc}</p>
         </div>

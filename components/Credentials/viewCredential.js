@@ -1,9 +1,11 @@
 import { Image, Row, Col, Button } from "antd";
 import { useRouter } from "next/router";
+import { useRef } from "react";
 
 import styles from "./viewCredential.module.css";
+import GeneratePDF from "../utils/GeneratePDF";
 
-export default function ViewCredential({ Certificate }) {
+export default function ViewCredential({ Certificate, CredentialType }) {
   const router = useRouter();
 
   const deleteCertificate = async () => {
@@ -22,6 +24,8 @@ export default function ViewCredential({ Certificate }) {
     router.push("/educator/certificates");
   };
 
+  const pdfRef = useRef();
+
   return (
     <div>
       <Row className={styles.view_cert_container} wrap>
@@ -38,13 +42,44 @@ export default function ViewCredential({ Certificate }) {
             span: 12,
           }}
         >
-          <Image
-            src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-            alt="certificate pdf file "
-            fill="true"
-            priority="true"
-            className={styles.view_cert_image}
-          />
+          {CredentialType === "certificate"
+            ?
+            <div className={styles.content} ref={pdfRef}>
+              <div>
+                <div className={styles.subContent}>
+                  <h1 className={styles.userName}>username</h1>
+                  <hr style={{ width: "100%" }} />
+                  <p id="text" className={styles.paragraph}>
+                    {Certificate.title}
+                  </p>
+                  <p id="text" className={styles.paragraph2}>
+                    {Certificate.desc}
+                  </p>
+                </div>
+                <div className={styles.subContent2}>
+                  <img
+                    src="/images/signatureCred.png"
+                    alt="this is the signature"
+                    className={styles.signature}
+                  />
+                  <hr style={{ width: "100%" }} />
+                  <img
+                    src="/images/logo-stud.svg"
+                    alt="this is the credBLOCK logo"
+                    className={styles.logo}
+                  />
+                </div>
+              </div>
+            </div>
+            :
+            <Image
+              src="/images/resetPwd.jpg"
+              alt="credential pdf file "
+              fill="true"
+              priority="true"
+              className={styles.view_cert_image}
+            />
+          }
         </Col>
         <Col
           span={12}
@@ -147,16 +182,36 @@ export default function ViewCredential({ Certificate }) {
               <p className={styles.view_cert_texts}>Group 1</p>
             </Col>
           </Row>
-          <Row style={{ width: "100%" }}>
-            <Col style={{ width: "100%" }}>
-              <Button
-                onClick={deleteCertificate}
-                style={{ width: "100%" }}
-                type="danger"
-              >
-                Delete
-              </Button>
-            </Col>
+          <Row style={{ width: "100%" }} justify="space-between" align="middle" >
+
+            {CredentialType === "certificate"
+              ?
+              <>
+                <Col span={12}>
+                  <GeneratePDF html={pdfRef} />
+                </Col>
+                <Col span={12}>
+                  <Button
+                    onClick={deleteCertificate}
+                    style={{ width: "90%" }}
+                    type="danger"
+                  >
+                    Delete
+                  </Button>
+                </Col>
+              </>
+              :
+              <Col span={24}>
+                <Button
+                  onClick={deleteCertificate}
+                  style={{ width: "100%" }}
+                  type="danger"
+                >
+                  Delete
+                </Button>
+              </Col>
+            }
+
           </Row>
         </Col>
       </Row>

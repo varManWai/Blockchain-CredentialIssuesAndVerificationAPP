@@ -8,15 +8,8 @@ import Certificate_Educator from "../../../models/certificate_educator";
 import Educator from "../../../models/educator";
 
 export default function Certificates({ Certificates }) {
-
-  const { data: session, status } = useSession();
-
-
-
-
   return (
     <div>
-      {console.log(session)}
       <AllCertificate Certificates={Certificates} path="certificates" />
     </div>
   )

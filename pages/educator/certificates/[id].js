@@ -6,7 +6,7 @@ import connectMongo from '../../../utils/connectMongo';
 export default function viewCertificate ({CertificateData}) {
     return (
         <div>
-            <View_Certificate Certificate={CertificateData}/>
+            <View_Certificate Certificate={CertificateData} CredentialType="certificate"/>
         </div>
     )
 }
