@@ -2,16 +2,15 @@ import CertificateItem from "./credentialItem";
 
 import { Row, Col, Space, Pagination } from "antd";
 import styles from "./credentialsGrid.module.css";
+import { useState } from "react";
 
 export default function CredentialsGrid({ items, specDeletePath }) {
-  const itemRender = (_, type, originalElement) => {
-    if (type === "prev") {
-      return <a>Previous</a>;
-    }
-    if (type === "next") {
-      return <a>Next</a>;
-    }
-    return originalElement;
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 10;
+
+  const onPageChange = (page) => {
+    setCurrentPage(page);
   };
 
   return (
@@ -47,7 +46,7 @@ export default function CredentialsGrid({ items, specDeletePath }) {
       </Row>
       <Row justify="center">
         <Col>
-          <Pagination total={80} itemRender={itemRender} />
+          <Pagination defaultCurrent={1} total={50} />
         </Col>
       </Row>
     </div>
