@@ -1,17 +1,26 @@
-import CertificateGrid from "./credentialsGrid"
+import CertificateGrid from "./credentialsGrid";
 
-import { Button, Col, DatePicker, Drawer, Form, Input, Row, Select, Space } from "antd";
+import {
+  Button,
+  Col,
+  DatePicker,
+  Drawer,
+  Form,
+  Input,
+  Row,
+  Select,
+  Space,
+} from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
 import { useState, useCallback, useEffect } from "react";
 
-import Loader from '../Layout/loader';
-
+import Loader from "../Layout/loader";
 
 import factory from "../../ethereum/factory";
 import web3 from "../../ethereum/web3";
 
-import styles from './allCredentials.module.css';
+import styles from "./allCredentials.module.css";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
@@ -19,12 +28,12 @@ import { useSession } from "next-auth/react";
 export default function AllCertificate({ Certificates, path }) {
   const router = useRouter();
 
-  const { TextArea } = Input;  // for text area field
-  const [open, setOpen] = useState(false);  //for drawer
+  const { TextArea } = Input; // for text area field
+  const [open, setOpen] = useState(false); //for drawer
 
   const onClose = () => {
     setOpen(false);
-  }
+  };
 
   //FORM Attributes
   const [title, setTitle] = useState("");
@@ -35,9 +44,7 @@ export default function AllCertificate({ Certificates, path }) {
 
   const [loading, setLoading] = useState(false);
 
-
   const createCertificate = async (event) => {
-
     setLoading(true);
 
     console.log("the blockchain stuff start from here");
@@ -47,12 +54,13 @@ export default function AllCertificate({ Certificates, path }) {
     console.log(accounts);
 
     try {
-
       await factory.methods.createCertificate(title, desc, dateIssued).send({
         from: accounts[0],
       });
 
-      const certAddress = await factory.methods.getDeployedCertificates().call();
+      const certAddress = await factory.methods
+        .getDeployedCertificates()
+        .call();
 
       console.log(certAddress);
 
@@ -72,10 +80,8 @@ export default function AllCertificate({ Certificates, path }) {
       const data = await res.json();
       console.log(data);
 
-
       setLoading(false);
       router.reload();
-
     } catch (err) {
       console.log(err);
     }
@@ -84,7 +90,6 @@ export default function AllCertificate({ Certificates, path }) {
 
   //code for responsive - start
   const useMediaQuery = (width) => {
-
     const [targetReached, setTargetReached] = useState(false);
 
     const updateTarget = useCallback((e) => {
@@ -113,27 +118,26 @@ export default function AllCertificate({ Certificates, path }) {
   const isBreakpoint = useMediaQuery(925);
   //code for responsive - end
 
-
   //sample data for the group selection field - start
   const selectContent = [
     {
-      value: 'jack',
-      label: 'Jack',
+      value: "jack",
+      label: "Jack",
     },
     {
-      value: 'lucy',
-      label: 'Lucy',
+      value: "lucy",
+      label: "Lucy",
     },
     {
-      value: 'disabled',
+      value: "disabled",
       disabled: true,
-      label: 'Disabled',
+      label: "Disabled",
     },
     {
-      value: 'Yiminghe',
-      label: 'yiminghe',
+      value: "Yiminghe",
+      label: "yiminghe",
     },
-  ]
+  ];
   //sample data for the group selection field - end
 
   const tailLayout = {
@@ -142,19 +146,17 @@ export default function AllCertificate({ Certificates, path }) {
     },
   };
 
-
-  //date selector - start 
+  //date selector - start
   const onChange = (value, dateString) => {
-    console.log('Selected Time: ', value);
-    console.log('Formatted Selected Time: ', dateString);
+    console.log("Selected Time: ", value);
+    console.log("Formatted Selected Time: ", dateString);
     setDateIssued(dateString);
   };
 
   const onOk = (value) => {
-    console.log('onOk: ', value);
+    console.log("onOk: ", value);
   };
   //date selector - end
-
 
   //group selector - start
   const handleChange = (value) => {
@@ -162,15 +164,30 @@ export default function AllCertificate({ Certificates, path }) {
   };
   //group selector - end
 
+
+
+
   return (
     <div className={styles.all_certificates_section}>
       <div className={styles.add_new_cert}>
-        <Button 
-        style={{
-          marginRight:"2.5vw",
-        }}
-        icon={<PlusOutlined />} 
-        onClick={isBreakpoint ? (() => { router.push(`/educator/${path}/add`); }) : (() => { setOpen(true) })} type="primary">New</Button>
+        <Button
+          style={{
+            marginRight: "2.5vw",
+          }}
+          icon={<PlusOutlined />}
+          onClick={
+            isBreakpoint
+              ? () => {
+                  router.push(`/educator/${path}/add`);
+                }
+              : () => {
+                  setOpen(true);
+                }
+          }
+          type="primary"
+        >
+          New
+        </Button>
       </div>
       <Drawer
         title={`Create a new ${path}`}
@@ -189,18 +206,23 @@ export default function AllCertificate({ Certificates, path }) {
           </Space>
         }
       >
-        {loading
-          ?
+        {loading ? (
           <Loader />
-          :
-          <Form layout="vertical" requiredMark onSubmitCapture={createCertificate}>
+        ) : (
+          <Form
+            layout="vertical"
+            requiredMark
+            onSubmitCapture={createCertificate}
+          >
             <Row gutter={16}>
               <Col span={12}>
-                <Form.Item
-                  name="title"
-                  label="Title"
-                >
-                  <Input value={title} onChange={(event) => { setTitle(event.target.value) }} />
+                <Form.Item name="title" label="Title">
+                  <Input
+                    value={title}
+                    onChange={(event) => {
+                      setTitle(event.target.value);
+                    }}
+                  />
                 </Form.Item>
               </Col>
               <Col span={12}>
@@ -212,7 +234,13 @@ export default function AllCertificate({ Certificates, path }) {
             <Row gutter={16}>
               <Col span={20}>
                 <Form.Item label="Description">
-                  <TextArea rows={4} value={desc} onChange={(event) => { setDesc(event.target.value) }} />
+                  <TextArea
+                    rows={4}
+                    value={desc}
+                    onChange={(event) => {
+                      setDesc(event.target.value);
+                    }}
+                  />
                 </Form.Item>
               </Col>
             </Row>
@@ -231,10 +259,9 @@ export default function AllCertificate({ Certificates, path }) {
               </Col>
             </Row>
           </Form>
-        }
+        )}
       </Drawer>
       <CertificateGrid items={Certificates} specDeletePath={path} />
     </div>
-  )
+  );
 }
-
