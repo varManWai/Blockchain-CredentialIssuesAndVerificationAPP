@@ -4,6 +4,10 @@ import { useRef } from "react";
 
 import styles from "./viewCredential.module.css";
 import GeneratePDF from "../utils/GeneratePDF";
+import { DeleteOutlined, DownloadOutlined } from "@ant-design/icons";
+
+import TransformImage from '../utils/imageCloudinary';
+
 
 export default function ViewCredential({ Certificate, CredentialType }) {
   const router = useRouter();
@@ -72,13 +76,20 @@ export default function ViewCredential({ Certificate, CredentialType }) {
               </div>
             </div>
             :
-            <Image
-              src="/images/resetPwd.jpg"
-              alt="credential pdf file "
-              fill="true"
-              priority="true"
-              className={styles.view_cert_image}
-            />
+            <>
+                {Certificate.imageAddress ? (
+                  <>
+                    <TransformImage
+                      crop={'scale'}
+                      image={Certificate.imageAddress}
+                      width={300}
+                      height={300}
+                    />
+                  </>
+                ) : (
+                  <img src="/images/forgotPwd.jpg" width={300} height={300} alt="default badge image" srcSet="" />
+                )}
+              </>
           }
         </Col>
         <Col
@@ -196,6 +207,7 @@ export default function ViewCredential({ Certificate, CredentialType }) {
                     style={{ width: "90%" }}
                     type="danger"
                   >
+                    <DeleteOutlined />
                     Delete
                   </Button>
                 </Col>
@@ -207,6 +219,7 @@ export default function ViewCredential({ Certificate, CredentialType }) {
                   style={{ width: "100%" }}
                   type="danger"
                 >
+                  <DeleteOutlined />
                   Delete
                 </Button>
               </Col>

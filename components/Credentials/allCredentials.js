@@ -24,7 +24,6 @@ import styles from "./allCredentials.module.css";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
-
 export default function AllCertificate({ Certificates, path }) {
   const router = useRouter();
 
@@ -39,10 +38,32 @@ export default function AllCertificate({ Certificates, path }) {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [dateIssued, setDateIssued] = useState("");
+  const [imageAddress, setImageAddress] = useState("");
 
   const { data: session, status } = useSession();
 
   const [loading, setLoading] = useState(false);
+
+
+  const openWidget = () => {
+    // create the widget
+    const widget = window.cloudinary.createUploadWidget(
+        {
+            cloudName: "dhfvht9ju",
+            uploadPreset: "ml_default",
+        },
+        (error, result) => {
+            if (
+                result.event === "success" &&
+                result.info.resource_type === "image"
+            ) {
+                console.log(result.info);
+                setImageAddress(result.info.public_id);
+            }
+        }
+    );
+    widget.open(); // open up the widget after creation
+};
 
   const createCertificate = async (event) => {
     setLoading(true);
@@ -72,8 +93,9 @@ export default function AllCertificate({ Certificates, path }) {
         body: JSON.stringify({
           title: title,
           desc: desc,
-          dateIssued: dateIssued,
+          dateIssued: "11 dec 2022",
           address: certAddress[certAddress.length - 1],
+          imageAddress: imageAddress,
           educatorEmail: session.user.email,
         }),
       });
@@ -164,9 +186,6 @@ export default function AllCertificate({ Certificates, path }) {
   };
   //group selector - end
 
-
-
-
   return (
     <div className={styles.all_certificates_section}>
       <div className={styles.add_new_cert}>
@@ -215,7 +234,7 @@ export default function AllCertificate({ Certificates, path }) {
             onSubmitCapture={createCertificate}
           >
             <Row gutter={16}>
-              <Col span={12}>
+              <Col span={path === "certificates" ? 24 : 12}>
                 <Form.Item name="title" label="Title">
                   <Input
                     value={title}
@@ -225,11 +244,21 @@ export default function AllCertificate({ Certificates, path }) {
                   />
                 </Form.Item>
               </Col>
-              <Col span={12}>
-                <Form.Item label="Date and Time release">
-                  <DatePicker showTime onChange={onChange} onOk={onOk} />
-                </Form.Item>
-              </Col>
+              {path === "certificates" ? (
+                ""
+              ) : (
+                <Col span={isBreakpoint ? 24 : 12}>
+                  <Form.Item label="Badge Image">
+                    <Button
+                      onClick={openWidget}
+                      type="primary"
+                      style={{ width: "100%" }}
+                    >
+                      Upload
+                    </Button>
+                  </Form.Item>
+                </Col>
+              )}
             </Row>
             <Row gutter={16}>
               <Col span={20}>

@@ -29,7 +29,7 @@ const transporter = nodemailer.createTransport({
 
 const mailOptions = {
   from: email,
-  to: ["isaacworking31@gmail.com","laizoke98@gmail.com"],
+  to: ["isaacworking31@gmail.com", "laizoke98@gmail.com"],
 };
 
 // /**
@@ -84,7 +84,8 @@ export default async function AddCertificate(req, res) {
     };
 
     await transporter.sendMail({
-      from:email,to:"laizoke98@gmail.com",
+      from: email,
+      to: "laizoke98@gmail.com",
       ...generateEmailContent(_id),
       subject: "Claim Credential",
     });

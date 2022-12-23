@@ -21,14 +21,32 @@ export default function AddCertificate({ path }) {
     const [title, setTitle] = useState("");
     const [desc, setDesc] = useState("");
     const [dateIssued, setDateIssued] = useState("");
-    const [address, setAddress] = useState("");
+    const [imageAddress, setImageAddress] = useState("");
 
     const { data: session, status } = useSession();
 
     const [loading, setLoading] = useState(false);
     // console.log(session.user.email);
 
-
+    const openWidget = () => {
+        // create the widget
+        const widget = window.cloudinary.createUploadWidget(
+            {
+                cloudName: "dhfvht9ju",
+                uploadPreset: "ml_default",
+            },
+            (error, result) => {
+                if (
+                    result.event === "success" &&
+                    result.info.resource_type === "image"
+                ) {
+                    console.log(result.info);
+                    setImageAddress(result.info.public_id);
+                }
+            }
+        );
+        widget.open(); // open up the widget after creation
+    };
 
     const createCertificate = async (event) => {
 
@@ -58,8 +76,9 @@ export default function AddCertificate({ path }) {
                 body: JSON.stringify({
                     title: title,
                     desc: desc,
-                    dateIssued: dateIssued,
-                    address: certAddress[certAddress.length -1],
+                    dateIssued: "11 dec 2022",
+                    address: certAddress[certAddress.length - 1],
+                    imageAddress: imageAddress,
                     educatorEmail: session.user.email,
                 }),
             });
@@ -173,7 +192,7 @@ export default function AddCertificate({ path }) {
                 <div className={styles.add_cert_container}>
                     <Form {...layout} name="control-ref" onSubmitCapture={createCertificate}>
                         <Row gutter={16}>
-                            <Col span={isBreakpoint ? 24 : 12}>
+                            <Col span={path === 'certificates' ? 24 : 12}>
                                 <Form.Item
                                     name="title"
                                     label="Title"
@@ -181,17 +200,16 @@ export default function AddCertificate({ path }) {
                                     <Input value={title} onChange={(event) => { setTitle(event.target.value) }} />
                                 </Form.Item>
                             </Col>
-                            <Col span={isBreakpoint ? 24 : 12}>
-                                <Form.Item label="Date and Time release">
-                                    <DatePicker
-                                        showTime
-                                        onChange={onChange}
-                                        onOk={onOk}
-                                        style={{
-                                            width: "100%",
-                                        }} />
-                                </Form.Item>
-                            </Col>
+                            {path === 'certificates'
+                                ?
+                                ''
+                                :
+                                <Col span={isBreakpoint ? 24 : 12}>
+                                    <Form.Item label="Badge Image">
+                                        <Button onClick={openWidget} type="primary" style={{ width: "100%" }}>Upload</Button>
+                                    </Form.Item>
+                                </Col>
+                            }
                         </Row>
                         <Row gutter={16}>
                             <Col span={24}>

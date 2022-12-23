@@ -10,6 +10,33 @@ import Educator from "../../../../models/educator";
 //  * @param {import('next').NextApiRequest} req
 //  * @param {import('next').NextApiResponse} res
 //  */
+
+import nodemailer from "nodemailer";
+
+const path = require("path");
+
+const dotenv = require("dotenv");
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
+
+const email = process.env.EMAIL;
+const pass = process.env.EMAIL_PASS;
+
+console.log(email);
+console.log(pass);
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: email,
+    pass: pass,
+  },
+});
+
+const mailOptions = {
+  from: email,
+  to: ["isaacworking31@gmail.com", "laizoke98@gmail.com"],
+};
+
 export default async function AddBadge(req, res) {
   try {
     // console.log('CONNECTING TO MONGO');
@@ -17,10 +44,54 @@ export default async function AddBadge(req, res) {
     // console.log('CONNECTED TO MONGO');
 
     // console.log('CREATING DOCUMENT');
-    const { _id, title, desc, dateIssued, address } = await Badge.create(
-      req.body
-    );
+    const { _id, title, desc, dateIssued, address, imageAddress } =
+      await Badge.create(req.body);
 
+    const generateEmailContent = (_id) => {
+      return {
+        html: `<!DOCTYPE html>
+        <html lang="en">
+        
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+        </head>
+        
+        <body>
+            <h2 style="text-align:center">Hello!</h2>
+        
+            <hr>
+        
+            <p style="text-align:justify">Congratulation on your achievement and thank you for being a part of CredBLOCK. For
+                those who have yet to claim the digital credentials, fret not! We have extended the dealine for these
+                redemptions.</p>
+        
+        
+            <br>
+        
+            <p style="text-align:justify">To redeeem your digital credential, Please click the <a
+                    href="http://localhost:3000/certificates/claim/${"1234"}">link</a>.</p>
+        
+        
+            <img alt="image" src="http://cdn.mcauto-images-production.sendgrid.net/a600765390647751/069c42c9-e60e-4364-bc4c-434bba7a9e14/1920x1280.jpg"
+                width="100%" />
+        </body>
+        
+        </html>`,
+      };
+    };
+
+    await transporter.sendMail({
+      from: email,
+      to: "laizoke98@gmail.com",
+      ...generateEmailContent(_id),
+      subject: "Claim Credential",
+    });
+
+
+    
     console.log("----------------------------------------");
     console.log(_id);
     console.log("----------------------------------------");
@@ -50,7 +121,6 @@ export default async function AddBadge(req, res) {
     console.log("Educator ID");
     console.log(educatorID);
     console.log("----------------------------------------");
-
 
     const badgeEducator = await Badge_Educator.create({
       badgeID: _id,

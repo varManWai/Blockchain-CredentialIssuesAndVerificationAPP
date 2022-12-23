@@ -16,7 +16,10 @@ const badgeSchema = new Schema({
   address: {
     type: String,
     required: true,
-  }
+  },
+  imageAddress: {
+    type: String,
+  },
 });
 
 const Badge = models.Badge || model("Badge", badgeSchema);

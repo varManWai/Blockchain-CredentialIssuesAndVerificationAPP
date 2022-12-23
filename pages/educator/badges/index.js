@@ -1,4 +1,5 @@
 import { getSession } from "next-auth/react";
+import Script from "next/script";
 import AllBadge from "../../../components/Credentials/allCredentials";
 
 import BadgeModel from "../../../models/badge";
@@ -6,11 +7,15 @@ import Badge_Educator from "../../../models/badge_educator";
 import Educator from "../../../models/educator";
 import connectMongo from "../../../utils/connectMongo";
 
+
 export default function Badges({ Badges }) {
   return (
     <div>
+      <Script
+        src="https://widget.Cloudinary.com/v2.0/global/all.js"
+        type="text/javascript"
+      />
       <AllBadge Certificates={Badges} path="badges" />
-      {/* {console.log(Badges)} */}
     </div>
   );
 }

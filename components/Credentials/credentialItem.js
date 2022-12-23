@@ -8,7 +8,9 @@ import { useRouter } from "next/router";
 
 import styles from "./credentialItem.module.css";
 
-export default function CertificateItem({ cert, deletePath }) {
+import TransformImage from '../utils/imageCloudinary';
+
+export default function CertificateItem({ cert, deletePath, imageAddress }) {
   const { Meta } = Card;
   const router = useRouter();
 
@@ -86,8 +88,20 @@ export default function CertificateItem({ cert, deletePath }) {
                 </div>
               </div>
               :
-              <img src="/images/resetPwd.jpg" alt="my badge image" width={300} height={150} srcset="" />
-
+              <>
+                {cert.imageAddress ? (
+                  <>
+                    <TransformImage
+                      crop={'scale'}
+                      image={cert.imageAddress}
+                      width={300}
+                      height={300}
+                    />
+                  </>
+                ) : (
+                  <img src="/images/forgotPwd.jpg" width={300} height={300} alt="default badge image" srcSet="" />
+                )}
+              </>
             }
           </>
         }

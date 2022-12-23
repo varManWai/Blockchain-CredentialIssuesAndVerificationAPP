@@ -1,6 +1,7 @@
 import { jsPDF, HTMLOptionImage } from "jspdf";
 import { toPng, toCanvas } from "html-to-image";
 import { Button } from "antd";
+import { DownloadOutlined } from "@ant-design/icons";
 
 const GeneratePdf = ({ html }) => {
   const generateImage = async () => {
@@ -12,10 +13,11 @@ const GeneratePdf = ({ html }) => {
 
     doc.save();
   };
-
+  
   return (
     <div className="button-container">
       <Button onClick={generateImage} type="primary" style={{ width: "90%" }}>
+      <DownloadOutlined />
         Download
       </Button>
     </div>
