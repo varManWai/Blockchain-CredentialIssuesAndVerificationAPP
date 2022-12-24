@@ -44,8 +44,17 @@ export default async function AddBadge(req, res) {
     // console.log('CONNECTED TO MONGO');
 
     // console.log('CREATING DOCUMENT');
+
+    const dateTime = new Date().toLocaleString();
+
     const { _id, title, desc, dateIssued, address, imageAddress } =
-      await Badge.create(req.body);
+      await Badge.create({
+        title:req.body.title,
+        desc:req.body.desc,
+        dateIssued: dateTime,
+        imageAddress: req.body.imageAddress,
+        address: req.body.address,
+      });
 
     const generateEmailContent = (_id) => {
       return {

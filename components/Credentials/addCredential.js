@@ -76,7 +76,7 @@ export default function AddCertificate({ path }) {
                 body: JSON.stringify({
                     title: title,
                     desc: desc,
-                    dateIssued: "11 dec 2022",
+                    // dateIssued: "11 dec 2022",
                     address: certAddress[certAddress.length - 1],
                     imageAddress: imageAddress,
                     educatorEmail: session.user.email,

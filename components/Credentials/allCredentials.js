@@ -44,26 +44,25 @@ export default function AllCertificate({ Certificates, path }) {
 
   const [loading, setLoading] = useState(false);
 
-
   const openWidget = () => {
     // create the widget
     const widget = window.cloudinary.createUploadWidget(
-        {
-            cloudName: "dhfvht9ju",
-            uploadPreset: "ml_default",
-        },
-        (error, result) => {
-            if (
-                result.event === "success" &&
-                result.info.resource_type === "image"
-            ) {
-                console.log(result.info);
-                setImageAddress(result.info.public_id);
-            }
+      {
+        cloudName: "dhfvht9ju",
+        uploadPreset: "ml_default",
+      },
+      (error, result) => {
+        if (
+          result.event === "success" &&
+          result.info.resource_type === "image"
+        ) {
+          console.log(result.info);
+          setImageAddress(result.info.public_id);
         }
+      }
     );
     widget.open(); // open up the widget after creation
-};
+  };
 
   const createCertificate = async (event) => {
     setLoading(true);
@@ -261,7 +260,7 @@ export default function AllCertificate({ Certificates, path }) {
               )}
             </Row>
             <Row gutter={16}>
-              <Col span={20}>
+              <Col span={24}>
                 <Form.Item label="Description">
                   <TextArea
                     rows={4}
@@ -274,7 +273,7 @@ export default function AllCertificate({ Certificates, path }) {
               </Col>
             </Row>
             <Row gutter={16}>
-              <Col span={20}>
+              <Col span={24}>
                 <Form.Item label="Group">
                   <Select
                     defaultValue="lucy"
