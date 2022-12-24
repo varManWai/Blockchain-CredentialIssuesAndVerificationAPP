@@ -1,6 +1,7 @@
 import "../styles/globals.css";
-import Final_Layout from "../components/Layout/final_layout";
+import EducatorLayout from "../components/Layout/layout";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 // import { GoogleReCaptchaProvider } from "react-google-recaptcha-v3";
 
@@ -9,33 +10,27 @@ import { useLayoutEffect } from "react";
 import { SessionProvider } from "next-auth/react";
 function MyApp({ Component, pageProps }) {
 
-  const path = useRouter();
-
-  let criteria;
-  let footer = true;
-
-  if (path.pathname.includes("/educator_acc") ||
-    path.pathname.includes("/student_acc")) {
-    criteria = "none";
-    footer = false;
-  } else if (path.pathname.includes("/educator")) {
-    criteria = "educator";
-  } else if (
-    path.pathname.includes("/student")
-  ) {
-    criteria = "student";
-  } else {
-    criteria = "visitor";
-  }
-
-
-
   return (
     <>
-      <SessionProvider>
-        <Final_Layout criteria={criteria} footer={footer}>
+      <SessionProvider session={pageProps.session}>
+      <Head>
+          <meta charSet="UTF-8" />
+          <meta name="keywords" content="Certificate, badge, blockchain" />
+          <meta name="author" content="Lai & Ho" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
+          <title>CredBLOCK</title>
+          <meta
+            name="description"
+            content="A Application for the credential issues and verification"
+          />
+          <link rel="icon" href="/images/ico.svg" />
+        </Head>
+        <EducatorLayout>
           <Component {...pageProps} />
-        </Final_Layout>
+        </EducatorLayout>
       </SessionProvider>
     </>
   );

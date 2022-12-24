@@ -1,0 +1,30 @@
+.forgotPwd_header {
+  font-size: 3.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: left;
+  margin: 0px;
+  padding: 0px;
+}
+
+.forgotPwd_sub_header {
+  font-size: 1.8rem;
+  font-weight: 500;
+  text-transform: normal;
+  text-align: left;
+  color: rgb(105, 105, 105);
+}
+
+.margin_bottom_input {
+  margin-bottom: 5rem;
+}
+
+.forgotPwd_redirect {
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
+.login_button {
+  width: 100%;
+}

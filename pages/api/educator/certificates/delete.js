@@ -1,5 +1,8 @@
-import connectMongo from '../../../../utils/connectMongo';
-import Certificate from '../../../../models/certificate';
+import connectMongo from "../../../../utils/connectMongo";
+import Certificate from "../../../../models/certificate";
+import Certificate_Student from "../../../../models/certificate_student";
+import Certificate_Educator from "../../../../models/certificate_educator";
+import { Types } from "mongoose";
 
 // /**
 //  * @param {import('next').NextApiRequest} req
@@ -12,6 +15,14 @@ export default async function deleteStudent(req, res) {
     // console.log('CONNECTED TO MONGO');
 
     // console.log('CREATING DOCUMENT');
+    const certificateID = Types.ObjectId(req.body._id);
+
+    const certificateStudent = await Certificate_Student.deleteOne({
+      certificateID: certificateID,
+    });
+    const certificateEducator = await Certificate_Educator.deleteOne({
+      certificateID: certificateID,
+    });
     const certificate = await Certificate.deleteOne(req.body);
     // console.log('CREATED DOCUMENT');
 

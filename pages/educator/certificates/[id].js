@@ -1,4 +1,4 @@
-import View_Certificate from "../../../components/Certificates/view_certificate"
+import View_Certificate from "../../../components/Credentials/viewCredential"
 
 import CertificateModel from "../../../models/certificate";
 import connectMongo from '../../../utils/connectMongo';
@@ -6,7 +6,7 @@ import connectMongo from '../../../utils/connectMongo';
 export default function viewCertificate ({CertificateData}) {
     return (
         <div>
-            <View_Certificate Certificate={CertificateData}/>
+            <View_Certificate Certificate={CertificateData} CredentialType="certificate"/>
         </div>
     )
 }

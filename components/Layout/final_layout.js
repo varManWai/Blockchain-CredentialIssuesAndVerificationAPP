@@ -39,7 +39,7 @@ export default function Final_Layout({ children, criteria, footer }) {
   };
 
   const router = useRouter();
-  const pathArr = router.pathname.split("/");
+  const pathArr = router.pathname.split("/"); 
   let keyNum = 0;
   pathArr.shift();
   pathArr.shift();
@@ -63,6 +63,8 @@ export default function Final_Layout({ children, criteria, footer }) {
 
   const LayoutSelector = () => {
     if (criteria == "student") {
+
+
 
       return (
         <>

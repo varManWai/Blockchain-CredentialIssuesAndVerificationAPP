@@ -1,4 +1,4 @@
-import View_Badge from "../../../components/Certificates/view_certificate"
+import View_Badge from "../../../components/Credentials/viewCredential"
 
 import BadgeModel from "../../../models/badge";
 import connectMongo from '../../../utils/connectMongo';
@@ -6,7 +6,7 @@ import connectMongo from '../../../utils/connectMongo';
 export default function viewBadge ({BadgeData}) {
     return (
         <div>
-            <View_Badge Certificate={BadgeData}/>
+            <View_Badge Certificate={BadgeData} CredentialType="badge"/>
         </div>
     )
 }

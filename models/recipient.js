@@ -10,6 +10,15 @@ const recipientSchema = new Schema({
     required: true,
     unique: true,
   },
+  verificationCode: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  hasClaimed: {
+    type: Boolean,
+    required: true,
+  },
 });
 
 const Recipient = models.Recipient || model("Recipient", recipientSchema);
