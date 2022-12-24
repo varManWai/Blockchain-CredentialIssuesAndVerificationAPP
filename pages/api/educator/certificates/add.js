@@ -80,7 +80,7 @@ export default async function AddCertificate(req, res) {
                     href="http://localhost:3000/certificates/claim/${"1234"}">link</a>.</p>
         
         
-            <img alt="image" src="http://cdn.mcauto-images-production.sendgrid.net/a600765390647751/069c42c9-e60e-4364-bc4c-434bba7a9e14/1920x1280.jpg"
+            <img alt="image" src="https://res.cloudinary.com/dhfvht9ju/image/upload/v1671875905/ppkyn4l4o0vfjeq79opx.png"
                 width="100%" />
         </body>
         

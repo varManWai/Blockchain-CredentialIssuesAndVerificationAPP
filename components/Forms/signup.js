@@ -105,6 +105,10 @@ export default function Edu_SignUp_Form() {
                 throw new Error(data.message || 'Something went wrong!');
             }
 
+
+
+            router.push('/educator/login');
+
             console.log(result);
 
 
