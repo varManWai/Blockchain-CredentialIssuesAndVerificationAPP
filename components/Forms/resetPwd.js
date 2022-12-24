@@ -37,7 +37,7 @@ export default function Edu_ResetPwd_Form({ educatorData }) {
     <>
       {isSubmit ? (
         <Row justify="center" align="middle">
-          <Col  style={{ marginBottom: "20px" }}>
+          <Col style={{ marginBottom: "20px" }}>
             <Progress type="circle" percent={100} />
           </Col>
           <Col span={24}>
@@ -45,7 +45,7 @@ export default function Edu_ResetPwd_Form({ educatorData }) {
               Updated the password!
             </h2>
           </Col>
-          <Col >
+          <Col>
             <Button>
               <Link href="/educator/login">Back to Login</Link>
             </Button>
