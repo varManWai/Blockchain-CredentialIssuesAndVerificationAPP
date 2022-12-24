@@ -4,7 +4,7 @@ import { useRef } from "react";
 
 import styles from "./viewCredential.module.css";
 import GeneratePDF from "../utils/GeneratePDF";
-import { DeleteOutlined, DownloadOutlined } from "@ant-design/icons";
+import { DeleteOutlined, DownloadOutlined, LeftOutlined } from "@ant-design/icons";
 
 import TransformImage from '../utils/imageCloudinary';
 
@@ -29,9 +29,16 @@ export default function ViewCredential({ Certificate, CredentialType }) {
   };
 
   const pdfRef = useRef();
-
+  
   return (
     <div>
+      <Row style={{marginBottom:20}} className={styles.view_cert_container} >
+        <Col >
+          <Button onClick={() => router.back()}
+            icon={<LeftOutlined width="150px" height="150px"/>}
+            type="text"></Button>
+        </Col>
+      </Row>
       <Row className={styles.view_cert_container} wrap>
         <Col
           className={styles.view_cert_section1}
@@ -77,19 +84,19 @@ export default function ViewCredential({ Certificate, CredentialType }) {
             </div>
             :
             <>
-                {Certificate.imageAddress ? (
-                  <>
-                    <TransformImage
-                      crop={'scale'}
-                      image={Certificate.imageAddress}
-                      width={300}
-                      height={300}
-                    />
-                  </>
-                ) : (
-                  <img src="/images/defaultBadge.png" width={300} height={300} alt="default badge image" srcSet="" />
-                )}
-              </>
+              {Certificate.imageAddress ? (
+                <>
+                  <TransformImage
+                    crop={'scale'}
+                    image={Certificate.imageAddress}
+                    width={300}
+                    height={300}
+                  />
+                </>
+              ) : (
+                <img src="/images/defaultBadge.png" width={300} height={300} alt="default badge image" srcSet="" />
+              )}
+            </>
           }
         </Col>
         <Col

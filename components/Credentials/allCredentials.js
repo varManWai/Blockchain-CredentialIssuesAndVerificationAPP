@@ -196,11 +196,11 @@ export default function AllCertificate({ Certificates, path }) {
           onClick={
             isBreakpoint
               ? () => {
-                  router.push(`/educator/${path}/add`);
-                }
+                router.push(`/educator/${path}/add`);
+              }
               : () => {
-                  setOpen(true);
-                }
+                setOpen(true);
+              }
           }
           type="primary"
         >
