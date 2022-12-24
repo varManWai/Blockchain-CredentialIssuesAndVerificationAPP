@@ -231,7 +231,7 @@ export default function Educator() {
                                             justify="space-between"
                                             align="middle"
                                         >
-                                            <Col span={20} >
+                                            <Col span={18} >
                                                 <Row>
                                                     <Space size="large">
                                                         <Col>
@@ -269,7 +269,7 @@ export default function Educator() {
                                             </Col>
                                             <Col
                                                 className={styles.navbar_section_items_section_2}
-                                                span={4}
+                                                span={6}
                                             >
                                                 <Dropdown
                                                     placement="bottom"
@@ -288,11 +288,18 @@ export default function Educator() {
                                                         }
                                                         onClick={(e) => e.preventDefault()}
                                                     >
-                                                        <img
-                                                            src="/images/resetPwd.jpg"
-                                                            alt="personal image"
-                                                            className={styles.navbar_section_items_section_2_item}
-                                                        />
+                                                        <Row justify="center" align="middle">
+                                                            <Col>
+                                                                <span className={
+                                                                    styles.navbar_section_items_section_1_item_student}
+                                                                    style={{ textTransform: "lowercase", }}>
+                                                                    {session.user.email}
+                                                                </span>
+                                                            </Col>
+                                                            <Col>
+                                                                <DownOutlined style={{ color: "white", }} />
+                                                            </Col>
+                                                        </Row>
                                                     </button>
                                                 </Dropdown>
                                             </Col>
