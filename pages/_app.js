@@ -13,7 +13,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <SessionProvider session={pageProps.session}>
-      <Head>
+        <Head>
           <meta charSet="UTF-8" />
           <meta name="keywords" content="Certificate, badge, blockchain" />
           <meta name="author" content="Lai & Ho" />

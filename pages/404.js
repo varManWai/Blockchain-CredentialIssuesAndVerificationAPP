@@ -3,7 +3,7 @@ import Link from "next/link"
 
 
 export default function PageNotFound() {
-    
+
     return (
         <Result
             status="404"
