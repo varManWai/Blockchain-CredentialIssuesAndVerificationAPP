@@ -1,6 +1,7 @@
 import CertificateGrid from "./credentialsGrid";
 
 import {
+  Alert,
   Button,
   Col,
   DatePicker,
@@ -43,6 +44,8 @@ export default function AllCertificate({ Certificates, path }) {
   const { data: session, status } = useSession();
 
   const [loading, setLoading] = useState(false);
+
+  const [error, setError] = useState('');
 
   const openWidget = () => {
     // create the widget
@@ -98,13 +101,17 @@ export default function AllCertificate({ Certificates, path }) {
           educatorEmail: session.user.email,
         }),
       });
-      const data = await res.json();
-      console.log(data);
+      const result = await res.json();
+
+      if (!res.ok) {
+        throw new Error(result.message || 'Something went wrong!');
+      }
 
       setLoading(false);
       router.reload();
     } catch (err) {
       console.log(err);
+      setError(err.message);
     }
     setLoading(false);
   };
@@ -232,6 +239,14 @@ export default function AllCertificate({ Certificates, path }) {
             requiredMark
             onSubmitCapture={createCertificate}
           >
+            {error
+              ?
+              <div style={{marginBottom:"15px"}}>
+                <Alert message={`Error: ${error}`} type="error" />
+              </div>
+              :
+              ''
+            }
             <Row gutter={16}>
               <Col span={path === "certificates" ? 24 : 12}>
                 <Form.Item name="title" label="Title">
@@ -240,6 +255,9 @@ export default function AllCertificate({ Certificates, path }) {
                     onChange={(event) => {
                       setTitle(event.target.value);
                     }}
+                    required
+                    minLength="1"
+                    maxLength="256"
                   />
                 </Form.Item>
               </Col>
@@ -268,6 +286,9 @@ export default function AllCertificate({ Certificates, path }) {
                     onChange={(event) => {
                       setDesc(event.target.value);
                     }}
+                    required
+                    minLength="1"
+                    maxLength="1024"
                   />
                 </Form.Item>
               </Col>

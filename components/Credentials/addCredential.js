@@ -1,4 +1,4 @@
-import { Form, Select, message, Input, DatePicker, Row, Col, Button } from "antd"
+import { Form, Select, message, Input, DatePicker, Row, Col, Button, Alert } from "antd"
 
 import styles from './addCredential.module.css';
 import { useState, useCallback, useEffect } from "react";
@@ -26,7 +26,8 @@ export default function AddCertificate({ path }) {
     const { data: session, status } = useSession();
 
     const [loading, setLoading] = useState(false);
-    // console.log(session.user.email);
+
+    const [error, setError] = useState('');
 
     const openWidget = () => {
         // create the widget
@@ -82,15 +83,19 @@ export default function AddCertificate({ path }) {
                     educatorEmail: session.user.email,
                 }),
             });
-            const data = await res.json();
-            console.log(data);
 
+            const result = await res.json();
+
+            if (!res.ok) {
+                throw new Error(result.message || 'Something went wrong!');
+            }
 
             setLoading(false);
             router.push(`/educator/${path}`);
 
         } catch (err) {
             console.log(err);
+            setError(err.message);
         }
         setLoading(false);
     };
@@ -183,66 +188,91 @@ export default function AddCertificate({ path }) {
         console.log(`selected ${value}`);
     };
     //group selector - end
+
+
     return (
         <>
             {loading
                 ?
                 <Loader />
                 :
-                <div className={styles.add_cert_container}>
-                    <Form {...layout} name="control-ref" onSubmitCapture={createCertificate}>
-                        <Row gutter={16}>
-                            <Col span={path === 'certificates' ? 24 : 12}>
-                                <Form.Item
-                                    name="title"
-                                    label="Title"
-                                >
-                                    <Input value={title} onChange={(event) => { setTitle(event.target.value) }} />
-                                </Form.Item>
-                            </Col>
-                            {path === 'certificates'
-                                ?
-                                ''
-                                :
-                                <Col span={isBreakpoint ? 24 : 12}>
-                                    <Form.Item label="Badge Image">
-                                        <Button onClick={openWidget} type="primary" style={{ width: "100%" }}>Upload</Button>
+                <>
+                    <div className={styles.add_cert_container}>
+                        {error
+                            ?
+                            <div style={{ marginBottom: "15px" }}>
+                                <Alert message={`Error: ${error}`} type="error" />
+                            </div>
+                            :
+                            ''
+                        }
+                        <Form {...layout} name="control-ref" onSubmitCapture={createCertificate}>
+                            <Row gutter={16}>
+                                <Col span={path === 'certificates' ? 24 : 12}>
+                                    <Form.Item
+                                        name="title"
+                                        label="Title"
+                                    >
+                                        <Input
+                                            value={title}
+                                            onChange={(event) => { setTitle(event.target.value) }}
+                                            required
+                                            minLength="1"
+                                            maxLength="256"
+                                        />
                                     </Form.Item>
                                 </Col>
-                            }
-                        </Row>
-                        <Row gutter={16}>
-                            <Col span={24}>
-                                <Form.Item label="Description">
-                                    <TextArea rows={4} value={desc} onChange={(event) => { setDesc(event.target.value) }} />
-                                </Form.Item>
-                            </Col>
-                        </Row>
-                        <Row gutter={16}>
-                            <Col span={24}>
-                                <Form.Item label="Group">
-                                    <Select
-                                        defaultValue="lucy"
-                                        style={{
-                                            width: "100%",
-                                        }}
-                                        onChange={handleChange}
-                                        options={selectContent}
-                                    />
-                                </Form.Item>
-                            </Col>
-                        </Row>
-                        <Row gutter={16}>
-                            <Col span={24}>
-                                <Form.Item {...tailLayout} className={styles.addCert_button_container}>
-                                    <Button type="primary" htmlType="submit">
-                                        Submit
-                                    </Button>
-                                </Form.Item>
-                            </Col>
-                        </Row>
-                    </Form>
-                </div>
+                                {path === 'certificates'
+                                    ?
+                                    ''
+                                    :
+                                    <Col span={isBreakpoint ? 24 : 12}>
+                                        <Form.Item label="Badge Image">
+                                            <Button onClick={openWidget} type="primary" style={{ width: "100%" }}>Upload</Button>
+                                        </Form.Item>
+                                    </Col>
+                                }
+                            </Row>
+                            <Row gutter={16}>
+                                <Col span={24}>
+                                    <Form.Item label="Description">
+                                        <TextArea
+                                            rows={4}
+                                            value={desc}
+                                            onChange={(event) => { setDesc(event.target.value) }}
+                                            required
+                                            minLength="1"
+                                            maxLength="1024"
+                                        />
+                                    </Form.Item>
+                                </Col>
+                            </Row>
+                            <Row gutter={16}>
+                                <Col span={24}>
+                                    <Form.Item label="Group">
+                                        <Select
+                                            defaultValue="lucy"
+                                            style={{
+                                                width: "100%",
+                                            }}
+                                            onChange={handleChange}
+                                            options={selectContent}
+                                        />
+                                    </Form.Item>
+                                </Col>
+                            </Row>
+                            <Row gutter={16}>
+                                <Col span={24}>
+                                    <Form.Item {...tailLayout} className={styles.addCert_button_container}>
+                                        <Button type="primary" htmlType="submit">
+                                            Submit
+                                        </Button>
+                                    </Form.Item>
+                                </Col>
+                            </Row>
+                        </Form>
+                    </div>
+                </>
             }
 
 
