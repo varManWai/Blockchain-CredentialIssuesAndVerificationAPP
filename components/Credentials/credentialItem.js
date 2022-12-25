@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import { DeleteOutlined, EditOutlined, EyeOutlined } from "@ant-design/icons";
 
-import { Card, Avatar } from "antd";
+import { Card, Avatar, Popconfirm, message } from "antd";
 import { useRef, useState } from "react";
 import { useRouter } from "next/router";
 
@@ -11,33 +11,63 @@ import styles from "./credentialItem.module.css";
 import TransformImage from '../utils/imageCloudinary';
 
 export default function CertificateItem({ cert, deletePath, imageAddress }) {
-  const { Meta } = Card;
+
   const router = useRouter();
 
-  const style = {
-    backgroundImage: "/hello world",
+  const [open, setOpen] = useState(false);
+  const [condition, setCondition] = useState(false);
+
+  const [error, setError] = useState('');
+
+  const confirm = async () => {
+    setOpen(false);
+
+    try {
+      const res = await fetch(`/api/educator/${deletePath}/delete`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          _id: cert._id,
+        }),
+      });
+      const result = await res.json();
+      console.log(result);
+
+
+
+      if (!res.ok) {
+        throw new Error(result.message || "Something went wrong!");
+      }
+
+      message.success('Deleted');
+      router.push(`/educator/${deletePath}`);
+
+    } catch (err) {
+      console.log(err);
+      setError(err.message);
+      message.success(err.message);
+    }
+
+    
   };
-
-  const [popover, setPopover] = useState(true);
-
-  const handleOnClick = () => {
-    setPopover(false);
+  const cancel = () => {
+    setOpen(false);
+    message.error('Cancel');
   };
+  const handleOpenChange = async (newOpen) => {
+    if (!newOpen) {
+      setOpen(newOpen);
+      return;
+    }
 
-  const deleteCertificate = async () => {
-    const res = await fetch(`/api/educator/${deletePath}/delete`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        _id: cert._id,
-      }),
-    });
-    const data = await res.json();
-    console.log(data);
-
-    router.push(`/educator/${deletePath}`);
+    console.log(condition);
+    if (condition) {
+      confirm();
+    } else {
+      setOpen(newOpen);
+    }
   };
 
   let actions = [
@@ -45,7 +75,19 @@ export default function CertificateItem({ cert, deletePath, imageAddress }) {
       key="view"
       onClick={() => router.push(`/educator/${deletePath}/${cert._id}`)}
     />,
-    <DeleteOutlined key="delete" onClick={deleteCertificate} />,
+    <Popconfirm
+      title="Delete the credential"
+      description="Are you sure to delete this credential?"
+      open={open}
+      onOpenChange={handleOpenChange}
+      onConfirm={confirm}
+      onCancel={cancel}
+      okText="Confirm"
+      cancelText="Cancel"
+    >
+      <DeleteOutlined key="delete" />
+    </Popconfirm>
+    ,
   ];
 
   const pdfRef = useRef();

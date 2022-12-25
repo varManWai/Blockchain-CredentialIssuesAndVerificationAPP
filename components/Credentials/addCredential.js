@@ -274,9 +274,6 @@ export default function AddCertificate({ path }) {
                     </div>
                 </>
             }
-
-
         </>
-
     )
 }

@@ -36,6 +36,13 @@ export default async function resetPWD(req, res) {
 
     console.log(emailRecieved);
 
+    if (!emailRecieved || !emailRecieved.includes("@")) {
+      res.status(422).json({
+        message: "Invalid email",
+      });
+      return;
+    }
+
     const verifiedEducator = await Educator.findOne({ email: emailRecieved });
 
     console.log(verifiedEducator);
@@ -68,12 +75,15 @@ export default async function resetPWD(req, res) {
         from: email,
         to: verifiedEducator.email,
         ...generateEmailContent(),
-        subject: "Claim Credential",
+        subject: "Forgot Password",
       });
 
       console.log("got email inside");
     } else {
-      res.status(201).json({ message: "invalid email!" });
+      res.status(422).json({
+        message: "Email is not exist.",
+      });
+      return;
     }
 
     res.status(201).json({ message: "sent reset password email!" });

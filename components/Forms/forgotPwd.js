@@ -1,7 +1,8 @@
-import { Form, Input, Button, Progress, Row, Col } from "antd";
+import { Form, Input, Button, Progress, Row, Col, Alert } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import Loader from "../Layout/loader";
 
 import styles from "./forgotPwd.module.css";
 
@@ -14,12 +15,15 @@ export default function Edu_ForgotPwd_Form() {
 
   const [isSubmit, setIsSubmit] = useState(false);
 
+  const [loading, setLoading] = useState(false);
 
+  const [error, setError] = useState('');
 
   const [email, setEmail] = useState("");
 
   const forgotPassword = async () => {
     setIsSubmit(false);
+    setLoading(true);
     try {
       const res = await fetch(`/api/educator/forgotPwd`, {
         method: "POST",
@@ -30,80 +34,113 @@ export default function Edu_ForgotPwd_Form() {
           email: email,
         }),
       });
-      const data = await res.json();
-      console.log(data);
+      const result = await res.json();
+      console.log(result);
+
+
+
+      if (!res.ok) {
+        throw new Error(result.message || "Something went wrong!");
+      }
 
       setIsSubmit(true);
+
     } catch (err) {
       console.log(err);
+      setError(err.message);
     }
+    setLoading(false);
   };
 
   return (
     <>
-      {isSubmit
+      {loading
         ?
-        <Row justify="center" align="middle">
-          <Col style={{marginBottom:"20px",}}>
-            <Progress type="circle" percent={100} />
-          </Col>
-          <Col>
-            <h2 style={{ textAlign: "center", marginBottom:"50px",}}>Reset password link had sent to your email</h2>
-          </Col>
-          <Col>
-            <Button><Link href="/educator/login">Back to Login</Link></Button>
-          </Col>
-        </Row>
+        <Loader />
         :
-        <div className={styles.sub_loginForm}>
-          <h2 className={styles.forgotPwd_header}>Forgot Password</h2>
-          <p className={styles.forgotPwd_sub_header}>
-            Please provide your account email
-          </p>
+        <>
+          {isSubmit
+            ?
+            <>
+              <Row justify="center" align="middle">
+                <Col style={{ marginBottom: "20px", }}>
+                  <Progress type="circle" percent={100} />
+                </Col>
+                <Col>
+                  <h2 style={{ textAlign: "center", marginBottom: "50px", }}>Reset password link had sent to your email</h2>
+                </Col>
+                <Col>
+                  <Button><Link href="/educator/login">Back to Login</Link></Button>
+                </Col>
+              </Row>
+            </>
+            :
+            <>
 
-          <Form
-            form={form}
-            onSubmitCapture={forgotPassword}
-            name="forgot password"
-            scrollToFirstError
-          >
-            <Form.Item
-              name="email"
-              label="E-mail"
-              rules={[
-                {
-                  type: "email",
-                  message: "The input is not valid E-mail!",
-                },
-                {
-                  required: true,
-                  message: "Please input your E-mail!",
-                },
-              ]}
-              className={styles.margin_bottom_input}
-            >
-              <Input
-                value={email}
-                onChange={(event) => {
-                  setEmail(event.target.value);
-                }}
-              />
-            </Form.Item>
+              <div className={styles.sub_loginForm}>
+                <h2 className={styles.forgotPwd_header}>Forgot Password</h2>
+                <p className={styles.forgotPwd_sub_header}>
+                  Please provide your account email
+                </p>
+                <>
+                  {error
+                    ?
+                    <div style={{ marginBottom: "15px" }}>
+                      <Alert message={`Error: ${error}`} type="error" />
+                    </div>
+                    :
+                    ""
+                  }
+                </>
+                <Form
+                  form={form}
+                  onSubmitCapture={forgotPassword}
+                  name="forgot password"
+                  scrollToFirstError
+                >
+                  <Form.Item
+                    name="email"
+                    label="E-mail"
+                    rules={[
+                      {
+                        type: "email",
+                        message: "The input is not valid E-mail!",
+                      },
+                      {
+                        required: true,
+                        message: "Please input your E-mail!",
+                      },
+                    ]}
+                    className={styles.margin_bottom_input}
+                  >
+                    <Input
+                      value={email}
+                      onChange={(event) => {
+                        setEmail(event.target.value);
+                      }}
+                      required
+                      minLength="1"
+                      maxLength="50"
+                    />
+                  </Form.Item>
 
-            <Form.Item>
-              <Button
-                type="primary"
-                htmlType="submit"
-                className={`login-form-button ${styles.login_button}`}
-              >
-                Send
-              </Button>
-            </Form.Item>
-          </Form>
-          <Link href="/educator/login" className={styles.forgotPwd_redirect}>
-            Back to login
-          </Link>
-        </div>
+                  <Form.Item>
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      className={`login-form-button ${styles.login_button}`}
+                    >
+                      Send
+                    </Button>
+                  </Form.Item>
+                </Form>
+                <Link href="/educator/login" className={styles.forgotPwd_redirect}>
+                  Back to login
+                </Link>
+              </div>
+            </>
+          }
+        </>
       }
     </>
 

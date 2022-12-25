@@ -2,6 +2,8 @@ import ForgotPwdLayout from "../../../components/Layout/Auth/forgotPwdLayout";
 import ResetPwdForm from "../../../components/Forms/resetPwd";
 import { getSession } from "next-auth/react";
 import Educator from "../../../models/educator";
+import { Types } from "mongoose";
+import connectMongo from "../../../utils/connectMongo";
 
 export default function ResetPwd({ educatorData }) {
   return (
@@ -24,6 +26,8 @@ export const getServerSideProps = async (context) => {
         },
       };
     }
+
+    await connectMongo();
 
     const educator = await Educator.findById(id);
 
