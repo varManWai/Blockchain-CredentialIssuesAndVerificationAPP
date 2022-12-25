@@ -78,6 +78,9 @@ export default function Edu_ResetPwd_Form({ educatorData }) {
                 prefix={<LockOutlined className="site-form-item-icon" />}
                 type="password"
                 placeholder="Password"
+                required
+                minLength="1"
+                maxLength="30"
               />
             </Form.Item>
 
@@ -113,6 +116,9 @@ export default function Edu_ResetPwd_Form({ educatorData }) {
                 onChange={(event) => {
                   setPassword(event.target.value);
                 }}
+                required
+                minLength="1"
+                maxLength="30"
               />
             </Form.Item>
 

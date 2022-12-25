@@ -19,7 +19,7 @@ export default async function RegisterEducator(req, res) {
     // console.log('CREATING DOCUMENT');
 
     console.log(req.body);
-    console.log("backedn started");
+    console.log("backend started");
 
     const { email, password, name, phoneNum, jobTitle, orgName, orgURL , accountType} =
       req.body;
@@ -32,7 +32,7 @@ export default async function RegisterEducator(req, res) {
     ) {
       res.status(422).json({
         message:
-          "Invalid input - password should also be at least 5 characters long.",
+          "Password should also be at least 5 characters long.",
       });
       return;
     }
@@ -42,7 +42,7 @@ export default async function RegisterEducator(req, res) {
     if(emailUnique){
       res.status(422).json({
         message:
-          "Invalid input - the email already exist.",
+          "Email already exist.",
       });
       return;
     }
