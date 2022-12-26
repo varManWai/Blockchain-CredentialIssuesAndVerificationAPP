@@ -31,7 +31,9 @@ export default function Edu_create_group() {
                 groupName: enteredName,
                 desc: enteredDesc,
                 educatorEmail: session.user.email,
-                recipients: items
+                recipients: items,
+                name: items[0].name,
+                email:items[0].email,
             }),
         });
         // const data = await res.json();

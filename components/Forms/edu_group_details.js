@@ -95,12 +95,12 @@ export default function Edu_group_details({ group, receivers }) {
                             },
                         ]}
                     >
-                        {/* {receivers.map((receiver) => (
-                            <ul>
-                                <li>{receiver}</li>
+                        {receivers.map((receiver) => (
+                            <ul key={receiver._id}>
+                                <li>{receiver.name}</li>
                             </ul>
                             
-                        ))} */}
+                        ))}
 
                     </Form.Item>
 
