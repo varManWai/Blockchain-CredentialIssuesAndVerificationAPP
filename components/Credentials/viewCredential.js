@@ -7,6 +7,7 @@ import GeneratePDF from "../utils/GeneratePDF";
 import { DeleteOutlined, DownloadOutlined, LeftOutlined } from "@ant-design/icons";
 
 import TransformImage from '../utils/imageCloudinary';
+import Link from "next/link";
 
 
 export default function ViewCredential({ Certificate, CredentialType }) {
@@ -135,13 +136,14 @@ export default function ViewCredential({ Certificate, CredentialType }) {
                   </label>
                 </Col>
                 <Col>
-                  <a
+                  <Link
+                    href={`/educator/${CredentialType}s/edit/editTitle/${Certificate._id}`}
                     className={styles.view_cert_link}
                     type="text"
                     primary="true"
                   >
                     Edit
-                  </a>
+                  </Link>
                 </Col>
               </Row>
             </Col>
@@ -172,13 +174,14 @@ export default function ViewCredential({ Certificate, CredentialType }) {
                   </label>
                 </Col>
                 <Col>
-                  <a
+                  <Link
+                    href={`/educator/${CredentialType}s/edit/editDesc/${Certificate._id}`}
                     className={styles.view_cert_link}
                     type="text"
                     primary="true"
                   >
                     Edit
-                  </a>
+                  </Link>
                 </Col>
               </Row>
             </Col>
