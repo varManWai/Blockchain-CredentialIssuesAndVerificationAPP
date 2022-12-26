@@ -42,8 +42,8 @@ export default function Edu_Login_Form() {
         throw new Error(result.error || "message something went wrong");
       }
       
-      
-      router.push("/educator/certificates");
+
+      await router.push("/educator/certificates");
     } catch (err) {
       console.log(err);
       setError(err.message);
@@ -100,7 +100,7 @@ export default function Edu_Login_Form() {
                 ref={emailInputRef}
                 required
                 minLength="5"
-                maxLength="100"
+                maxLength="50"
               />
             </Form.Item>
             <Form.Item

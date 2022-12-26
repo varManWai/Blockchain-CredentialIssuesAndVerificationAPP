@@ -45,13 +45,11 @@ export default async function AddBadge(req, res) {
 
     // console.log('CREATING DOCUMENT');
 
-    const dateTime = new Date().toLocaleString();
-
     const { _id, title, desc, dateIssued, address, imageAddress } =
       await Badge.create({
-        title:req.body.title,
-        desc:req.body.desc,
-        dateIssued: dateTime,
+        title: req.body.title,
+        desc: req.body.desc,
+        dateIssued: req.body.dateIssued,
         imageAddress: req.body.imageAddress,
         address: req.body.address,
       });
@@ -99,8 +97,6 @@ export default async function AddBadge(req, res) {
       subject: "Claim Credential",
     });
 
-
-    
     console.log("----------------------------------------");
     console.log(_id);
     console.log("----------------------------------------");

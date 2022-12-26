@@ -61,7 +61,9 @@ export default function AddCertificate({ path }) {
 
         try {
 
-            await factory.methods.createCertificate(title, desc, dateIssued).send({
+            const dateTime = new Date().toLocaleString();
+
+            await factory.methods.createCertificate(title, desc, dateTime).send({
                 from: accounts[0],
             });
 
@@ -77,7 +79,7 @@ export default function AddCertificate({ path }) {
                 body: JSON.stringify({
                     title: title,
                     desc: desc,
-                    // dateIssued: "11 dec 2022",
+                    dateIssued: dateTime,
                     address: certAddress[certAddress.length - 1],
                     imageAddress: imageAddress,
                     educatorEmail: session.user.email,

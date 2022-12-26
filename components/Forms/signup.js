@@ -102,7 +102,7 @@ export default function Edu_SignUp_Form() {
     setLoading(true);
     try {
 
-      if(passwordInputRef1 !== passwordInputRef2){
+      if(enteredPassword1 !== enteredPassword2){
         throw new Error('Password is not the same, Please enter the same password before submit'); 
       }
 
@@ -125,15 +125,12 @@ export default function Edu_SignUp_Form() {
 
       const result = await res.json();
 
-
-
       if (!res.ok) {
         throw new Error(result.message || "Something went wrong!");
       }
 
-      
-
-      router.push("/educator/login");
+    
+      await router.push("/educator/login");
     } catch (err) {
       console.log("Error happend on: educator sign up page");
       console.log(err);
