@@ -1,15 +1,44 @@
 import React from 'react';
-
+import { useRouter } from "next/router";
 
 import { Typography, Button, Checkbox, Form, Col, Row, Input, Upload, Select, Image } from 'antd';
+import { EditOutlined, CloseOutlined, SaveOutlined } from '@ant-design/icons'
 
-
-export default function Edu_group_details({ group }) {
+export default function Edu_group_details({ group, receivers }) {
     const { Title } = Typography;
+    const router = useRouter();
+
+    const updateGroupHandler = async (e) => {
+        //e.preventDefault();
+        console.log(group._id);
+        // get user inputs
+        // const enteredName = nameInputRef.current.value;
+        // const enteredDesc = descriptionInputRef.current.value;
+
+        // ready to POST it to API to create a group
+        console.log("here");
+        const res = await fetch(`/api/educator/group/edit`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                groupID: group._id,
+                name: "NextJS Certification edited ",
+                desc: "edited desc 2",
+            }),
+        });
+        // const data = await res.json();
+
+        // back to display all group page
+        router.push('educator/group/');
+
+    };
+
     return (
 
         <div>
-            <Title level={2}>Group details</Title><br/>
+            <Title level={2}>Group details</Title><br />
 
             <Col span={12}>
                 <Form
@@ -66,8 +95,19 @@ export default function Edu_group_details({ group }) {
                             },
                         ]}
                     >
-                         <p>none</p>
+                        {/* {receivers.map((receiver) => (
+                            <ul>
+                                <li>{receiver}</li>
+                            </ul>
+                            
+                        ))} */}
+
                     </Form.Item>
+
+                    <Button icon={<EditOutlined />} type="primary">Edit</Button><br /><br />
+                    <Button icon={<CloseOutlined />} danger>Cancel</Button><br /><br />
+                    <Button icon={<SaveOutlined />} type="primary" onClick={() => updateGroupHandler()} >Save</Button>
+
 
                 </Form>
 
