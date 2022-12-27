@@ -198,6 +198,8 @@ export default async function AddCertificate(req, res) {
 
     res.status(201).json({ message: "Created certificates!" });
   } catch (error) {
+
+    console.log("here is the error in certificate add page");
     console.log(error);
     res.json({ error });
   }
