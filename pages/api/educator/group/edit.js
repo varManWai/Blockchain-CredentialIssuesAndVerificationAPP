@@ -16,8 +16,15 @@ export default async function EditGroup(req, res) {
         console.log(req.body.groupID);
         console.log(req.body.name);
         console.log(req.body.desc);
-        
-        const update = await Group.findByIdAndUpdate(req.body.groupID, { groupName: req.body.name, desc: req.body.desc });
+
+        if (req.body.name && req.body.desc) {
+            const update = await Group.findByIdAndUpdate(req.body.groupID, { groupName: req.body.name, desc: req.body.desc });
+
+        } else if (req.body.desc) {
+            const update = await Group.findByIdAndUpdate(req.body.groupID, { desc: req.body.desc });
+        } else {
+            const update = await Group.findByIdAndUpdate(req.body.groupID, { groupName: req.body.name });
+        }
 
         // console.log(res.status);
 

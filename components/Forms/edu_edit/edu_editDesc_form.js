@@ -2,9 +2,6 @@ import { Form, Button, Select, Input } from 'antd';
 
 import styles from '../../../styles/Login.module.css';
 
-
-
-
 export default function EditDescription() {
 
     const { TextArea } = Input;

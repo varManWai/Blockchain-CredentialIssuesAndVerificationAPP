@@ -16,10 +16,11 @@ export default async function AddGroup(req, res) {
 
         // get the logged in educator
         const educator = await Educator.findOne({ email: req.body.educatorEmail })
-        // console.log(educator._id);
-        // console.log(req.body.groupName);
-        // console.log(req.body.desc);
-        // console.log(req.body.recipients[0]);
+        console.log(educator._id);
+        console.log(req.body.groupName);
+        console.log(req.body.desc);
+        console.log(req.body.recipients[0]);
+        console.log("here");
 
         // 1. create a new group
         const newGroup = await Group.create({
