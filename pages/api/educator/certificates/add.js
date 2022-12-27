@@ -43,12 +43,12 @@ export default async function AddCertificate(req, res) {
     // console.log('CONNECTED TO MONGO');
 
     // console.log('CREATING DOCUMENT');
-    const dateTime = new Date().toLocaleString();
+    // const dateTime = new Date().toLocaleString();
 
     const { _id, title, desc, dateIssued, address } = await Certificate.create({
       title: req.body.title,
       desc: req.body.desc,
-      dateIssued: dateTime,
+      dateIssued: req.body.dateIssued,
       address: req.body.address,
     });
 

@@ -23,7 +23,7 @@ export const getServerSideProps = async (context) => {
     if (!session) {
         return {
             redirect: {
-                destination: "/educator_acc/login",
+                destination: "/educator/login",
                 permanent: false,
             },
         };

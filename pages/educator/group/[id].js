@@ -1,4 +1,4 @@
-import Group_Details from "../../../components/Forms/edu_group_details"
+import Group_Details from "../../../components/Forms/edu_group_details";
 
 import connectMongo from '../../../utils/connectMongo';
 
@@ -7,22 +7,20 @@ import Group_recipient from '../../../models/group_recipient';
 import GroupModel from '../../../models/group';
 
 export default function groupDetails({ selectedGroup, groupReceivers }) {
-    return (
-        <div>
-            <Group_Details group={selectedGroup} receivers={groupReceivers} />
-        </div>
-    )
+  return (
+    <div>
+      <Group_Details group={selectedGroup} receivers={groupReceivers} />
+    </div>
+  );
 }
 
-
 export const getServerSideProps = async (context) => {
+  const { id } = context.query;
 
-    const { id } = context.query;
-
-    try {
-        console.log("CONNECTING TO MONGO");
-        await connectMongo();
-        console.log("CONNECTED TO MONGO");
+  try {
+    console.log("CONNECTING TO MONGO");
+    await connectMongo();
+    console.log("CONNECTED TO MONGO");
 
         console.log("FETCHING DOCUMENTS");
         // get the selected group 
@@ -48,10 +46,15 @@ export const getServerSideProps = async (context) => {
         console.log("FETCHING DOCUMENTS");
         return { props: { selectedGroup: JSON.parse(JSON.stringify(group)), groupReceivers: JSON.parse(JSON.stringify(recipients)) } }
 
-    } catch (error) {
-
-        return {
-            notFound: true,
-        };
-    }
-}
+    return {
+      props: {
+        selectedGroup: JSON.parse(JSON.stringify(group)),
+        groupReceivers: JSON.parse(JSON.stringify(recipientsData)),
+      },
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
+};

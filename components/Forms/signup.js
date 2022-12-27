@@ -72,7 +72,8 @@ export default function Edu_SignUp_Form() {
 
   const nameInputRef = useRef();
   const emailInputRef = useRef();
-  const passwordInputRef = useRef();
+  const passwordInputRef1 = useRef();
+   const passwordInputRef2 = useRef();
   const jobTitleInputRef = useRef();
   const phoneNoInputRef = useRef();
   const orgNameInputRef = useRef();
@@ -83,7 +84,8 @@ export default function Edu_SignUp_Form() {
 
     const enteredName = nameInputRef.current.input.value;
     const enteredEmail = emailInputRef.current.input.value;
-    const enteredPassword = passwordInputRef.current.input.value;
+    const enteredPassword1 = passwordInputRef1.current.input.value;
+    const enteredPassword2 = passwordInputRef2.current.input.value;
     const enteredJobTitle = jobTitleInputRef.current.input.value;
     const enteredPhoneNo = phoneNoInputRef.current.input.value;
     const enteredOrgName = orgNameInputRef.current.input.value;
@@ -91,13 +93,19 @@ export default function Edu_SignUp_Form() {
 
     console.log(enteredName);
     console.log(enteredEmail);
-    console.log(enteredPassword);
+    console.log(enteredPassword1);
+    console.log(enteredPassword2);
     console.log(enteredJobTitle);
     console.log(enteredPhoneNo);
     console.log(enteredOrgURL);
 
     setLoading(true);
     try {
+
+      if(enteredPassword1 !== enteredPassword2){
+        throw new Error('Password is not the same, Please enter the same password before submit'); 
+      }
+
       const res = await fetch(`/api/auth/educator/signup`, {
         method: "POST",
         headers: {
@@ -117,15 +125,12 @@ export default function Edu_SignUp_Form() {
 
       const result = await res.json();
 
-
-
       if (!res.ok) {
         throw new Error(result.message || "Something went wrong!");
       }
 
-      
-
-      router.push("/educator/login");
+    
+      await router.push("/educator/login");
     } catch (err) {
       console.log("Error happend on: educator sign up page");
       console.log(err);
@@ -215,7 +220,11 @@ export default function Edu_SignUp_Form() {
                 ]}
                 hasFeedback
               >
-                <Input.Password required minLength="5" maxLength="30" />
+                <Input.Password 
+                ref={passwordInputRef1}
+                required 
+                minLength="5" 
+                maxLength="30" />
               </Form.Item>
 
               <Form.Item
@@ -243,7 +252,7 @@ export default function Edu_SignUp_Form() {
                 ]}
               >
                 <Input.Password
-                  ref={passwordInputRef}
+                  ref={passwordInputRef2}
                   required
                   minLength="5"
                   maxLength="30"
