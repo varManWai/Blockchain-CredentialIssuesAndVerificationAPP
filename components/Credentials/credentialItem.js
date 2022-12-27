@@ -29,7 +29,7 @@ export default function CertificateItem({ cert, deletePath, imageAddress }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          _id: cert._id,
+          address: cert.address,
         }),
       });
       const result = await res.json();

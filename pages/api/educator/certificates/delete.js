@@ -15,18 +15,30 @@ export default async function deleteStudent(req, res) {
     // console.log('CONNECTED TO MONGO');
 
     // console.log('CREATING DOCUMENT');
-    const certificateID = Types.ObjectId(req.body._id);
+    const address = req.body.address;
 
-    const certificateStudent = await Certificate_Student.deleteOne({
-      certificateID: certificateID,
+    console.log("address");
+    console.log(address);
+
+    const certificates = await Certificate.find({ address: address });
+
+    console.log("certificates");
+    console.log(certificates);
+
+    const certificateData = await certificates.map(async (certificate) => {
+      await Certificate_Student.deleteOne({
+        certificateID: certificate._id,
+      });
+      await Certificate_Educator.deleteOne({
+        certificateID: certificate._id,
+      });
+      await Certificate.deleteOne({_id:certificate._id});
+
     });
-    const certificateEducator = await Certificate_Educator.deleteOne({
-      certificateID: certificateID,
-    });
-    const certificate = await Certificate.deleteOne(req.body);
+
     // console.log('CREATED DOCUMENT');
 
-    res.json({ certificate });
+    res.status(201).json({ message: "Deleted certificates!" });
   } catch (error) {
     console.log(error);
     res.json({ error });

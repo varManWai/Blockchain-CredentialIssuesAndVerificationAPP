@@ -24,7 +24,8 @@ export const getServerSideProps = async (context) => {
       const Certificate = await CertificateModel.findById(id);
       console.log("FETCHED DOCUMENTS");
   
-  
+      console.log(Certificate);
+
       return {
         props: {
             CertificateData: JSON.parse(JSON.stringify(Certificate)),

@@ -13,26 +13,54 @@ import Link from "next/link";
 export default function ViewCredential({ Certificate, CredentialType }) {
   const router = useRouter();
 
-  const deleteCertificate = async () => {
-    const res = await fetch("/api/educator/certificates/delete", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        _id: Certificate._id,
-      }),
-    });
-    const data = await res.json();
-    console.log(data);
+  console.log(Certificate);
 
-    router.push("/educator/certificates");
+  const deleteCertificate = async () => {
+
+    if (CredentialType == "certificate") {
+
+
+      console.log("start certificate deelte");
+      const res = await fetch("/api/educator/certificates/delete", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          address: Certificate.address,
+        }),
+      });
+      const data = await res.json();
+      console.log(data);
+
+      router.push("/educator/certificates");
+    }
+
+    if (CredentialType == "badge") {
+      console.log("start badge deelte");
+
+      const res = await fetch("/api/educator/badges/delete", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          address: Certificate.address,
+        }),
+      });
+      const data = await res.json();
+      console.log(data);
+
+      router.push("/educator/badges");
+    }
+
   };
 
   const pdfRef = useRef();
 
   return (
     <div>
+      {console.log(Certificate)}
       <Row style={{ marginBottom: "20px", }} className={styles.view_cert_container} >
         <Col >
           <Button onClick={() => router.back()}
