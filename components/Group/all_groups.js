@@ -10,10 +10,10 @@ export default function All_groups({ groups }) {
     const router = useRouter();
     return (
         <div>
-            <Button icon={<PlusOutlined />}type="primary" onClick={() => router.push('/educator/group/create')} >New</Button>
-            <Divider orientation="left" orientationMargin="0">
+             <Divider orientation="left" orientationMargin="0">
                 Your group
             </Divider>
+            <Button icon={<PlusOutlined />}type="primary" onClick={() => router.push('/educator/group/create')} >New</Button>
             <List
                 itemLayout="horizontal"
                 dataSource={groups}

@@ -6,6 +6,8 @@ import connectMongo from '../../../utils/connectMongo';
 import GroupModel from '../../../models/group';
 import Educator from "../../../models/educator";
 
+import {getSession} from 'next-auth/react';
+
 export default function profile({groups, edu_details}) {
     return (
         <div>
@@ -16,32 +18,28 @@ export default function profile({groups, edu_details}) {
 }
 
 export const getServerSideProps = async (context) => {
-    //const session = await getSession({ req: context.req });
+    const session = await getSession({ req: context.req });
 
-    // if (!session) {
-    //     return {
-    //         redirect: {
-    //             destination: "/educator_acc/login",
-    //             permanent: false,
-    //         },
-    //     };
-    // }
-
-    // const { _id } = await Educator.findOne({ email: session.user.email });
+    if (!session) {
+        return {
+            redirect: {
+                destination: "/educator/login",
+                permanent: false,
+            },
+        };
+    }
+   
 
     try {
         await connectMongo();
 
-        const eduDetails = await Educator.findById(
-            '639ac3c99a9c5160501265ac'
-        );
+        // get the selected educator
+        const educator = await Educator.findOne({ email: session.user.email });
 
-        const allGroups = await GroupModel.find({
-            // hardcoded
-            educatorID: '639ac3c99a9c5160501265ac'
-        });
+        // get the groups created by the selected educator
+        const allGroups = await GroupModel.find({ educatorID: educator._id});
 
-        return { props: { groups: JSON.parse(JSON.stringify(allGroups)),   edu_details: JSON.parse(JSON.stringify(eduDetails))} }
+        return { props: { groups: JSON.parse(JSON.stringify(allGroups)),   edu_details: JSON.parse(JSON.stringify(educator))} }
 
     } catch (error) {
         return {

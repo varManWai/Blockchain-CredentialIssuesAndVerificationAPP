@@ -51,151 +51,82 @@ export default function Edu_group_details({ group, receivers }) {
 
   return (
     <div>
-      <Title level={2}>Group details</Title>
-      <br />
+      <Row>
+        <Title level={2}>Group details</Title>
+        <Button
+          icon={<EditOutlined />}
+          style={{ marginLeft: "70vw" }}
+          checked={componentDisabled}
+          onClick={(e) => setComponentDisabled(e.target.checked)}
+          type="primary">
+          Edit
+        </Button><br /><br />
+        {/* <Col span={24}>col</Col> */}
+      </Row>
 
       <Col span={12}>
         <Form
-          // form={form}
           layout="vertical"
-          // onFinish={onFinish}
-          // onFinishFailed={onFinishFailed}
-          autoComplete="off"
-        // onClick={onCreate}
+          onValuesChange={onFormLayoutChange}
+          disabled={componentDisabled}
+          onSubmitCapture={updateGroupHandler}
         >
           <Form.Item
             name="name"
             label="Display Name "
             rules={[
               {
-                required: true,
-                message: "Please give your group a name!",
+                message: 'Please give your group a name!',
               },
               {
-                type: "string",
-                min: 8,
+                type: 'string',
+
               },
             ]}
           >
-            <p>{group.groupName}</p>
+            <input placeholder={group.groupName} ref={nameInputRef} size="202" />
           </Form.Item>
           <Form.Item
             name="desc"
             label="Description "
             rules={[
               {
-                required: true,
-                message:
-                  "Please explain what this group of credential holders had to do to earn the credential!",
+                message: 'Please explain what this group of credential holders had to do to earn the credential!',
               },
               {
-                type: "string",
-                min: 20,
+                type: 'string',
+
               },
             ]}
           >
-            <p>{group.desc}</p>
+            <input placeholder={group.desc} ref={descriptionInputRef} size="202" />
           </Form.Item>
-          <Form.Item
-            name="recipients"
-            label="Receivers "
-            rules={[
-              {
-                required: true,
-                message: "",
-              },
-              {
-                type: "string",
-                min: 20,
-              },
-            ]}
-          >
-            {receivers.map((receiver) => (
-              <ul key={receiver._id}>
-                <li>{receiver.name}</li>
-              </ul>
-            ))}
-          </Form.Item>
+          <button icon={<SaveOutlined />} style={{ marginRight: "2.5vw", }} type="primary"  >Save</button>
+          <button icon={<CloseOutlined />} danger style={{ marginRight: "2.5vw" }} >Cancel</button><br /><br />
+          {/* {receivers.map((receiver) => (
+                    <ul>
+                        <li>{receiver.name}</li>
+                    </ul>
+                ))} */}
 
-          <div>
-            <Row>
-              <Title level={2}>Group details</Title>
-              <Button
-                icon={<EditOutlined />}
-                style={{ marginLeft: "70vw" }}
-                checked={componentDisabled}
-                onClick={(e) => setComponentDisabled(e.target.checked)}
-                type="primary">
-                Edit
-              </Button><br /><br />
-              {/* <Col span={24}>col</Col> */}
-            </Row>
-
-            <Col span={12}>
-              <Form
-                layout="vertical"
-                onValuesChange={onFormLayoutChange}
-                disabled={componentDisabled}
-                onSubmitCapture={updateGroupHandler}
-              >
-                <Form.Item
-                  name="name"
-                  label="Display Name "
-                  rules={[
-                    {
-                      message: 'Please give your group a name!',
-                    },
-                    {
-                      type: 'string',
-
-                    },
-                  ]}
-                >
-                  <input placeholder={group.groupName} ref={nameInputRef} size="202" />
-                </Form.Item>
-                <Form.Item
-                  name="desc"
-                  label="Description "
-                  rules={[
-                    {
-                      message: 'Please explain what this group of credential holders had to do to earn the credential!',
-                    },
-                    {
-                      type: 'string',
-
-                    },
-                  ]}
-                >
-                  <input placeholder={group.desc} ref={descriptionInputRef} size="202" />
-                </Form.Item>
-                <button icon={<SaveOutlined />} style={{ marginRight: "2.5vw", }} type="primary"  >Save</button>
-                <button icon={<CloseOutlined />} danger style={{ marginRight: "2.5vw" }} >Cancel</button><br /><br />
-                {/* {receivers.map((receiver) => (
-                            <ul>
-                                <li>{receiver.name}</li>
-                            </ul>
-
-                        ))} */}
-
-              </Form>
-              <Title level={5}>Group receivers</Title>
-              <List
-                itemLayout="horizontal"
-                dataSource={receivers}
-                renderItem={(item) => (
-                  <List.Item>
-                    <List.Item.Meta
-                      title={item.name}
-                      description={item.email}
-                    />
-                  </List.Item>
-                )}
-              />
-
-            </Col>
-          </div>
         </Form>
+        <Title level={5}>Group receivers</Title>
+        <List
+          itemLayout="horizontal"
+          dataSource={receivers}
+          renderItem={(item) => (
+            <List.Item>
+              <List.Item.Meta
+                title={item.name}
+                description={item.email}
+              />
+            </List.Item>
+          )}
+        />
+
       </Col>
+
+
     </div>
 
   );

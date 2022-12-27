@@ -43,7 +43,6 @@ export default function Edu_profile_form({ details }) {
                 }}
             >
 
-
                 <Col className="gutter-row" span={6} style={{ margin: 50 }}>
                     <Title level={3}>Name:</Title>
                     <p><span>{details.name}</span></p>
@@ -58,11 +57,6 @@ export default function Edu_profile_form({ details }) {
                 </Col>
 
             </Row>
-
-            {/* <Divider orientation="left">Your credentials</Divider> */}
-            <Divider orientation="left" orientationMargin="0">
-                Your group
-            </Divider>
 
 
 

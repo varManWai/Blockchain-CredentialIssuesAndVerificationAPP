@@ -6,6 +6,8 @@ import Recipients from '../../../models/recipient';
 import Group_recipient from '../../../models/group_recipient';
 import GroupModel from '../../../models/group';
 
+import {getSession} from 'next-auth/react';
+
 export default function groupDetails({ selectedGroup, groupReceivers }) {
   return (
     <div>
