@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import { useRouter } from "next/router";
 import { useState } from 'react';
 import { useSession } from "next-auth/react";
+import { Input, Button } from 'antd';
 import * as XLSX from 'xlsx';
 
 export default function Edu_create_group() {
@@ -17,11 +18,14 @@ export default function Edu_create_group() {
 
         e.preventDefault();
         // get user inputs
-        const enteredName = nameInputRef.current.value;
-        const enteredDesc = descriptionInputRef.current.value;
+        const enteredName = nameInputRef.current.input.value;
+        const enteredDesc = descriptionInputRef.current.input.value;
 
         // ready to POST it to API to create a group
-        console.log("here");
+        console.log(enteredName);
+        console.log(enteredDesc);
+        console.log(enteredDesc);
+
         const res = await fetch(`/api/educator/group/add`, {
             method: "POST",
             headers: {
@@ -33,10 +37,12 @@ export default function Edu_create_group() {
                 educatorEmail: session.user.email,
                 recipients: items,
                 name: items[0].name,
-                email:items[0].email,
+                email: items[0].email,
             }),
         });
-        // const data = await res.json();
+        const data = await res.json();
+        console.log(data);
+
 
         // back to display all group page
         router.push('/educator/group/');
@@ -93,11 +99,11 @@ export default function Edu_create_group() {
 
                 <h1>Groups details</h1>
                 <label htmlFor="dname">Display name</label><br />
-                <input type="text" required id="dname" name="dname" placeholder=" Name of the group" size="150" ref={nameInputRef} /><br /><br />
+                <Input type="text" required id="dname" name="dname" placeholder=" Name of the group" ref={nameInputRef} /><br /><br />
                 <label htmlFor="nameERR"></label><br />
 
                 <label htmlFor="desc">Description</label><br />
-                <input type="text" required id="desc" name="desc" placeholder=" Inform people what this group of credential holders had to do to earn the credential" size="150" ref={descriptionInputRef} /><br /><br />
+                <Input type="text" required id="desc" name="desc" placeholder=" Inform people what this group of credential holders had to do to earn the credential" ref={descriptionInputRef} /><br /><br />
                 <label htmlFor="descERR"></label><br />
 
                 <label htmlFor="excelFileSelect">Upload excel file : </label>

@@ -20,7 +20,6 @@ export default function All_groups({ groups }) {
                 renderItem={(item) => (
                     <List.Item>
                         <List.Item.Meta
-                            avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
                             title={<Link href={`/educator/group/${encodeURIComponent(item._id)}`}>{item.groupName}</Link>}
                             description={item.desc}
                         />
