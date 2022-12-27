@@ -1,10 +1,10 @@
 import Group_Details from "../../../components/Forms/edu_group_details";
 
-import Group_recipient from "../../../models/group_recipient";
-import connectMongo from "../../../utils/connectMongo";
-import GroupModel from "../../../models/group";
-import Recipient from "../../../models/recipient";
-import { getSession } from "next-auth/react";
+import connectMongo from '../../../utils/connectMongo';
+
+import Recipients from '../../../models/recipient';
+import Group_recipient from '../../../models/group_recipient';
+import GroupModel from '../../../models/group';
 
 export default function groupDetails({ selectedGroup, groupReceivers }) {
   return (
@@ -33,23 +33,29 @@ export const getServerSideProps = async (context) => {
     await connectMongo();
     console.log("CONNECTED TO MONGO");
 
-    console.log("FETCHING DOCUMENTS");
-    const group = await GroupModel.findById(id);
+        console.log("FETCHING DOCUMENTS");
+        // get the selected group 
+        const group = await GroupModel.findById(id);
+        console.log("FETCHING DOCUMENTS");
+        // look for the recipients of the group and return an array
+        const receivers = await Group_recipient.find({ groupID: id });
+        console.log("FETCHING DOCUMENTS");
+        console.log(receivers);
 
-    console.log(group._id);
+        // look for the actual recipients details based on the array 
+        const recipients = await Promise.all(receivers.map(async (item) => {
 
-    const receivers = await Group_recipient.find({ groupID: group._id });
+            const eachRecipient = await Recipients.findById(
+                item.recipientID
+            );
+            return eachRecipient;
 
-    console.log("here is the result 1");
-    console.log(receivers);
+        }));
 
-    const recipients = await receivers.map(async (receiver) => {
-      return await Recipient.findById(receiver.recipientID);
-    });
+        console.log(recipients);
 
-    const recipientsData = await Promise.all(recipients).then((values) => {
-      return values;
-    });
+        console.log("FETCHING DOCUMENTS");
+        return { props: { selectedGroup: JSON.parse(JSON.stringify(group)), groupReceivers: JSON.parse(JSON.stringify(recipients)) } }
 
     return {
       props: {
