@@ -89,8 +89,16 @@ export default function Educator() {
             type: 'divider',
         },
         {
-            label: <a onClick={logoutHandler}>Logout</a>,
+            label: <Link href="/educator/profile/accountSetting">Account Setting</Link>,
             key: '1',
+        },
+
+        {
+            type: 'divider',
+        },
+        {
+            label: <a onClick={logoutHandler}>Logout</a>,
+            key: '2',
         },
     ];
 
