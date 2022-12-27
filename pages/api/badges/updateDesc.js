@@ -24,16 +24,18 @@ export default async function resetPWD(req, res) {
     console.log("here it the updated desc");
     console.log(descriptionRecieved);
 
-    const verifiedBadge = await Badge.findById(badgeRecieved._id);
+    const verifiedBadge = await Badge.find({
+      address: badgeRecieved.address,
+    });
 
     console.log(verifiedBadge);
 
     if (verifiedBadge) {
-      const updatedBadge = await Badge.findByIdAndUpdate(verifiedBadge._id, {
-        desc: descriptionRecieved,
+      verifiedBadge.map(async (badgeData) => {
+        await Badge.findByIdAndUpdate(badgeData._id, {
+          desc: descriptionRecieved,
+        });
       });
-
-      console.log(updatedBadge);
 
       console.log("updated descrption");
     } else {

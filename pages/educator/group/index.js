@@ -29,13 +29,13 @@ export const getServerSideProps = async (context) => {
         };
     }
 
-    const { _id } = await Educator.findOne({ email: session.user.email });
+    const educatorData = await Educator.findOne({ email: session.user.email });
 
     try {
         await connectMongo();
 
         const allGroups = await GroupModel.find({
-            educatorID: _id
+            educatorID: educatorData._id
         });
 
         return { props: { groups: JSON.parse(JSON.stringify(allGroups)) } }

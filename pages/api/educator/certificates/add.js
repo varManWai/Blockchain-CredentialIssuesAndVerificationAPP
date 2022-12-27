@@ -6,6 +6,9 @@ import Certificate_Educator from "../../../../models/certificate_educator";
 import { getSession, useSession } from "next-auth/react";
 import Educator from "../../../../models/educator";
 
+import Recipient from "../../../../models/recipient";
+import Group_Recipient from "../../../../models/group_recipient";
+
 import nodemailer from "nodemailer";
 
 const path = require("path");
@@ -27,10 +30,10 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-const mailOptions = {
-  from: email,
-  to: ["isaacworking31@gmail.com", "laizoke98@gmail.com"],
-};
+// const mailOptions = {
+//   from: email,
+//   to: ["isaacworking31@gmail.com", "laizoke98@gmail.com"],
+// };
 
 // /**
 //  * @param {import('next').NextApiRequest} req
@@ -45,70 +48,64 @@ export default async function AddCertificate(req, res) {
     // console.log('CREATING DOCUMENT');
     // const dateTime = new Date().toLocaleString();
 
-    const { _id, title, desc, dateIssued, address } = await Certificate.create({
-      title: req.body.title,
-      desc: req.body.desc,
-      dateIssued: req.body.dateIssued,
-      address: req.body.address,
+    const groupID = Types.ObjectId(req.body.groupID);
+
+    const groupRecipientData = await Group_Recipient.find({ groupID: groupID });
+
+    console.log("groupRecipientData");
+    console.log(groupRecipientData);
+
+    const recipients = groupRecipientData.map(async (recipient) => {
+      return await Recipient.findById(recipient.recipientID);
     });
 
-    const generateEmailContent = (_id) => {
-      return {
-        html: `<!DOCTYPE html>
-        <html lang="en">
-        
-        <head>
-            <meta charset="UTF-8">
-            <meta http-equiv="X-UA-Compatible" content="IE=edge">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Document</title>
-        </head>
-        
-        <body>
-            <h2 style="text-align:center">Hello!</h2>
-        
-            <hr>
-        
-            <p style="text-align:justify">Congratulation on your achievement and thank you for being a part of CredBLOCK. For
-                those who have yet to claim the digital credentials, fret not! We have extended the dealine for these
-                redemptions.</p>
-        
-        
-            <br>
-        
-            <p style="text-align:justify">To redeeem your digital credential, Please click the <a
-                    href="http://localhost:3000/certificates/claim/${"1234"}">link</a>.</p>
-        
-        
-            <img alt="image" src="https://res.cloudinary.com/dhfvht9ju/image/upload/v1671875905/ppkyn4l4o0vfjeq79opx.png"
-                width="100%" />
-        </body>
-        
-        </html>`,
-      };
-    };
+    console.log("recipients");
+    console.log(recipients);
 
-    await transporter.sendMail({
-      from: email,
-      to: "laizoke98@gmail.com",
-      ...generateEmailContent(_id),
-      subject: "Claim Credential",
+    const recipientsData = await Promise.all(recipients).then((values) => {
+      return values;
     });
 
-    console.log("----------------------------------------");
-    console.log(_id);
-    console.log("----------------------------------------");
+    console.log("--------------------------------------------------------");
 
-    const studentID = Types.ObjectId("639e59e4d45662e5803c762a");
+    const newRecipients = await recipientsData.map(async (recipient) => {
+      let random_number = Math.random().toString().substr(2, 5);
 
-    console.log("StudentID");
-    console.log(studentID);
-    console.log("----------------------------------------");
-
-    const certificateStudent = await Certificate_Student.create({
-      certificateID: _id,
-      studentID: studentID,
+      return await Recipient.create({
+        name: recipient.name,
+        email: recipient.email,
+        verificationCode: random_number,
+        hasClaimed: false,
+      });
     });
+
+    const newRecipientsData = await Promise.all(newRecipients).then(
+      (values) => {
+        return values;
+      }
+    );
+
+    console.log("----------------------------------------");
+    console.log(newRecipientsData);
+    // console.log(newGroupRecipientsData);
+
+    console.log("----------------------------------------");
+
+    const certificates = await newRecipientsData.map(async (recipient) => {
+      return await Certificate.create({
+        title: req.body.title,
+        desc: req.body.desc,
+        dateIssued: req.body.dateIssued,
+        address: req.body.address,
+        groupID: groupID,
+      });
+    });
+
+    const certificatesData = await Promise.all(certificates).then((values) => {
+      return values;
+    });
+
+    console.log(certificatesData);
 
     const educatorEmail = req.body.educatorEmail;
 
@@ -123,14 +120,83 @@ export default async function AddCertificate(req, res) {
     console.log(educatorID);
     console.log("----------------------------------------");
 
-    const certificateEducator = await Certificate_Educator.create({
-      certificateID: _id,
-      educatorID: educatorID,
+    const certificateEducator = await certificatesData.map(async (certificate) => {
+      return await Certificate_Educator.create({
+        certificateID: certificate._id,
+        educatorID: educatorID,
+      });
     });
 
-    // console.log("CREATED DOCUMENT");
+    const certificateEducatorData = await Promise.all(certificateEducator).then(
+      (values) => {
+        return values;
+      }
+    );
 
-    res.status(201).json({ message: "Created Certificate!" });
+    console.log("CertificateEducatorData");
+    console.log(certificateEducatorData);
+
+    const generateEmailContent = (
+      certificateID,
+      recipientID,
+      recipientName
+    ) => {
+      return {
+        html: `<!DOCTYPE html>
+        <html lang="en">
+        
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Document</title>
+        </head>
+        
+        <body>
+            <h2 style="text-align:center">Hello ${recipientName}!</h2>
+        
+            <hr>
+        
+            <p style="text-align:justify">Congratulation on your achievement and thank you for being a part of CredBLOCK. For
+                those who have yet to claim the digital credentials, fret not! We have extended the deadline for these
+                redemptions.</p>
+        
+        
+            <br>
+        
+            <p style="text-align:justify">To redeeem your digital credential, Please click the <a
+                    href="http://localhost:3000/certificates/claim/${certificateID}?vc=${recipientID}">link</a>.</p>
+        
+        
+            <img alt="image" src="https://res.cloudinary.com/dhfvht9ju/image/upload/v1671875905/ppkyn4l4o0vfjeq79opx.png"
+                width="100%" />
+        </body>
+        
+        </html>`,
+      };
+    };
+
+    let num = -1;
+
+    await certificatesData.map(async (certificate) => {
+      console.log(num);
+      console.log(email);
+      num++;
+      await transporter.sendMail({
+        from: email,
+        to: newRecipientsData[num].email,
+        ...generateEmailContent(
+          certificate._id,
+          newRecipientsData[num]._id,
+          newRecipientsData[num].name
+        ),
+        subject: "Claim Credential",
+      });
+    });
+
+    console.log("CREATED certificates");
+
+    res.status(201).json({ message: "Created certificates!" });
   } catch (error) {
     console.log(error);
     res.json({ error });

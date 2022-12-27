@@ -25,7 +25,7 @@ import styles from "./allCredentials.module.css";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
-export default function AllCertificate({ Certificates, path }) {
+export default function AllCertificate({ Certificates, path, groupsArr }) {
   const router = useRouter();
 
   const { TextArea } = Input; // for text area field
@@ -40,6 +40,9 @@ export default function AllCertificate({ Certificates, path }) {
   const [desc, setDesc] = useState("");
   const [dateIssued, setDateIssued] = useState("");
   const [imageAddress, setImageAddress] = useState("");
+
+  const [groupID, setGroupID] = useState('');
+
 
   const { data: session, status } = useSession();
 
@@ -68,55 +71,113 @@ export default function AllCertificate({ Certificates, path }) {
   };
 
   const createCertificate = async (event) => {
-    setLoading(true);
 
-    console.log("the blockchain stuff start from here");
 
-    const accounts = await web3.eth.getAccounts();
+    if (path === "certificates") {
+      setLoading(true);
 
-    // console.log(accounts);
+      console.log("the blockchain stuff start from here");
 
-    try {
+      const accounts = await web3.eth.getAccounts();
 
-     
-      const dateTime = new Date().toLocaleString();
+      console.log(accounts);
 
-      await factory.methods.createCertificate(title, desc, dateTime).send({
-        from: accounts[0],
-      });
+      try {
 
-      const certAddress = await factory.methods
-        .getDeployedCertificates()
-        .call();
+        const dateTime = new Date().toLocaleString();
 
-      // console.log(certAddress);
+        await factory.methods.createCertificate(title, desc, dateTime).send({
+          from: accounts[0],
+        });
 
-      const res = await fetch(`/api/educator/${path}/add`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          title: title,
-          desc: desc,
-          dateIssued: dateTime,
-          address: certAddress[certAddress.length - 1],
-          imageAddress: imageAddress,
-          educatorEmail: session.user.email,
-        }),
-      });
-      const result = await res.json();
+        const certAddress = await factory.methods.getDeployedCertificates().call();
 
-      if (!res.ok) {
-        throw new Error(result.message || 'Something went wrong!');
+        console.log(certAddress);
+
+        const res = await fetch(`/api/educator/${path}/add`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: title,
+            desc: desc,
+            dateIssued: dateTime,
+            address: certAddress[certAddress.length - 1],
+            educatorEmail: session.user.email,
+            groupID: groupID,
+          }),
+        });
+
+        const result = await res.json();
+
+        if (!res.ok) {
+          throw new Error(result.message || 'Something went wrong!');
+        }
+
+        setLoading(false);
+        onClose();
+        router.push(`/educator/${path}`);
+
+      } catch (err) {
+        console.log(err);
+        setError(err.message);
       }
-
-      setLoading(false);
-      router.reload();
-    } catch (err) {
-      console.log(err);
-      setError(err.message);
     }
+
+    if (path === "badges") {
+      setLoading(true);
+
+      console.log("the blockchain stuff start from here");
+
+      const accounts = await web3.eth.getAccounts();
+
+      console.log(accounts);
+
+      try {
+
+        const dateTime = new Date().toLocaleString();
+
+        await factory.methods.createBadge(title, desc, dateTime).send({
+          from: accounts[0],
+        });
+
+        const badgeAddress = await factory.methods.getDeployedBadges().call();
+
+        console.log(badgeAddress);
+
+        const res = await fetch(`/api/educator/${path}/add`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: title,
+            desc: desc,
+            dateIssued: dateTime,
+            address: badgeAddress[badgeAddress.length - 1],
+            imageAddress: imageAddress,
+            educatorEmail: session.user.email,
+            groupID: groupID,
+          }),
+        });
+
+        const result = await res.json();
+
+        if (!res.ok) {
+          throw new Error(result.message || 'Something went wrong!');
+        }
+
+        setLoading(false);
+        onClose();
+        router.push(`/educator/${path}`);
+
+      } catch (err) {
+        console.log(err);
+        setError(err.message);
+      }
+    }
+
     setLoading(false);
   };
 
@@ -150,49 +211,9 @@ export default function AllCertificate({ Certificates, path }) {
   const isBreakpoint = useMediaQuery(925);
   //code for responsive - end
 
-  //sample data for the group selection field - start
-  const selectContent = [
-    {
-      value: "jack",
-      label: "Jack",
-    },
-    {
-      value: "lucy",
-      label: "Lucy",
-    },
-    {
-      value: "disabled",
-      disabled: true,
-      label: "Disabled",
-    },
-    {
-      value: "Yiminghe",
-      label: "yiminghe",
-    },
-  ];
-  //sample data for the group selection field - end
-
-  const tailLayout = {
-    wrapperCol: {
-      span: 24,
-    },
-  };
-
-  //date selector - start
-  const onChange = (value, dateString) => {
-    console.log("Selected Time: ", value);
-    console.log("Formatted Selected Time: ", dateString);
-    setDateIssued(dateString);
-  };
-
-  const onOk = (value) => {
-    console.log("onOk: ", value);
-  };
-  //date selector - end
-
   //group selector - start
   const handleChange = (value) => {
-    console.log(`selected ${value}`);
+    setGroupID(value);
   };
   //group selector - end
 
@@ -245,7 +266,7 @@ export default function AllCertificate({ Certificates, path }) {
           >
             {error
               ?
-              <div style={{marginBottom:"15px"}}>
+              <div style={{ marginBottom: "15px" }}>
                 <Alert message={`Error: ${error}`} type="error" />
               </div>
               :
@@ -301,12 +322,12 @@ export default function AllCertificate({ Certificates, path }) {
               <Col span={24}>
                 <Form.Item label="Group">
                   <Select
-                    defaultValue="lucy"
+                    defaultValue="Select your group"
                     style={{
                       width: "100%",
                     }}
                     onChange={handleChange}
-                    options={selectContent}
+                    options={groupsArr}
                   />
                 </Form.Item>
               </Col>

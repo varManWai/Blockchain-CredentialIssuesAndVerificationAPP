@@ -22,16 +22,17 @@ export default async function resetPWD(req, res) {
     console.log(badgeRecieved);
     console.log(titleRecieved);
 
-    const verifiedBadge = await Badge.findById(badgeRecieved._id);
-
+    const verifiedBadge = await Badge.find({
+      address: badgeRecieved.address,
+    });
     console.log(verifiedBadge);
 
     if (verifiedBadge) {
-      const updatedBadge = await Badge.findByIdAndUpdate(verifiedBadge._id, {
-        title: titleRecieved,
+      verifiedBadge.map(async (badgeData) => {
+        await Badge.findByIdAndUpdate(badgeData._id, {
+          title: titleRecieved,
+        });
       });
-
-      console.log(updatedBadge);
 
       console.log("updated title");
     } else {

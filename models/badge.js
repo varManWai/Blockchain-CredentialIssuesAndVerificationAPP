@@ -20,6 +20,11 @@ const badgeSchema = new Schema({
   imageAddress: {
     type: String,
   },
+  groupID: {
+    type: Schema.Types.ObjectId,
+    ref: "Group",
+    required: true,
+  },
 });
 
 const Badge = models.Badge || model("Badge", badgeSchema);

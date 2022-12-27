@@ -42,8 +42,8 @@ export default function Edu_Login_Form() {
         throw new Error(result.error || "message something went wrong");
       }
       
-
       await router.push("/educator/certificates");
+
     } catch (err) {
       console.log(err);
       setError(err.message);

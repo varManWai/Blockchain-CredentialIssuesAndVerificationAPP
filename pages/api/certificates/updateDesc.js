@@ -22,21 +22,22 @@ export default async function resetPWD(req, res) {
     console.log(certificateRecieved);
     console.log(descriptionRecieved);
 
-    const verifiedCertificate = await Certificate.findById(
-      certificateRecieved._id
-    );
+    const verifiedCertificate = await Certificate.find({
+      address: certificateRecieved.address,
+    });
 
     console.log(verifiedCertificate);
 
     if (verifiedCertificate) {
-      const updatedCertificate = await Certificate.findByIdAndUpdate(
-        verifiedCertificate._id,
+
+      verifiedCertificate.map(async (certificateData)=>{
+        await Certificate.findByIdAndUpdate(
+          certificateData._id,
         {
           desc: descriptionRecieved,
         }
       );
-
-      console.log(updatedCertificate);
+      })
 
       console.log("updated descrption");
     } else {

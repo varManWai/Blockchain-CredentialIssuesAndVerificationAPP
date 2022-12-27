@@ -17,6 +17,11 @@ const certificateSchema = new Schema({
     type: String,
     required: true,
   },
+  groupID: {
+    type: Schema.Types.ObjectId,
+    ref: "Group",
+    required: true,
+  },
 });
 
 const Certificate =

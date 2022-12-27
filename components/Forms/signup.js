@@ -113,7 +113,7 @@ export default function Edu_SignUp_Form() {
         },
         body: JSON.stringify({
           email: enteredEmail,
-          password: enteredPassword,
+          password: enteredPassword2,
           name: enteredName,
           phoneNum: enteredPhoneNo,
           jobTitle: enteredJobTitle,

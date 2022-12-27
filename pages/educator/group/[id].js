@@ -4,6 +4,7 @@ import Group_recipient from "../../../models/group_recipient";
 import connectMongo from "../../../utils/connectMongo";
 import GroupModel from "../../../models/group";
 import Recipient from "../../../models/recipient";
+import { getSession } from "next-auth/react";
 
 export default function groupDetails({ selectedGroup, groupReceivers }) {
   return (
@@ -15,6 +16,17 @@ export default function groupDetails({ selectedGroup, groupReceivers }) {
 
 export const getServerSideProps = async (context) => {
   const { id } = context.query;
+
+  const session = await getSession({ req: context.req });
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/educator/login",
+        permanent: false,
+      },
+    };
+  }
 
   try {
     console.log("CONNECTING TO MONGO");
