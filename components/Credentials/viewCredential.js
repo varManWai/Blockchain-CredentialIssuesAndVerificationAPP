@@ -60,7 +60,6 @@ export default function ViewCredential({ Certificate, CredentialType }) {
 
   return (
     <div>
-      {console.log(Certificate)}
       <Row style={{ marginBottom: "20px", }} className={styles.view_cert_container} >
         <Col >
           <Button onClick={() => router.back()}
