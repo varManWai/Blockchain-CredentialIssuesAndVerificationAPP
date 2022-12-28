@@ -49,8 +49,7 @@ export default function Update_Detail_Form({ educator }) {
         const enteredOrgURL = orgURLInputRef.current.input.value;
 
         try {
-            if (enteredName ) {
-                console.log("there is " + enteredName);
+            if (enteredName || enteredPhoneNum || enteredJobTitle || enteredOrgName || enteredOrgURL) {
 
                 const res = await fetch(`/api/educator/updateDetails`, {
                     method: "POST",
@@ -69,7 +68,7 @@ export default function Update_Detail_Form({ educator }) {
 
                 router.reload(window.location.pathname);
             } else {
-                throw new Error( "Please update something!");
+                throw new Error("Please update something!");
             }
 
 

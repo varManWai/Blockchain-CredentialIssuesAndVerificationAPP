@@ -67,8 +67,8 @@ export default function Update_Password_Form({ educatorData }) {
 
                     if (!res.ok) {
                         throw new Error(result.message || "Something went wrong!");
-                    }{
-                        
+                    } {
+
                     }
 
                     router.reload(window.location.pathname);
@@ -76,7 +76,7 @@ export default function Update_Password_Form({ educatorData }) {
 
             } else {
                 throw new Error(result.message || "Current password is wrong!");
-                
+
             }
         } catch (err) {
             console.log(err);
