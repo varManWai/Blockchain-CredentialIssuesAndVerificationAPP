@@ -58,7 +58,9 @@ export default function Edu_profile_form({ details }) {
 
             </Row>
 
-
+            <Divider orientation="left" orientationMargin="0">
+                Your group
+            </Divider>
 
 
 
