@@ -114,7 +114,8 @@ export default function AllCertificate({ Certificates, path, groupsArr }) {
         if (!res.ok) {
           throw new Error(result.message || 'Something went wrong!');
         }
-
+        setError("")
+        setImageAddress("");
         setLoading(false);
         onClose();
         router.push(`/educator/${path}`);
@@ -168,6 +169,8 @@ export default function AllCertificate({ Certificates, path, groupsArr }) {
           throw new Error(result.message || 'Something went wrong!');
         }
 
+        setError("")
+        setImageAddress("");
         setLoading(false);
         onClose();
         router.push(`/educator/${path}`);
