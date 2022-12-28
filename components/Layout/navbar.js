@@ -301,7 +301,9 @@ export default function Educator() {
                                                                 <span className={
                                                                     styles.navbar_section_items_section_1_item_student}
                                                                     style={{ textTransform: "lowercase", }}>
-                                                                    {session.user.email}
+                                                                    {session ?
+                                                                        session.user.email :
+                                                                        ''}
                                                                 </span>
                                                             </Col>
                                                             <Col>
