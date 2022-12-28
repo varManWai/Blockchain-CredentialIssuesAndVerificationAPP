@@ -10,7 +10,7 @@ import TransformImage from '../utils/imageCloudinary';
 import Link from "next/link";
 
 
-export default function ViewCredential({ Certificate, CredentialType }) {
+export default function ViewCredential({ Certificate, CredentialType , GroupData}) {
   const router = useRouter();
 
   console.log(Certificate);
@@ -227,7 +227,7 @@ export default function ViewCredential({ Certificate, CredentialType }) {
               </Row>
             </Col>
             <Col span={24}>
-              <p className={styles.view_cert_texts}>Group 1</p>
+              <p className={styles.view_cert_texts}>{GroupData.groupName}</p>
             </Col>
           </Row>
           <Row style={{ width: "100%" }} justify="space-between" align="middle" >
