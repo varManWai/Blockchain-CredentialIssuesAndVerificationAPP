@@ -10,7 +10,7 @@ import Student from "../../../models/student";
 
 export default async function resetPWD(req, res) {
   try {
-    console.log("CONNECTING TO MONGO");
+    // console.log("CONNECTING TO MONGO");
 
     await connectMongo();
     // console.log('CONNECTED TO MONGO');
@@ -19,16 +19,16 @@ export default async function resetPWD(req, res) {
     const badgeRecieved = req.body.badge;
     const descriptionRecieved = req.body.desc;
 
-    console.log(badgeRecieved);
+    // console.log(badgeRecieved);
 
-    console.log("here it the updated desc");
-    console.log(descriptionRecieved);
+    // console.log("here it the updated desc");
+    // console.log(descriptionRecieved);
 
     const verifiedBadge = await Badge.find({
       address: badgeRecieved.address,
     });
 
-    console.log(verifiedBadge);
+    // console.log(verifiedBadge);
 
     if (verifiedBadge) {
       verifiedBadge.map(async (badgeData) => {
@@ -37,7 +37,7 @@ export default async function resetPWD(req, res) {
         });
       });
 
-      console.log("updated descrption");
+      // console.log("updated descrption");
     } else {
       res.status(422).json({
         message: "update descrption unsuccessfully!",

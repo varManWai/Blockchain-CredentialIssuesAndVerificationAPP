@@ -9,7 +9,7 @@ import { hashPassword } from "../../../utils/auth";
 
 export default async function resetPWD(req, res) {
   try {
-    console.log("CONNECTING TO MONGO");
+    // console.log("CONNECTING TO MONGO");
 
     await connectMongo();
     // console.log('CONNECTED TO MONGO');
@@ -18,23 +18,23 @@ export default async function resetPWD(req, res) {
     const EducatorRecieved = req.body.educator;
     const passwordRecieved = req.body.password;
 
-    console.log(EducatorRecieved);
-    console.log(passwordRecieved);
+    // console.log(EducatorRecieved);
+    // console.log(passwordRecieved);
 
     const encryptedPassword = await hashPassword(passwordRecieved);
     const verifiedEducator = await Educator.findById(EducatorRecieved._id);
 
-    console.log(verifiedEducator);
-    console.log(encryptedPassword);
+    // console.log(verifiedEducator);
+    // console.log(encryptedPassword);
 
     if (verifiedEducator) {
       const newEducator = await Educator.findByIdAndUpdate(verifiedEducator._id, {
         password: encryptedPassword,
       });
 
-      console.log(newEducator);
+      // console.log(newEducator);
 
-      console.log("updated password");
+      // console.log("updated password");
     } else {
       res.status(201).json({ message: "reset password unsuccessfully!" });
     }

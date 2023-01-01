@@ -40,10 +40,10 @@ export const getServerSideProps = async (context) => {
 
     const { _id } = await Educator.findOne({ email: session.user.email });
 
-    console.log(_id);
+    // console.log(_id);
 
     const groups = await GroupModel.find({ educatorID: _id });
-    console.log("FETCHED DOCUMENTS");
+    // console.log("FETCHED DOCUMENTS");
 
     const groupsArr = [];
     const groupsSelection = await groups.map(async (group) => {
@@ -53,9 +53,9 @@ export const getServerSideProps = async (context) => {
       });
     });
 
-    console.log("groupsSelection");
+    // console.log("groupsSelection");
 
-    console.log(groupsArr);
+    // console.log(groupsArr);
 
     const badgeArr = await Badge_Educator.find({ educatorID: _id });
 
@@ -71,7 +71,7 @@ export const getServerSideProps = async (context) => {
       });
 
       if (!temp1.get(badge.address)) {
-        console.log("running");
+        // console.log("running");
         temp1.set(badge.address, badge._id);
       }
 
@@ -85,7 +85,7 @@ export const getServerSideProps = async (context) => {
     const finalCrendentials = [];
 
     await temp1.forEach(async (value, key) => {
-      console.log(key);
+      // console.log(key);
       let objectKey = Types.ObjectId(value);
       const cert = await BadgeModel.findById(objectKey);
 

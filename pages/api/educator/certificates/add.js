@@ -52,21 +52,21 @@ export default async function AddCertificate(req, res) {
 
     const groupRecipientData = await Group_Recipient.find({ groupID: groupID });
 
-    console.log("groupRecipientData");
-    console.log(groupRecipientData);
+    // console.log("groupRecipientData");
+    // console.log(groupRecipientData);
 
     const recipients = groupRecipientData.map(async (recipient) => {
       return await Recipient.findById(recipient.recipientID);
     });
 
-    console.log("recipients");
-    console.log(recipients);
+    // console.log("recipients");
+    // console.log(recipients);
 
     const recipientsData = await Promise.all(recipients).then((values) => {
       return values;
     });
 
-    console.log("--------------------------------------------------------");
+    // console.log("--------------------------------------------------------");
 
     const newRecipients = await recipientsData.map(async (recipient) => {
       let random_number = Math.random().toString().substr(2, 5);
@@ -85,11 +85,11 @@ export default async function AddCertificate(req, res) {
       }
     );
 
-    console.log("----------------------------------------");
-    console.log(newRecipientsData);
-    // console.log(newGroupRecipientsData);
+    // console.log("----------------------------------------");
+    // console.log(newRecipientsData);
+    // // console.log(newGroupRecipientsData);
 
-    console.log("----------------------------------------");
+    // console.log("----------------------------------------");
 
     const certificates = await newRecipientsData.map(async (recipient) => {
       return await Certificate.create({
@@ -105,20 +105,20 @@ export default async function AddCertificate(req, res) {
       return values;
     });
 
-    console.log(certificatesData);
+    // console.log(certificatesData);
 
     const educatorEmail = req.body.educatorEmail;
 
-    console.log("Educator email");
-    console.log(educatorEmail);
+    // console.log("Educator email");
+    // console.log(educatorEmail);
 
     const educator = await Educator.findOne({ email: educatorEmail });
 
     const educatorID = Types.ObjectId(educator._id);
 
-    console.log("Educator ID");
-    console.log(educatorID);
-    console.log("----------------------------------------");
+    // console.log("Educator ID");
+    // console.log(educatorID);
+    // console.log("----------------------------------------");
 
     const certificateEducator = await certificatesData.map(async (certificate) => {
       return await Certificate_Educator.create({
@@ -133,8 +133,8 @@ export default async function AddCertificate(req, res) {
       }
     );
 
-    console.log("CertificateEducatorData");
-    console.log(certificateEducatorData);
+    // console.log("CertificateEducatorData");
+    // console.log(certificateEducatorData);
 
     const generateEmailContent = (
       certificateID,
@@ -179,8 +179,8 @@ export default async function AddCertificate(req, res) {
     let num = -1;
 
     await certificatesData.map(async (certificate) => {
-      console.log(num);
-      console.log(email);
+      // console.log(num);
+      // console.log(email);
       num++;
       await transporter.sendMail({
         from: email,
@@ -194,12 +194,12 @@ export default async function AddCertificate(req, res) {
       });
     });
 
-    console.log("CREATED certificates");
+    // console.log("CREATED certificates");
 
     res.status(201).json({ message: "Created certificates!" });
   } catch (error) {
 
-    console.log("here is the error in certificate add page");
+    // console.log("here is the error in certificate add page");
     console.log(error);
     res.json({ error });
   }

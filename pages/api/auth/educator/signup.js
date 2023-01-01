@@ -16,10 +16,10 @@ export default async function RegisterEducator(req, res) {
     await connectMongo();
     // console.log('CONNECTED TO MONGO');
 
-    // console.log('CREATING DOCUMENT');
+    // // console.log('CREATING DOCUMENT');
 
-    console.log(req.body);
-    console.log("backend started");
+    // console.log(req.body);
+    // console.log("backend started");
 
     const { email, password, name, phoneNum, jobTitle, orgName, orgURL , accountType} =
       req.body;
@@ -37,7 +37,7 @@ export default async function RegisterEducator(req, res) {
       return;
     }
 
-    const emailUnique = await Educator.findOne({email:email});
+    const emailUnique = await Educator.findOne({email:email.toLowerCase()});
 
     if(emailUnique){
       res.status(422).json({
@@ -50,7 +50,7 @@ export default async function RegisterEducator(req, res) {
     const hashedPassword = await hashPassword(password);
 
     const educator = await Educator.create({
-      email: email,
+      email: email.toLowerCase(),
       password: hashedPassword,
       name: name,
       phoneNum: phoneNum,

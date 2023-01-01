@@ -37,7 +37,7 @@ export default function EditTitle({ credential, type }) {
 
         const accounts = await web3.eth.getAccounts();
 
-        console.log(accounts);
+        // console.log(accounts);
 
         const certificateEth = Certificate(credential.address);
 
@@ -64,7 +64,7 @@ export default function EditTitle({ credential, type }) {
 
         router.push(`/educator/${type}s/edit/editTitle/${credential._id}`);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         setError(err.message);
       }
     }
@@ -75,7 +75,7 @@ export default function EditTitle({ credential, type }) {
 
         const accounts = await web3.eth.getAccounts();
 
-        console.log(accounts);
+        // console.log(accounts);
 
         const badgeEth = Badge(credential.address);
 
@@ -102,7 +102,7 @@ export default function EditTitle({ credential, type }) {
 
         router.push(`/educator/${type}s/edit/editTitle/${credential._id}`);
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         setError(err.message);
       }
     }

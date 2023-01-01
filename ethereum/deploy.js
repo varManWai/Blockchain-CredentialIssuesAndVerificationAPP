@@ -18,7 +18,7 @@ try{
     const deploy = async () => {
       const accounts = await web3.eth.getAccounts();
     
-      console.log("Attempting to deploy from account", accounts[2]);
+      // console.log("Attempting to deploy from account", accounts[2]);
       
     
     
@@ -29,13 +29,13 @@ try{
         .send({ from: accounts[2],gas: "10000000" });
     
       
-      console.log("Contract deployed to", result.options.address);
+      // console.log("Contract deployed to", result.options.address);
       provider.engine.stop();
     };
     
     deploy();
     
     }catch(err){
-      console.log(err);
+      // console.log(err);
     }
     

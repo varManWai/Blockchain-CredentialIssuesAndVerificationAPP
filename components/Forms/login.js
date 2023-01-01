@@ -36,7 +36,7 @@ export default function Edu_Login_Form() {
         password: enteredPassword,
       });
 
-      console.log(result);
+      // console.log(result);
 
       if (result.error) {
         throw new Error(result.error || "message something went wrong");
@@ -45,7 +45,7 @@ export default function Edu_Login_Form() {
       await router.push("/educator/certificates");
 
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       setError(err.message);
     }
     setLoading(false);

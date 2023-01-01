@@ -30,17 +30,17 @@ export const getServerSideProps = async (context) => {
   }
 
   try {
-    console.log("CONNECTING TO MONGO");
+    // console.log("CONNECTING TO MONGO");
     await connectMongo();
-    console.log("CONNECTED TO MONGO");
+    // console.log("CONNECTED TO MONGO");
 
     const educatorData = await EducatorModel.findOne({
       email: session.user.email,
     });
 
-    console.log("FETCHING DOCUMENTS");
+    // console.log("FETCHING DOCUMENTS");
     const groups = await GroupModel.find({ educatorID: educatorData._id });
-    console.log("FETCHED DOCUMENTS");
+    // console.log("FETCHED DOCUMENTS");
 
     const groupsArr = [];
     const groupsSelection = await groups.map(async (group) => {
@@ -50,9 +50,9 @@ export const getServerSideProps = async (context) => {
       });
     });
 
-    console.log("groupsSelection");
+    // console.log("groupsSelection");
 
-    console.log(groupsArr);
+    // console.log(groupsArr);
 
     return {
       props: {

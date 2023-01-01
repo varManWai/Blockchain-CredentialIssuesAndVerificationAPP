@@ -16,11 +16,11 @@ export default async function AddGroup(req, res) {
 
         // get the logged in educator
         const educator = await Educator.findOne({ email: req.body.educatorEmail })
-        console.log(educator._id);
-        console.log(req.body.groupName);
-        console.log(req.body.desc);
-        console.log(req.body.recipients[0]);
-        console.log("here");
+        // console.log(educator._id);
+        // console.log(req.body.groupName);
+        // console.log(req.body.desc);
+        // console.log(req.body.recipients[0]);
+        // console.log("here");
 
     // 1. create a new group
     const newGroup = await Group.create({
@@ -58,8 +58,8 @@ export default async function AddGroup(req, res) {
     // no issue in adding until here;
     // issue with the return
 
-    console.log("check newRecipients");
-    console.log(fetchRecipient);
+    // console.log("check newRecipients");
+    // console.log(fetchRecipient);
 
     // 3. create a list of group_recipient (solved many to many relationship)
     const recipientsGroup = fetchRecipient.map(async (item) => {

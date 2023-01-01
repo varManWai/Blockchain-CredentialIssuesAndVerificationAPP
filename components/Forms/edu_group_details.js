@@ -16,7 +16,7 @@ export default function Edu_group_details({ group, receivers }) {
 
   const updateGroupHandler = async (e) => {
     e.preventDefault();
-    console.log(group._id);
+    // console.log(group._id);
     // get user inputs
 
     const enteredName = nameInputRef.current.input.value;
@@ -41,7 +41,7 @@ export default function Edu_group_details({ group, receivers }) {
         throw new Error("Please update something!");
       }
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       setError(err.message);
     }
   };

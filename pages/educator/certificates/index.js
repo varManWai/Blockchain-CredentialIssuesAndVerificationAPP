@@ -33,13 +33,13 @@ export const getServerSideProps = async (context) => {
     };
   }
 
-  console.log(session.user.email);
+  // console.log(session.user.email);
 
   try {
     await connectMongo();
 
     const { _id } = await Educator.findOne({ email: session.user.email });
-    console.log(_id);
+    // console.log(_id);
 
     const groups = await GroupModel.find({ educatorID: _id });
 
@@ -63,7 +63,7 @@ export const getServerSideProps = async (context) => {
       });
 
       if (!temp.get(certificate.address)) {
-        console.log("running");
+        // console.log("running");
         temp.set(certificate.address, certificate._id);
       }
 
@@ -77,7 +77,7 @@ export const getServerSideProps = async (context) => {
     const finalCert = [];
 
     await temp.forEach(async (value, key) => {
-      console.log(key);
+      // console.log(key);
       let objectKey = Types.ObjectId(value);
       const cert = await CertificateModel.findById(objectKey);
 

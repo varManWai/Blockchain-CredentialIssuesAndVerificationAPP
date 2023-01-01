@@ -9,13 +9,13 @@ export default async function EditGroup(req, res) {
         // console.log('CONNECTING TO MONGO');
         await connectMongo();
         // console.log('CONNECTED TO MONGO');
-        console.log(req.body);
+        // console.log(req.body);
 
         // get the educator
-        console.log("CREATED DOCUMENT1");
-        console.log(req.body.groupID);
-        console.log(req.body.name);
-        console.log(req.body.desc);
+        // console.log("CREATED DOCUMENT1");
+        // console.log(req.body.groupID);
+        // console.log(req.body.name);
+        // console.log(req.body.desc);
 
         if (req.body.name) {
             const updateName = await Group.findByIdAndUpdate(req.body.groupID, { groupName: req.body.name });
@@ -35,7 +35,7 @@ export default async function EditGroup(req, res) {
         // // desc: enteredDesc,
         // // recipients: items
         // // educatorEmail: session.user.email,
-        console.log('CREATED DOCUMENT');
+        // console.log('CREATED DOCUMENT');
 
         //res.json({ Group });
         res.status(200).json({ msg: 'Success' })

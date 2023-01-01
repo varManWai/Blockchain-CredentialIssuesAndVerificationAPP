@@ -33,7 +33,7 @@ export default function CertificateItem({ cert, deletePath, imageAddress }) {
         }),
       });
       const result = await res.json();
-      console.log(result);
+      // console.log(result);
 
 
 
@@ -45,7 +45,7 @@ export default function CertificateItem({ cert, deletePath, imageAddress }) {
       router.push(`/educator/${deletePath}`);
 
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       setError(err.message);
       message.success(err.message);
     }
@@ -62,7 +62,7 @@ export default function CertificateItem({ cert, deletePath, imageAddress }) {
       return;
     }
 
-    console.log(condition);
+    // console.log(condition);
     if (condition) {
       confirm();
     } else {

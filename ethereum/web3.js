@@ -1,6 +1,6 @@
 import Web3 from "web3";
 
-console.log("some shitter");
+// console.log("some shitter");
 
 let web3;
 try {

@@ -19,14 +19,14 @@ export default async function resetPWD(req, res) {
     const certificateRecieved = req.body.certificate;
     const titleRecieved = req.body.title;
 
-    console.log(certificateRecieved);
-    console.log(titleRecieved);
+    // console.log(certificateRecieved);
+    // console.log(titleRecieved);
 
     const verifiedCertificate = await Certificate.find({
       address: certificateRecieved.address,
     });
 
-    console.log(verifiedCertificate);
+    // console.log(verifiedCertificate);
 
     if (verifiedCertificate) {
       verifiedCertificate.map(async (certificateData) => {
@@ -35,7 +35,7 @@ export default async function resetPWD(req, res) {
         });
       });
 
-      console.log("updated title");
+      // console.log("updated title");
     } else {
       res.status(422).json({
         message: "updated title unsuccessfully!",

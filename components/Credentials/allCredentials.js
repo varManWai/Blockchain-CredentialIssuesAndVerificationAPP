@@ -62,7 +62,7 @@ export default function AllCertificate({ Certificates, path, groupsArr }) {
           result.event === "success" &&
           result.info.resource_type === "image"
         ) {
-          console.log(result.info);
+          // console.log(result.info);
           setImageAddress(result.info.public_id);
         }
       }
@@ -76,11 +76,11 @@ export default function AllCertificate({ Certificates, path, groupsArr }) {
     if (path === "certificates") {
       setLoading(true);
 
-      console.log("the blockchain stuff start from here");
+      // console.log("the blockchain stuff start from here");
 
       const accounts = await web3.eth.getAccounts();
 
-      console.log(accounts);
+      // console.log(accounts);
 
       try {
 
@@ -92,7 +92,7 @@ export default function AllCertificate({ Certificates, path, groupsArr }) {
 
         const certAddress = await factory.methods.getDeployedCertificates().call();
 
-        console.log(certAddress);
+        // console.log(certAddress);
 
         const res = await fetch(`/api/educator/${path}/add`, {
           method: "POST",
@@ -121,7 +121,7 @@ export default function AllCertificate({ Certificates, path, groupsArr }) {
         router.push(`/educator/${path}`);
 
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         setError(err.message);
       }
     }
@@ -129,11 +129,11 @@ export default function AllCertificate({ Certificates, path, groupsArr }) {
     if (path === "badges") {
       setLoading(true);
 
-      console.log("the blockchain stuff start from here");
+      // console.log("the blockchain stuff start from here");
 
       const accounts = await web3.eth.getAccounts();
 
-      console.log(accounts);
+      // console.log(accounts);
 
       try {
 
@@ -145,7 +145,7 @@ export default function AllCertificate({ Certificates, path, groupsArr }) {
 
         const badgeAddress = await factory.methods.getDeployedBadges().call();
 
-        console.log(badgeAddress);
+        // console.log(badgeAddress);
 
         const res = await fetch(`/api/educator/${path}/add`, {
           method: "POST",
@@ -176,7 +176,7 @@ export default function AllCertificate({ Certificates, path, groupsArr }) {
         router.push(`/educator/${path}`);
 
       } catch (err) {
-        console.log(err);
+        // console.log(err);
         setError(err.message);
       }
     }

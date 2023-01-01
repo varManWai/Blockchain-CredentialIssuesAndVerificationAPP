@@ -17,7 +17,7 @@ export default NextAuth({
       async authorize(credentials) {
         await connectMongo();
 
-        const educator = await Educator.findOne({ email: credentials.email });
+        const educator = await Educator.findOne({ email: credentials.email.toLowerCase() });
 
         if (!educator) {
           throw new Error("Incorrect email or password");
@@ -34,7 +34,7 @@ export default NextAuth({
 
         // session.userId = educator.id;
         
-        return { email: educator.email };
+        return { email: educator.email.toLowerCase() };
       },
     }),
   ],

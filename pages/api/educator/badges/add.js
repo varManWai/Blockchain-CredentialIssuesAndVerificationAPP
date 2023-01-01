@@ -52,21 +52,21 @@ export default async function AddBadge(req, res) {
 
     const groupRecipientData = await Group_Recipient.find({ groupID: groupID });
 
-    console.log("groupRecipientData");
-    console.log(groupRecipientData);
+    // console.log("groupRecipientData");
+    // console.log(groupRecipientData);
 
     const recipients = groupRecipientData.map(async (recipient) => {
       return await Recipient.findById(recipient.recipientID);
     });
 
-    console.log("recipients");
-    console.log(recipients);
+    // console.log("recipients");
+    // console.log(recipients);
 
     const recipientsData = await Promise.all(recipients).then((values) => {
       return values;
     });
 
-    console.log("--------------------------------------------------------");
+    // console.log("--------------------------------------------------------");
 
     const newRecipients = await recipientsData.map(async (recipient) => {
       let random_number = Math.random().toString().substr(2, 5);
@@ -85,11 +85,11 @@ export default async function AddBadge(req, res) {
       }
     );
 
-    console.log("----------------------------------------");
-    console.log(newRecipientsData);
+    // console.log("----------------------------------------");
+    // console.log(newRecipientsData);
     // console.log(newGroupRecipientsData);
 
-    console.log("----------------------------------------");
+    // console.log("----------------------------------------");
 
     const badges = await newRecipientsData.map(async (recipient) => {
       return await Badge.create({
@@ -106,20 +106,20 @@ export default async function AddBadge(req, res) {
       return values;
     });
 
-    console.log(badgesData);
+    // console.log(badgesData);
 
     const educatorEmail = req.body.educatorEmail;
 
-    console.log("Educator email");
-    console.log(educatorEmail);
+    // console.log("Educator email");
+    // console.log(educatorEmail);
 
     const educator = await Educator.findOne({ email: educatorEmail });
 
     const educatorID = Types.ObjectId(educator._id);
 
-    console.log("Educator ID");
-    console.log(educatorID);
-    console.log("----------------------------------------");
+    // console.log("Educator ID");
+    // console.log(educatorID);
+    // console.log("----------------------------------------");
 
     const badgeEducator = await badgesData.map(async (badge) => {
       return await Badge_Educator.create({
@@ -134,8 +134,8 @@ export default async function AddBadge(req, res) {
       }
     );
 
-    console.log("badgeEducatorData");
-    console.log(badgeEducatorData);
+    // console.log("badgeEducatorData");
+    // console.log(badgeEducatorData);
 
     const generateEmailContent = (
       certificateID,
@@ -180,8 +180,8 @@ export default async function AddBadge(req, res) {
     let num = -1;
 
     await badgesData.map(async (badge) => {
-      console.log(num);
-      console.log(email);
+      // console.log(num);
+      // console.log(email);
       num++;
       await transporter.sendMail({
         from: email,
@@ -195,7 +195,7 @@ export default async function AddBadge(req, res) {
       });
     });
 
-    console.log("CREATED badges");
+    // console.log("CREATED badges");
 
     res.status(201).json({ message: "Created badges!" });
   } catch (error) {

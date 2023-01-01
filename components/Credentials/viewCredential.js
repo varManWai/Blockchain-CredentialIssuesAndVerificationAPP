@@ -13,14 +13,14 @@ import Link from "next/link";
 export default function ViewCredential({ Certificate, CredentialType , GroupData}) {
   const router = useRouter();
 
-  console.log(Certificate);
+  // console.log(Certificate);
 
   const deleteCertificate = async () => {
 
     if (CredentialType == "certificate") {
 
 
-      console.log("start certificate deelte");
+      // console.log("start certificate deelte");
       const res = await fetch("/api/educator/certificates/delete", {
         method: "POST",
         headers: {
@@ -31,13 +31,13 @@ export default function ViewCredential({ Certificate, CredentialType , GroupData
         }),
       });
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
 
       router.push("/educator/certificates");
     }
 
     if (CredentialType == "badge") {
-      console.log("start badge deelte");
+      // console.log("start badge deelte");
 
       const res = await fetch("/api/educator/badges/delete", {
         method: "POST",
@@ -49,7 +49,7 @@ export default function ViewCredential({ Certificate, CredentialType , GroupData
         }),
       });
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
 
       router.push("/educator/badges");
     }

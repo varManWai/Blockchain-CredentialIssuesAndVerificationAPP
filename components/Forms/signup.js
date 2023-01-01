@@ -91,13 +91,13 @@ export default function Edu_SignUp_Form() {
     const enteredOrgName = orgNameInputRef.current.input.value;
     const enteredOrgURL = orgURLInputRef.current.input.value;
 
-    console.log(enteredName);
-    console.log(enteredEmail);
-    console.log(enteredPassword1);
-    console.log(enteredPassword2);
-    console.log(enteredJobTitle);
-    console.log(enteredPhoneNo);
-    console.log(enteredOrgURL);
+    // console.log(enteredName);
+    // console.log(enteredEmail);
+    // console.log(enteredPassword1);
+    // console.log(enteredPassword2);
+    // console.log(enteredJobTitle);
+    // console.log(enteredPhoneNo);
+    // console.log(enteredOrgURL);
 
     setLoading(true);
     try {
@@ -132,8 +132,8 @@ export default function Edu_SignUp_Form() {
     
       await router.push("/educator/login");
     } catch (err) {
-      console.log("Error happend on: educator sign up page");
-      console.log(err);
+      // console.log("Error happend on: educator sign up page");
+      // console.log(err);
       setError(err.message);
     }
     setLoading(false);

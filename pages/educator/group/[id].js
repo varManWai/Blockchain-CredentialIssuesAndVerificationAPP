@@ -31,17 +31,17 @@ export const getServerSideProps = async (context) => {
   }
 
   try {
-    console.log("CONNECTING TO MONGO");
+    // console.log("CONNECTING TO MONGO");
     await connectMongo();
-    console.log("CONNECTED TO MONGO");
+    // console.log("CONNECTED TO MONGO");
 
-        console.log("FETCHING DOCUMENTS");
+        // console.log("FETCHING DOCUMENTS");
         // get the selected group 
         const group = await GroupModel.findById(id);
-        console.log("FETCHING DOCUMENTS");
+        // console.log("FETCHING DOCUMENTS");
         // look for the recipients of the group and return an array
         const receivers = await Group_recipient.find({ groupID: id });
-        console.log("FETCHING DOCUMENTS");
+        // console.log("FETCHING DOCUMENTS");
         console.log(receivers);
 
         // look for the actual recipients details based on the array 
@@ -54,9 +54,9 @@ export const getServerSideProps = async (context) => {
 
         }));
 
-        console.log(recipients);
+        // console.log(recipients);
 
-        console.log("FETCHING DOCUMENTS");
+        // console.log("FETCHING DOCUMENTS");
         return { props: { selectedGroup: JSON.parse(JSON.stringify(group)), groupReceivers: JSON.parse(JSON.stringify(recipients)) } }
 
     return {

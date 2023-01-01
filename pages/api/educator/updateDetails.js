@@ -3,7 +3,7 @@ import Educator from "../../../models/educator";
 
 export default async function updateDetails(req, res) {
     try {
-        console.log("CONNECTING TO MONGO");
+        // console.log("CONNECTING TO MONGO");
 
         await connectMongo();
         // console.log('CONNECTED TO MONGO');

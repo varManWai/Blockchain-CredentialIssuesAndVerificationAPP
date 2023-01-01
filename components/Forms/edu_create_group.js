@@ -28,10 +28,10 @@ export default function Edu_create_group() {
             const enteredName = nameInputRef.current.input.value;
             const enteredDesc = descriptionInputRef.current.input.value;
 
-            // ready to POST it to API to create a group
-            console.log(enteredName);
-            console.log(enteredDesc);
-            console.log(enteredDesc);
+            // // ready to POST it to API to create a group
+            // console.log(enteredName);
+            // console.log(enteredDesc);
+            // console.log(enteredDesc);
 
             const res = await fetch(`/api/educator/group/add`, {
                 method: "POST",
@@ -57,7 +57,7 @@ export default function Edu_create_group() {
             router.push('/educator/group/');
 
         } catch (err) {
-            console.log(err);
+            // console.log(err);
             setError(err.message);
         }
 
@@ -78,15 +78,15 @@ export default function Edu_create_group() {
 
                 const wsname = wb.SheetNames[0];
 
-                console.log(wsname);
+                // console.log(wsname);
 
                 const ws = wb.Sheets[wsname];
 
-                console.log(ws);
+                // console.log(ws);
 
                 const data = XLSX.utils.sheet_to_json(ws);
 
-                console.log(data);
+                // console.log(data);
 
                 data.map((d) => {
                     setItems([...items, d]);
@@ -104,7 +104,7 @@ export default function Edu_create_group() {
             setItems(d);
         });
 
-        console.log(items);
+        // console.log(items);
     };
 
     return (

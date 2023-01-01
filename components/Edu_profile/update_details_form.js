@@ -35,7 +35,7 @@ export default function Update_Detail_Form({ educator }) {
     };
 
     const onFinish = (values) => {
-        console.log(values);
+        // console.log(values);
     };
 
     // form onsubmit fucntion
@@ -75,7 +75,7 @@ export default function Update_Detail_Form({ educator }) {
 
 
         } catch (err) {
-            console.log(err);
+            // console.log(err);
             setError(err.message);
         }
     };

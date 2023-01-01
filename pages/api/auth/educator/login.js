@@ -18,11 +18,11 @@ export default async function LoginEducator(req, res) {
     const { email, password } = req.body;
 
     const educator = await Educator.findOne({
-      email: email,
+      email: email.toLowerCase(),
       password: password,
     });
 
-    console.log(educator);
+    // console.log(educator);
 
     if(educator == null){
       console.log('no matched');

@@ -17,13 +17,13 @@ export default async function deleteStudent(req, res) {
     // console.log('CREATING DOCUMENT');
     const address = req.body.address;
 
-    console.log("address");
-    console.log(address);
+    // console.log("address");
+    // console.log(address);
 
     const badges = await Badge.find({ address: address });
 
-    console.log("badges");
-    console.log(badges);
+    // console.log("badges");
+    // console.log(badges);
 
     const badgeData = await badges.map(async (badge) => {
       await Badge_Student.deleteOne({

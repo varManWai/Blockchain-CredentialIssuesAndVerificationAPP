@@ -29,17 +29,12 @@ export const getServerSideProps = async (context) => {
     }
 
     try {
-      console.log("CONNECTING TO MONGO");
       await connectMongo();
-      console.log("CONNECTED TO MONGO");
   
-      console.log("FETCHING DOCUMENTS");
       const Badge = await BadgeModel.findById(id);
-      console.log("FETCHED DOCUMENTS");
   
       const Group = await GroupModel.findById(Badge.groupID);
 
-      console.log(Group);
   
       return {
         props: {

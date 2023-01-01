@@ -17,13 +17,13 @@ export default async function deleteStudent(req, res) {
     // console.log('CREATING DOCUMENT');
     const address = req.body.address;
 
-    console.log("address");
-    console.log(address);
+    // console.log("address");
+    // console.log(address);
 
     const certificates = await Certificate.find({ address: address });
 
-    console.log("certificates");
-    console.log(certificates);
+    // console.log("certificates");
+    // console.log(certificates);
 
     const certificateData = await certificates.map(async (certificate) => {
       await Certificate_Student.deleteOne({

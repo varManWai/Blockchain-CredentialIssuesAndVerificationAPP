@@ -34,7 +34,7 @@ export const getServerSideProps = async (context) => {
     return { props: { educatorDetails: JSON.parse(JSON.stringify(educator)) } };
 
   } catch (error) {
-    console.log(error); 1
+    console.log(error); 
 
     return {
       notFound: true,

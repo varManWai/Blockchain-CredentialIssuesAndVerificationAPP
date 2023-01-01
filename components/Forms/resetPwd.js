@@ -37,7 +37,7 @@ export default function Edu_ResetPwd_Form({ educatorData }) {
         }),
       });
       const result = await res.json();
-      console.log(result);
+      // console.log(result);
 
       if (!res.ok) {
         throw new Error(result.message || "Something went wrong!");
@@ -45,7 +45,7 @@ export default function Edu_ResetPwd_Form({ educatorData }) {
 
       setIsSubmit(true);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       setError(err.message);
     }
     setLoading(false);
